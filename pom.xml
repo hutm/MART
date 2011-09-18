@@ -9,6 +9,13 @@
     <name>mart</name>
     <url>http://mart.khadkevich.org</url>
 
+    <repositories>
+        <repository>
+            <id>khadkevich</id>
+            <url>http://www.khadkevich.org/repository</url>
+        </repository>
+    </repositories>
+
 
     <properties>
         <myapp.jar.name>${name}-${version}.jar</myapp.jar.name>
