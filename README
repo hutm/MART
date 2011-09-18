@@ -1,0 +1,21 @@
+Installation instructions.
+
+Reqirements:
+
+1. Sun JDK 1.6
+2. Maven 2.2
+
+
+Installation
+1. Create $JAVA_HOME variable and set it to your current JDK installation path.
+2. Create $M2_HOME variable and set it to your current maven installation path. Add $M2_HOME/bin to the $PATH variable
+3. execute the following commands:
+
+chmod +x ./bin/* ./lib/install.sh
+cd ./lib
+./install.sh
+cd ../
+
+#edit pom.xml replacing "<build.dir>/home/hut/work/buildENST2</build.dir>" with the necessary build dir path
+mvn -Dmaven.test.skip=true -P development package
+
