@@ -14,11 +14,12 @@ Installation
 3. Follow the intructions of HTK and SRILM toolkits. Copy the compiled binaries into $PROJECT_ROOT/bin directory.
 4. echo build.dir=/path/to/build/directory  > $PROJECT_ROOT/mart.properties, where  /path/to/build/directory is the build directory.
 5. mvn -Dmaven.test.skip=true -P development package
-6. chmod +x  $PROJECT_ROOT/crs.sh
+6. chmod +x  $PROJECT_ROOT/crs.sh $PROJECT_ROOT/bin/*
 
 
 
 Test phase:
-$PROJECT_ROOT/crs.sh -c ./cfg/configBeats.cfg
-
+cd /path/to/build/directory
+./crs.sh -c ./cfg/configBeats.cfg    #Test beat extraction system
+./crs.sh -c ./cfg/configChords.cfg   #Test chord recognition system
 
