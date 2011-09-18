@@ -1,0 +1,5 @@
+<root>
+	<class>com.irst.filter.EllipticFBFilter</class>
+	<matlabFunc>filtfilt_elliptic</matlabFunc>
+	<midiNote>119</midiNote>
+</root>

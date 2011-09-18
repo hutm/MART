@@ -4,18 +4,21 @@ Reqirements:
 
 1. Sun JDK 1.6
 2. Maven 2.2
+3. HTK (http://htk.eng.cam.ac.uk/)
+4. SRILM (http://www.speech.sri.com/projects/srilm/)
 
 
 Installation
 1. Create $JAVA_HOME variable and set it to your current JDK installation path.
 2. Create $M2_HOME variable and set it to your current maven installation path. Add $M2_HOME/bin to the $PATH variable
-3. execute the following commands:
+3. Follow the intructions of HTK and SRILM toolkits. Copy the compiled binaries into $PROJECT_ROOT/bin directory.
+4. echo build.dir=/path/to/build/directory  > $PROJECT_ROOT/mart.properties, where  /path/to/build/directory is the build directory.
+5. mvn -Dmaven.test.skip=true -P development package
+6. chmod +x  $PROJECT_ROOT/crs.sh
 
-chmod +x ./bin/* ./lib/install.sh
-cd ./lib
-./install.sh
-cd ../
 
-#edit pom.xml replacing "<build.dir>/home/hut/work/buildENST2</build.dir>" with the necessary build dir path
-mvn -Dmaven.test.skip=true -P development package
+
+Test phase:
+$PROJECT_ROOT/crs.sh -c ./cfg/configBeats.cfg
+
 

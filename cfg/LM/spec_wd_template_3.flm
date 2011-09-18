@@ -1,0 +1,7 @@
+1
+W : 4 W(-1) W(-2) D(-1) D(-2) FLMfilePathCount FLMfilePathLM 5
+W1W2D1D2 D2 kndiscount gtmin 1 interpolate 
+W1W2D1 W2 kndiscount gtmin 1 interpolate 
+W1D1 D1 kndiscount gtmin 1 interpolate 
+W1 W1 kndiscount gtmin 1 interpolate 
+0 0 wbdiscount gtmin 1 interpolate

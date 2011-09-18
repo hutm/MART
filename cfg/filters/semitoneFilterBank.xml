@@ -1,0 +1,613 @@
+<SemitoneFilterBank><Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>33</ChannelNumber>
+	<StartFreq>53.43</StartFreq>
+	<EndFreq>56.61</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/33.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>34</ChannelNumber>
+	<StartFreq>56.61</StartFreq>
+	<EndFreq>59.98</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/34.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>35</ChannelNumber>
+	<StartFreq>59.98</StartFreq>
+	<EndFreq>63.54</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/35.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>36</ChannelNumber>
+	<StartFreq>63.54</StartFreq>
+	<EndFreq>67.32</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/36.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>37</ChannelNumber>
+	<StartFreq>67.32</StartFreq>
+	<EndFreq>71.33</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/37.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>38</ChannelNumber>
+	<StartFreq>71.33</StartFreq>
+	<EndFreq>75.57</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/38.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>39</ChannelNumber>
+	<StartFreq>75.57</StartFreq>
+	<EndFreq>80.06</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/39.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>40</ChannelNumber>
+	<StartFreq>80.06</StartFreq>
+	<EndFreq>84.82</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/40.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>41</ChannelNumber>
+	<StartFreq>84.82</StartFreq>
+	<EndFreq>89.87</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/41.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>42</ChannelNumber>
+	<StartFreq>89.87</StartFreq>
+	<EndFreq>95.21</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/42.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>43</ChannelNumber>
+	<StartFreq>95.21</StartFreq>
+	<EndFreq>100.87</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/43.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>441.00</SamplingFreq>
+	<ChannelNumber>44</ChannelNumber>
+	<StartFreq>100.87</StartFreq>
+	<EndFreq>106.87</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/44.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>45</ChannelNumber>
+	<StartFreq>106.87</StartFreq>
+	<EndFreq>113.22</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/45.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>46</ChannelNumber>
+	<StartFreq>113.22</StartFreq>
+	<EndFreq>119.96</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/46.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>47</ChannelNumber>
+	<StartFreq>119.96</StartFreq>
+	<EndFreq>127.09</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/47.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>48</ChannelNumber>
+	<StartFreq>127.09</StartFreq>
+	<EndFreq>134.65</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/48.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>49</ChannelNumber>
+	<StartFreq>134.65</StartFreq>
+	<EndFreq>142.65</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/49.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>50</ChannelNumber>
+	<StartFreq>142.65</StartFreq>
+	<EndFreq>151.13</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/50.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>51</ChannelNumber>
+	<StartFreq>151.13</StartFreq>
+	<EndFreq>160.12</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/51.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>52</ChannelNumber>
+	<StartFreq>160.12</StartFreq>
+	<EndFreq>169.64</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/52.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>53</ChannelNumber>
+	<StartFreq>169.64</StartFreq>
+	<EndFreq>179.73</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/53.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>54</ChannelNumber>
+	<StartFreq>179.73</StartFreq>
+	<EndFreq>190.42</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/54.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>55</ChannelNumber>
+	<StartFreq>190.42</StartFreq>
+	<EndFreq>201.74</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/55.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>882.00</SamplingFreq>
+	<ChannelNumber>56</ChannelNumber>
+	<StartFreq>201.74</StartFreq>
+	<EndFreq>213.74</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/56.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>57</ChannelNumber>
+	<StartFreq>213.74</StartFreq>
+	<EndFreq>226.45</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/57.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>58</ChannelNumber>
+	<StartFreq>226.45</StartFreq>
+	<EndFreq>239.91</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/58.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>59</ChannelNumber>
+	<StartFreq>239.91</StartFreq>
+	<EndFreq>254.18</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/59.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>60</ChannelNumber>
+	<StartFreq>254.18</StartFreq>
+	<EndFreq>269.29</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/60.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>61</ChannelNumber>
+	<StartFreq>269.29</StartFreq>
+	<EndFreq>285.30</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/61.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>62</ChannelNumber>
+	<StartFreq>285.30</StartFreq>
+	<EndFreq>302.27</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/62.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>63</ChannelNumber>
+	<StartFreq>302.27</StartFreq>
+	<EndFreq>320.24</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/63.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>64</ChannelNumber>
+	<StartFreq>320.24</StartFreq>
+	<EndFreq>339.29</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/64.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>65</ChannelNumber>
+	<StartFreq>339.29</StartFreq>
+	<EndFreq>359.46</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/65.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>66</ChannelNumber>
+	<StartFreq>359.46</StartFreq>
+	<EndFreq>380.84</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/66.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>67</ChannelNumber>
+	<StartFreq>380.84</StartFreq>
+	<EndFreq>403.48</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/67.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>68</ChannelNumber>
+	<StartFreq>403.48</StartFreq>
+	<EndFreq>427.47</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/68.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>69</ChannelNumber>
+	<StartFreq>427.47</StartFreq>
+	<EndFreq>452.89</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/69.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>70</ChannelNumber>
+	<StartFreq>452.89</StartFreq>
+	<EndFreq>479.82</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/70.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>71</ChannelNumber>
+	<StartFreq>479.82</StartFreq>
+	<EndFreq>508.36</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/71.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>72</ChannelNumber>
+	<StartFreq>508.36</StartFreq>
+	<EndFreq>538.58</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/72.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>73</ChannelNumber>
+	<StartFreq>538.58</StartFreq>
+	<EndFreq>570.61</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/73.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>74</ChannelNumber>
+	<StartFreq>570.61</StartFreq>
+	<EndFreq>604.54</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/74.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>75</ChannelNumber>
+	<StartFreq>604.54</StartFreq>
+	<EndFreq>640.49</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/75.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>76</ChannelNumber>
+	<StartFreq>640.49</StartFreq>
+	<EndFreq>678.57</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/76.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>77</ChannelNumber>
+	<StartFreq>678.57</StartFreq>
+	<EndFreq>718.92</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/77.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>3200.00</SamplingFreq>
+	<ChannelNumber>78</ChannelNumber>
+	<StartFreq>718.92</StartFreq>
+	<EndFreq>761.67</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/78.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>79</ChannelNumber>
+	<StartFreq>761.67</StartFreq>
+	<EndFreq>806.96</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/79.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>80</ChannelNumber>
+	<StartFreq>806.96</StartFreq>
+	<EndFreq>854.95</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/80.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>81</ChannelNumber>
+	<StartFreq>854.95</StartFreq>
+	<EndFreq>905.79</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/81.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>82</ChannelNumber>
+	<StartFreq>905.79</StartFreq>
+	<EndFreq>959.65</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/82.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>83</ChannelNumber>
+	<StartFreq>959.65</StartFreq>
+	<EndFreq>1016.71</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/83.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>84</ChannelNumber>
+	<StartFreq>1016.71</StartFreq>
+	<EndFreq>1077.17</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/84.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>85</ChannelNumber>
+	<StartFreq>1077.17</StartFreq>
+	<EndFreq>1141.22</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/85.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>86</ChannelNumber>
+	<StartFreq>1141.22</StartFreq>
+	<EndFreq>1209.08</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/86.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>87</ChannelNumber>
+	<StartFreq>1209.08</StartFreq>
+	<EndFreq>1280.97</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/87.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>88</ChannelNumber>
+	<StartFreq>1280.97</StartFreq>
+	<EndFreq>1357.15</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/88.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>89</ChannelNumber>
+	<StartFreq>1357.15</StartFreq>
+	<EndFreq>1437.85</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/89.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>6400.00</SamplingFreq>
+	<ChannelNumber>90</ChannelNumber>
+	<StartFreq>1437.85</StartFreq>
+	<EndFreq>1523.34</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/90.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>8000.00</SamplingFreq>
+	<ChannelNumber>91</ChannelNumber>
+	<StartFreq>1523.34</StartFreq>
+	<EndFreq>1613.93</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/91.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>8000.00</SamplingFreq>
+	<ChannelNumber>92</ChannelNumber>
+	<StartFreq>1613.93</StartFreq>
+	<EndFreq>1709.90</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/92.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>8000.00</SamplingFreq>
+	<ChannelNumber>93</ChannelNumber>
+	<StartFreq>1709.90</StartFreq>
+	<EndFreq>1811.57</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/93.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>8000.00</SamplingFreq>
+	<ChannelNumber>94</ChannelNumber>
+	<StartFreq>1811.57</StartFreq>
+	<EndFreq>1919.29</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/94.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>16000.00</SamplingFreq>
+	<ChannelNumber>95</ChannelNumber>
+	<StartFreq>1919.29</StartFreq>
+	<EndFreq>2033.42</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/95.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>16000.00</SamplingFreq>
+	<ChannelNumber>96</ChannelNumber>
+	<StartFreq>2033.42</StartFreq>
+	<EndFreq>2154.33</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/96.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>16000.00</SamplingFreq>
+	<ChannelNumber>97</ChannelNumber>
+	<StartFreq>2154.33</StartFreq>
+	<EndFreq>2282.44</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/97.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>16000.00</SamplingFreq>
+	<ChannelNumber>98</ChannelNumber>
+	<StartFreq>2282.44</StartFreq>
+	<EndFreq>2418.16</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/98.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>16000.00</SamplingFreq>
+	<ChannelNumber>99</ChannelNumber>
+	<StartFreq>2418.16</StartFreq>
+	<EndFreq>2561.95</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/99.xml</FilterFilePath>
+	</Filter>
+</Channel>
+<Channel>
+	<SamplingFreq>16000.00</SamplingFreq>
+	<ChannelNumber>100</ChannelNumber>
+	<StartFreq>2561.95</StartFreq>
+	<EndFreq>2714.29</EndFreq>
+	<Filter>
+		<FilterFilePath>semitoneFilterBank/100.xml</FilterFilePath>
+	</Filter>
+</Channel>
+</SemitoneFilterBank>

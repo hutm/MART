@@ -1,0 +1,1 @@
+./crs.sh -c ./cfg/linux.cfg -t $1 $2 $3 $4 $5 $6 $7 $8 $9
