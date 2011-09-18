@@ -1,0 +1,22 @@
+<PanelConfiguration>
+<VisualComponent>
+<class>org.mart.gui.component.visual.WaveForm</class>
+<name>Waveform 1</name>
+<source>From file</source>
+<enabled>true</enabled>
+<AudioFileName>/home/hut/Beatles/mazurka/audio/pid9054b-15.wav</AudioFileName>
+<SamplingRate>11025.0</SamplingRate>
+<Filtering>false</Filtering>
+<FilterFilePath/>
+</VisualComponent>
+<VisualComponent>
+<class>org.mart.gui.component.visual.BeatSequence</class>
+<name>Beat sequence 1</name>
+<source>Waveform 1</source>
+<enabled>true</enabled>
+<LabelsSource0>/home/hut/Beatles/mazurka100/labels</LabelsSource0>
+<LabelsSource1>/home/hut/work/beatOnly/2/fold/summary/781121729/data/1291800201/temp/lmWeight_2.00#acWeight_1.00#wip_-1.00</LabelsSource1>
+<LabelsSource2/>
+<IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
+</VisualComponent>
+</PanelConfiguration>

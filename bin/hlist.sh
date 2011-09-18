@@ -1,0 +1,1 @@
+/home/hut/prg/CHORDS3/bin/HList -C /home/hut/prg/CHORDS3/bin/config.cfg $1

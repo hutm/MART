@@ -1,0 +1,22 @@
+<PanelConfiguration>
+<VisualComponent>
+<class>org.mart.gui.component.visual.WaveForm</class>
+<name>Waveform 1</name>
+<source>From file</source>
+<enabled>true</enabled>
+<AudioFileName>/home/hut/Beatles/mazurka/audio/pid1263-13.wav</AudioFileName>
+<SamplingRate>11025.0</SamplingRate>
+<Filtering>false</Filtering>
+<FilterFilePath/>
+</VisualComponent>
+<VisualComponent>
+<class>org.mart.gui.component.visual.BeatSequence</class>
+<name>Beat sequence 1</name>
+<source>Waveform 1</source>
+<enabled>true</enabled>
+<LabelsSource1>/home/hut/Beatles/mazurka/labels/beat</LabelsSource1>
+<LabelsSource2/>
+<LabelsSource3/>
+<IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
+</VisualComponent>
+</PanelConfiguration>
