@@ -15,8 +15,8 @@ Installation
 2. Create $M2_HOME variable and set it to your current maven installation path. Add $M2_HOME/bin to the $PATH variable
 3. Follow the intructions of HTK and SRILM toolkits. Copy the compiled binaries into $PROJECT_ROOT/bin directory.
 4. echo build.dir=/path/to/build/directory  > $PROJECT_ROOT/mart.properties, where  /path/to/build/directory is the build directory.
-5. mvn -Dmaven.test.skip=true -P development package
-6. chmod +x  $PROJECT_ROOT/crs.sh $PROJECT_ROOT/bin/*
+5. chmod +x  $PROJECT_ROOT/crs.sh $PROJECT_ROOT/bin/*
+6. mvn -Dmaven.test.skip=true -P development package
 
 
 
