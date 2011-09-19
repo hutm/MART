@@ -25,4 +25,4 @@ cd /path/to/build/directory
 ./crs.sh -c ./cfg/configBeats.cfg    #Test beat extraction system
 ./crs.sh -c ./cfg/configChords.cfg   #Test chord recognition system
 
-Acknowledgements: Many thanks to Maurizio Omologo, my supervisor, for good research ideas support and inspiration.
+Acknowledgements: Many thanks to Maurizio Omologo, my supervisor, for good research ideas, support and inspiration.
