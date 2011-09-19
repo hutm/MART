@@ -2,7 +2,7 @@ MART -- Music Analysis, Recognition and Transcription framework is aimed at crea
 
 Installation instructions.
 
-Reqirements:
+Requirements:
 
 1. Sun JDK 1.6
 2. Maven 2.2
@@ -13,7 +13,7 @@ Reqirements:
 Installation
 1. Create $JAVA_HOME variable and set it to your current JDK installation path.
 2. Create $M2_HOME variable and set it to your current maven installation path. Add $M2_HOME/bin to the $PATH variable
-3. Follow the intructions of HTK and SRILM toolkits. Copy the compiled binaries into $PROJECT_ROOT/bin directory.
+3. Follow the instructions of HTK and SRILM toolkits. Copy the compiled binaries into $PROJECT_ROOT/bin directory.
 4. echo build.dir=/path/to/build/directory  > $PROJECT_ROOT/mart.properties, where  /path/to/build/directory is the build directory.
 5. chmod +x  $PROJECT_ROOT/crs.sh $PROJECT_ROOT/bin/*
 6. mvn -Dmaven.test.skip=true -P development package
@@ -25,3 +25,4 @@ cd /path/to/build/directory
 ./crs.sh -c ./cfg/configBeats.cfg    #Test beat extraction system
 ./crs.sh -c ./cfg/configChords.cfg   #Test chord recognition system
 
+Acknowledgements: Many thanks to Maurizio Omologo, my supervisor, for good research ideas support and inspiration.
