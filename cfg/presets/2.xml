@@ -14,9 +14,9 @@
 <name>Beat sequence 1</name>
 <source>Waveform 1</source>
 <enabled>true</enabled>
-<LabelsSource1>/home/hut/Beatles/mazurka/labels/beat</LabelsSource1>
+<LabelsSource0/>
+<LabelsSource1>/home/hut/Beatles/mazurka/labels</LabelsSource1>
 <LabelsSource2/>
-<LabelsSource3/>
 <IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
 </VisualComponent>
 </PanelConfiguration>

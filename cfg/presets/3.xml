@@ -4,149 +4,29 @@
 <name>Waveform 1</name>
 <source>From file</source>
 <enabled>true</enabled>
-<AudioFileName>/home/hut/data/!audio/0400_-_George_Michael_-_Careless_Whisper_.wav</AudioFileName>
-<SamplingRate>11025.0</SamplingRate>
+<AudioFileName>/home/hut/Beatles/data/wav/44100/03_-_I'm_Only_Sleeping.wav</AudioFileName>
+<SamplingRate>44100.0</SamplingRate>
 <Filtering>false</Filtering>
 <FilterFilePath/>
 </VisualComponent>
 <VisualComponent>
-<class>org.mart.gui.component.visual.ReassignedSpectrogram</class>
-<name>Reassigned spectrogram 1</name>
+<class>org.mart.gui.component.visual.ChordSequence</class>
+<name>Chord sequence 1</name>
 <source>Waveform 1</source>
-<enabled>false</enabled>
-<FromFilePath/>
-<WindowSize>1024</WindowSize>
-<Overlapping>0.9</Overlapping>
-<WindowType>2</WindowType>
-<MinFreqInSpectrogram>0</MinFreqInSpectrogram>
-<MaxFreqInSpectrogram>1000</MaxFreqInSpectrogram>
-<ReassignedSpectrumTag>1</ReassignedSpectrumTag>
-<ReassignedThreshold>0.4</ReassignedThreshold>
+<enabled>true</enabled>
+<LabelsSource0>/home/hut/work/!recognized/chords</LabelsSource0>
+<LabelsSource1>/home/hut/Beatles/labels</LabelsSource1>
+<LabelsSource2/>
+<IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
 </VisualComponent>
 <VisualComponent>
 <class>org.mart.gui.component.visual.BeatSequence</class>
 <name>Beat sequence 1</name>
 <source>Waveform 1</source>
 <enabled>true</enabled>
-<LabelsSource1>/home/hut/prg/BEAT/data/labels</LabelsSource1>
+<LabelsSource0/>
+<LabelsSource1>/home/hut/Beatles/labelsBeatsBeatles</LabelsSource1>
 <LabelsSource2/>
-<LabelsSource3/>
 <IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.PitchClassProfileRepresentation</class>
-<name>PCP 1</name>
-<source>Reassigned spectrogram 1</source>
-<enabled>false</enabled>
-<isWrapped>true</isWrapped>
-<ExtractionAlg>0</ExtractionAlg>
-<bassTreble>1</bassTreble>
-<WindowSize/>
-<AverageFactor>1</AverageFactor>
-<FilterFilePath>cfg/filters/combFilters.xml</FilterFilePath>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.SVFRepresentation</class>
-<name>SVF 1</name>
-<source>PCP 1</source>
-<enabled>true</enabled>
-<SVF>
-<ID>0</ID>
-<SVFOrder>200</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>1</ExtractorID>
-<enabled>true</enabled>
-</SVF>
-<SVF>
-<ID>1</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-<SVF>
-<ID>2</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-<SVF>
-<ID>3</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-<SVF>
-<ID>4</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.SVFRepresentation</class>
-<name>SVF 2</name>
-<source>PCP 1</source>
-<enabled>true</enabled>
-<SVF>
-<ID>0</ID>
-<SVFOrder>40</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>1</ExtractorID>
-<enabled>true</enabled>
-</SVF>
-<SVF>
-<ID>1</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-<SVF>
-<ID>2</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-<SVF>
-<ID>3</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-<SVF>
-<ID>4</ID>
-<SVFOrder>0</SVFOrder>
-<ColorID>0</ColorID>
-<ExtractorID>0</ExtractorID>
-<enabled>false</enabled>
-</SVF>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.ReassignedSpectrogram</class>
-<name>Reassigned spectrogram 2</name>
-<source>Waveform 1</source>
-<enabled>false</enabled>
-<FromFilePath/>
-<WindowSize>1024</WindowSize>
-<Overlapping>0.9</Overlapping>
-<WindowType>2</WindowType>
-<MinFreqInSpectrogram>0</MinFreqInSpectrogram>
-<MaxFreqInSpectrogram>1000</MaxFreqInSpectrogram>
-<ReassignedSpectrumTag>2</ReassignedSpectrumTag>
-<ReassignedThreshold>0.2</ReassignedThreshold>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.OnsetDetectionFunctionComponent</class>
-<name>OnsetDetection 2</name>
-<source>Reassigned spectrogram 2</source>
-<enabled>true</enabled>
-<RegressionWindowSize>7</RegressionWindowSize>
-<type>0</type>
 </VisualComponent>
 </PanelConfiguration>
