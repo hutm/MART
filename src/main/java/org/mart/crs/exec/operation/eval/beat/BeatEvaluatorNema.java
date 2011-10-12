@@ -53,8 +53,8 @@ public class BeatEvaluatorNema {
 
 
     public void initializeDirectories(String recognizedDirPath, String groundTruthFolder, String outFolder) throws Exception {
-        GT_PATH = String.format("%s_MIREX_Downbeat%s",groundTruthFolder, String.valueOf(isOnlyDownBeatEvaluation));
-        RESULT_PATH = String.format("%s_MIREX_Downbeat%s",recognizedDirPath, String.valueOf(isOnlyDownBeatEvaluation));
+        GT_PATH = String.format("%s_MIREX_Downbeat_%s",groundTruthFolder, String.valueOf(isOnlyDownBeatEvaluation));
+        RESULT_PATH = String.format("%s_MIREX_Downbeat_%s",recognizedDirPath, String.valueOf(isOnlyDownBeatEvaluation));
         workingDirectory = new File(outFolder);
         outputDirectory = new File(workingDirectory, (System.currentTimeMillis()) + "");
         outputDirectory.mkdirs();

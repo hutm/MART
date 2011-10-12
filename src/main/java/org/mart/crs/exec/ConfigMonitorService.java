@@ -128,7 +128,7 @@ public class ConfigMonitorService {
                             specialSeparator = "\\/";
                         }
 
-                        String cmd = String.format("java -Xmx%s -DoutPathExternal=%s%s -Dfold=%d -jar ./%s/crs-1.0-SNAPSHOT.jar -c %s", finalMemorySize, outPathForThisConfig, specialSeparator, finalI, newLibsDirName, destConfig);
+                        String cmd = String.format("java -Xmx%s -DoutPathExternal=%s%s -Dfold=%d -jar ./%s/mart-1.0-SNAPSHOT.jar -c %s", finalMemorySize, outPathForThisConfig, specialSeparator, finalI, newLibsDirName, destConfig);
                         Helper.execCmd(cmd);
                     } catch (Exception e) {
                         logger.error(Helper.getStackTrace(e));

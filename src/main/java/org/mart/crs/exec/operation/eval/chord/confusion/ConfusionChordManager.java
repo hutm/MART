@@ -19,6 +19,7 @@ package org.mart.crs.exec.operation.eval.chord.confusion;
 import org.mart.crs.config.Settings;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.label.chord.ChordStructure;
+import org.mart.crs.management.label.chord.Root;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
 import org.apache.log4j.Logger;
@@ -82,6 +83,10 @@ public class ConfusionChordManager {
         } catch (IOException e) {
             logger.error(Helper.getStackTrace(e));
         }
+
+        //write maj minor confusions for matlab
+
+
     }
 
 

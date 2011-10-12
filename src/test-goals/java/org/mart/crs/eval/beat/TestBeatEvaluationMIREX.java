@@ -1,6 +1,8 @@
 package org.mart.crs.eval.beat;
 
 import org.mart.crs.exec.operation.eval.beat.BeatEvaluator;
+import org.mart.crs.exec.operation.eval.beat.BeatEvaluatorNema;
+import org.mart.crs.labelling.beat.BeatLabelsConverter;
 import org.mart.crs.management.beat.BeatStructure;
 import org.mart.crs.utils.helper.HelperFile;
 import junit.framework.TestCase;
@@ -45,6 +47,33 @@ public class TestBeatEvaluationMIREX extends TestCase {
         evaluatorNema.initializeDirectories(tempLabelsFolder, gtFolder, resultsFinalFolder + ".txt");
         evaluatorNema.evaluate();
 
+    }
+
+    public void testBeatEvaluatorNemaICASSP2012Hains() throws Exception {
+        BeatEvaluatorNema evaluatorNema = new BeatEvaluatorNema();
+        evaluatorNema.initializeDirectories("/home/hut/PhD/experiments/beatForICASSP/hains1/output", "/home/hut/PhD/experiments/beatForICASSP/hains1/gt", "/home/hut/PhD/experiments/beatForICASSP/hains1/results.txt");
+        evaluatorNema.evaluate();
+    }
+
+    public void testBeatEvaluatorNemaICASSP2012Enst2010() throws Exception {
+        BeatEvaluatorNema.isOnlyDownBeatEvaluation = true;
+        BeatEvaluatorNema evaluatorNema = new BeatEvaluatorNema();
+        evaluatorNema.initializeDirectories("/home/hut/PhD/experiments/beatForICASSP/2010/output", "/home/hut/PhD/experiments/beatForICASSP/2010/gt", "/home/hut/PhD/experiments/beatForICASSP/2010/resultsDownbeats.txt");
+        evaluatorNema.evaluate();
+
+//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatForICASSP/2010/gt", "/home/hut/PhD/experiments/beatForICASSP/2010/output/1dim", "/home/hut/PhD/experiments/beatForICASSP/2010/list1dim.txt");
+//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatForICASSP/2010/gt", "/home/hut/PhD/experiments/beatForICASSP/2010/output/2dim", "/home/hut/PhD/experiments/beatForICASSP/2010/list2dim.txt");
+//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatForICASSP/2010/gt", "/home/hut/PhD/experiments/beatForICASSP/2010/output/3dim", "/home/hut/PhD/experiments/beatForICASSP/2010/list3dim.txt");
+//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatForICASSP/2010/gt", "/home/hut/PhD/experiments/beatForICASSP/2010/output/DAVIES", "/home/hut/PhD/experiments/beatForICASSP/2010/listDAVIES.txt");
+
+    }
+
+    public void testBeatEvaluatorNema() throws Exception {
+        BeatEvaluator evaluatorNema = new BeatEvaluator();
+        evaluatorNema.initializeDirectories("/home/hut/PhD/experiments/beatForICASSP/hains1/output/1dims", "/home/hut/PhD/experiments/beatForICASSP/hains1/gt", "/home/hut/PhD/experiments/beatForICASSP/hains1/results1dims.txt");
+        evaluatorNema.evaluate();
+
+        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatForICASSP/hains1/gt", "/home/hut/PhD/experiments/beatForICASSP/hains1/output/1dims", "/home/hut/PhD/experiments/beatForICASSP/hains1/list.txt");
     }
 
 
