@@ -84,7 +84,7 @@ public class BeatStructure implements Comparable<BeatStructure> {
             return new BeatStructureMazurka(sourceFilePath);
         }
         if (extension.equals(Settings.ONSET_EXT)) {
-            return new OnsetStructure(sourceFilePath);
+            return new BeatStructureText(sourceFilePath);
         }
         throw new IllegalArgumentException(String.format("Cannot extract beat structure from file %s with extension %s", sourceFilePath, extension));
     }
@@ -277,7 +277,7 @@ public class BeatStructure implements Comparable<BeatStructure> {
 
 
     public static void transfromLabelsToMIREXFormat(String resultsDir, String outDir, boolean isGroundTruth, boolean isOnlyDownBeats) {
-        File[] files = HelperFile.getFile(resultsDir).listFiles(new ExtensionFileFilter(Settings.BEAT_EXT));
+        File[] files = HelperFile.getFile(resultsDir).listFiles(new ExtensionFileFilter(Settings.BEAT_EXTENSIONS));
         HelperFile.getFile(outDir).mkdirs();
         String extension = Settings.TXT_EXT;
         if (!isGroundTruth) {

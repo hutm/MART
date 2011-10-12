@@ -3,6 +3,7 @@ package org.mart.crs.eval.chord;
 import org.mart.crs.exec.operation.eval.AbstractCRSEvaluator;
 import org.mart.crs.exec.operation.eval.chord.ChordEvaluatorNema;
 import junit.framework.TestCase;
+import org.mart.crs.exec.operation.eval.chord.ChordEvaluatorNemaFullDictionary;
 
 
 /**
@@ -44,6 +45,18 @@ public class TestChordEvaluationNema extends TestCase {
 //        evaluatorNema.initializeDirectories("/home/hut/temp/!finalMIREXFolds/labels_0", "/home/hut/Beatles/labels", "/home/hut/temp/!finalMIREXFolds/labels_0.txt");
 //        evaluatorNema.evaluate();
     }
+
+    public void testCHO() {
+        AbstractCRSEvaluator evaluatorNema = new ChordEvaluatorNema();
+        evaluatorNema.initializeDirectories("/home/hut/temp/chordsMattTrain/results", "/home/hut/mirdata/chords/labels", "/home/hut/temp/chordsMattTrain/resultsfinal.txt");
+        evaluatorNema.evaluate();
+
+
+        evaluatorNema = new ChordEvaluatorNemaFullDictionary();
+        evaluatorNema.initializeDirectories("/home/hut/temp/chordsMattTrain/results", "/home/hut/mirdata/chords/labels", "/home/hut/temp/chordsMattTrain/resultsfinalFullDict.txt");
+        evaluatorNema.evaluate();
+    }
+
 
 
 }

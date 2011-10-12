@@ -187,8 +187,10 @@
                                         <echo file="${build.dir}/crs.sh">
                                             java -Xmx1500m -jar ./lib/${name}-${version}.jar $1 $2 $3 $4 $5 $6 $7 $8 $9
                                         </echo>
-                                        <echo file="${build.dir}/configService.sh">
-                                            ./crs.sh -s $1
+                                        <echo file="${build.dir}/service.sh">
+mkdir ./libService
+cp -r ./lib/** ./libService/
+java -jar ./libService/mart-1.0-SNAPSHOT.jar -s $HOME/nfs/chords/$HOSTNAME
                                         </echo>
 
                                     </tasks>

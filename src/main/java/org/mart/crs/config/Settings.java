@@ -62,7 +62,7 @@ public class Settings {
     public static final String ONSET_EXT = ".txt";
     public static final String BEAT_TXT_EXT = ".beattxt";
     public static final String BEAT_MAZURKA_EXT = ".tap";
-    public static final String[] BEAT_EXTENSIONS = new String[]{Settings.BEAT_EXT, Settings.BEAT_MAZURKA_EXT, Settings.BEAT_TXT_EXT};
+    public static final String[] BEAT_EXTENSIONS = new String[]{Settings.BEAT_EXT, Settings.BEAT_MAZURKA_EXT, Settings.BEAT_TXT_EXT, Settings.ONSET_EXT};
 
 
     public static final String FIELD_SEPARATOR = "#";

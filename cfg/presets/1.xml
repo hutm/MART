@@ -4,7 +4,7 @@
 <name>Waveform 1</name>
 <source>From file</source>
 <enabled>true</enabled>
-<AudioFileName>/home/hut/Beatles/data/wav/44100/01_-_A_Hard_Day's_Night.wav</AudioFileName>
+<AudioFileName>/home/hut/mirdata/chords/audio/01_-_A_Hard_Day's_Night.wav</AudioFileName>
 <SamplingRate>44100.0</SamplingRate>
 <Filtering>false</Filtering>
 <FilterFilePath/>
@@ -14,9 +14,9 @@
 <name>Chord sequence 1</name>
 <source>Waveform 1</source>
 <enabled>true</enabled>
+<LabelsSource0/>
 <LabelsSource1>/home/hut/Beatles/labels</LabelsSource1>
 <LabelsSource2/>
-<LabelsSource3/>
 <IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
 </VisualComponent>
 <VisualComponent>
@@ -24,9 +24,9 @@
 <name>Beat sequence 1</name>
 <source>Waveform 1</source>
 <enabled>true</enabled>
+<LabelsSource0/>
 <LabelsSource1>/home/hut/Beatles/labelsBeatsBeatles</LabelsSource1>
 <LabelsSource2/>
-<LabelsSource3/>
 <IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
 </VisualComponent>
 </PanelConfiguration>

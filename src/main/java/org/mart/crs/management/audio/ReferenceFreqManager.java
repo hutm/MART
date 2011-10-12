@@ -56,7 +56,7 @@ public class ReferenceFreqManager {
         FileReader reader;
         Map<String, String> stringMap = null;
         if (refFreqFile == null || !HelperFile.getFile(refFreqFile).exists()) {
-            logger.info(String.format("Reference frequency file %s dows not exist", refFreqFile));
+            logger.info(String.format("Reference frequency file %s does not exist", refFreqFile));
             return;
         }
 

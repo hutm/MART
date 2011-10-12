@@ -102,25 +102,25 @@ public class RecognizeBeatConventionalVersionWithLMOperation extends RecognizeBe
                     AbstractCRSOperation.logger.info("--------------------------------------------------");
 
                     String resultsDirName = String.format("lmWeight_%3.2f%sacWeight_%3.2f%swip_%3.2f", lmWeight, FIELD_SEPARATOR, acWeight, FIELD_SEPARATOR, wip);
-                    String recognizedFolder = resultsDir + File.separator + resultsDirName;
-//                    LabelsManager.recognizedFolder_compare = recognizedFolder; //This is done in order to estimate the advantages of LM
-                    String outRescoredFile = tempDirPath + File.separator + "out_" + resultsDirName;
+                    String recognizedFolder = String.format("%s/%s", resultsDir, resultsDirName);
+                    String outRescoredFile = String.format("%s/out_%s", tempDirPath, resultsDirName);
 
-                    try {
-                        BufferedWriter writer = new BufferedWriter(new FileWriter(outRescoredFile));
-                        command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice-list " + fileList + " -read-htk -htk-lmscale " + lmWeight + " -htk-wdpenalty " + wip + " -htk-acscale " + acWeight + " -nbest-viterbi -output-ctm -viterbi-decode"; //-posterior-decode\"
-                        Helper.execCmd(command, writer, false);
-                        writer.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    for (String inLattice : latticeFilePathList) {
+                        try {
+                            BufferedWriter writer = new BufferedWriter(new FileWriter(outRescoredFile));
+                            command = String.format("%s/lattice-tool%s  -debug 0 -in-lattice %s -read-htk -htk-lmscale %5.3f -htk-wdpenalty %5.3f -htk-acscale %5.3f  -nbest-viterbi -output-ctm -viterbi-decode", binariesDir, EXECUTABLE_EXTENSION, inLattice, lmWeight, wip, acWeight);
+                            Helper.execCmd(command, writer, false);
+                            writer.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Parsing and evaluating results
+                        AbstractCRSOperation.logger.info("Parsing results and evaluating");
+                        HTKResultsParserBeat.parseLM(outRescoredFile, recognizedFolder, ExecParams._initialExecParameters);
                     }
 
-                    //Parsing and evaluating results
-                    AbstractCRSOperation.logger.info("Parsing results and evaluating");
 
-//                    BeatHTKParserLattice beatHTKParserLattice = new BeatHTKParserLattice(outRescoredFile, recognizedFolder);
-//                    beatHTKParserLattice.run();  //TODO migrate to BeatHTKParserLattice and to BeatHTKParser from static classes
-                    HTKResultsParserBeat.parseLM(outRescoredFile, recognizedFolder, ExecParams._initialExecParameters);
                     if(isMIREX || isQUAERO){
                         String inFilePath = HelperFile.getFile(recognizedFolder).listFiles()[0].getPath();
                         if(isQUAERO){
@@ -140,6 +140,5 @@ public class RecognizeBeatConventionalVersionWithLMOperation extends RecognizeBe
             HelperFile.getFile(inLattice).delete();
         }
     }
-
 
 }
