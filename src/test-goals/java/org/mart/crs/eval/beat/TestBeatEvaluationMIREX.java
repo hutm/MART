@@ -77,4 +77,11 @@ public class TestBeatEvaluationMIREX extends TestCase {
     }
 
 
+    public void testBeatEvaluatorNemaBeatles() throws Exception {
+        BeatEvaluatorNema.isOnlyDownBeatEvaluation = true;
+        BeatEvaluatorNema evaluatorNema = new BeatEvaluatorNema();
+        evaluatorNema.initializeDirectories("/home/hut/PhD/experiments/beatBeatles/results/output", "/home/hut/PhD/experiments/beatBeatles/results/gt", "/home/hut/PhD/experiments/beatBeatles/results/resultsDownbeats.txt");
+        evaluatorNema.evaluate();
+    }
+
 }

@@ -90,10 +90,10 @@ public class TrainingOnsetLanguageModelsOperation extends TrainingLanguageModels
                 BeatStructure beatStructure = BeatStructure.getBeatStructure(file);
                 beatSequence = beatStructure.getBeatSegments();
 
-                float stretchStart = 0.1f;
-                float stretchEnd = 2.0f;
+                float stretchStart = Settings.stretchCoeffForBeatLMBuildingStart;
+                float stretchEnd = Settings.stretchCoeffForBeatLMBuildingEnd;
                 if(HelperFile.getExtension(file).equalsIgnoreCase(Settings.BEAT_MAZURKA_EXT)){
-                    stretchStart = 0.8f;
+                    stretchStart = 0.8f;                                    //TODO remove hardcoded values
                     stretchEnd = 1.2f;
                 }
 
