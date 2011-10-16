@@ -18,7 +18,7 @@ public class TestFindDurationConsistency extends TestCase {
 
     public void testFindDurationInconsistency() {
         String labDir = "/home/hut/Beatles/data/tempLab";
-        String audioDir = "/home/hut/Beatles/data/flac2";
+        String audioDir = "/home/hut/Beatles/data/flac";
         File[] audioFiles = HelperFile.getFile(audioDir).listFiles();
         Arrays.sort(audioFiles);
         for(File audio:audioFiles){

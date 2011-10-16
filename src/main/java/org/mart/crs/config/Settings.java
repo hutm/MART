@@ -130,6 +130,8 @@ public class Settings {
 
     public static int numberOfTestMaterial;
 
+    public static float stretchCoeffForBeatLMBuildingStart = 0.1f;
+    public static float stretchCoeffForBeatLMBuildingEnd = 2.0f;
 
     //=================================NEED to be refactored=================BeatsBeat====================
 
