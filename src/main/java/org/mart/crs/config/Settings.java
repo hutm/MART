@@ -45,7 +45,6 @@ public class Settings {
     public static String SCRIPT_EXTENSION;
 
 
-
     //Extensions
     public static final String WAV_EXT = ".wav";
     public static final String MP3_EXT = ".mp3";
@@ -130,6 +129,9 @@ public class Settings {
 
     public static int numberOfTestMaterial;
 
+    public static int minNimberOfFramesForBeatSegment = 20;
+    public static int maxNimberOfFramesForBeatSegment = 100;
+
     public static float stretchCoeffForBeatLMBuildingStart = 0.1f;
     public static float stretchCoeffForBeatLMBuildingEnd = 2.0f;
 
@@ -192,7 +194,6 @@ public class Settings {
     public static String urlRoot;
 
     public static int NumberOfParallelThreadsForConfigListenerService = 1;
-
 
 
     //-----------------------initialization part---------------------------

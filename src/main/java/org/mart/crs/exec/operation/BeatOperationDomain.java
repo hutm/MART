@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.mart.crs.exec.scenario.stage.StageParameters.*;
+import static org.mart.crs.config.Settings.*;
 import static org.mart.crs.management.label.LabelsParser.END_SENTENCE;
 import static org.mart.crs.management.label.LabelsParser.START_SENTENCE;
 /**

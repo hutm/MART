@@ -28,8 +28,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mart.crs.exec.scenario.stage.StageParameters.maxNimberOfFramesForBeatSegment;
-import static org.mart.crs.exec.scenario.stage.StageParameters.minNimberOfFramesForBeatSegment;
+import static org.mart.crs.config.Settings.maxNimberOfFramesForBeatSegment;
+import static org.mart.crs.config.Settings.minNimberOfFramesForBeatSegment;
 
 /**
  * @version 1.0 Dec 3, 2010 6:30:33 PM

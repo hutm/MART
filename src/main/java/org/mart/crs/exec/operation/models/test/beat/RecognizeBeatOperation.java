@@ -31,6 +31,8 @@ import java.io.IOException;
 
 import static org.mart.crs.config.Settings.EXECUTABLE_EXTENSION;
 import static org.mart.crs.exec.scenario.stage.StageParameters.*;
+import static org.mart.crs.config.Settings.*;
+
 /**
  * @version 1.0 12/13/10 4:29 PM
  * @author: Hut
