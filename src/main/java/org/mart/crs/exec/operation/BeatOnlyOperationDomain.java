@@ -23,6 +23,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import static org.mart.crs.exec.scenario.stage.StageParameters.*;
+import static org.mart.crs.config.Settings.*;
 import static org.mart.crs.management.label.LabelsParser.END_SENTENCE;
 import static org.mart.crs.management.label.LabelsParser.START_SENTENCE;
 import static org.mart.crs.utils.helper.HelperFile.getFile;

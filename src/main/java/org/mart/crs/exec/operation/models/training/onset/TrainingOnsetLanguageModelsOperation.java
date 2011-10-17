@@ -92,10 +92,7 @@ public class TrainingOnsetLanguageModelsOperation extends TrainingLanguageModels
 
                 float stretchStart = Settings.stretchCoeffForBeatLMBuildingStart;
                 float stretchEnd = Settings.stretchCoeffForBeatLMBuildingEnd;
-                if(HelperFile.getExtension(file).equalsIgnoreCase(Settings.BEAT_MAZURKA_EXT)){
-                    stretchStart = 0.8f;                                    //TODO remove hardcoded values
-                    stretchEnd = 1.2f;
-                }
+
 
                 for (float stretch = stretchStart; stretch <= stretchEnd; stretch += 0.02) {
                     StringBuilder stringBuilder = new StringBuilder();
@@ -140,7 +137,7 @@ public class TrainingOnsetLanguageModelsOperation extends TrainingLanguageModels
 
         builder.append(String.format("%s%d ", beatSegment.toString(), duration));
 
-        return (duration <= minNimberOfFramesForBeatSegment || duration >= maxNimberOfFramesForBeatSegment);
+        return (duration <= Settings.minNimberOfFramesForBeatSegment || duration >= Settings.maxNimberOfFramesForBeatSegment);
     }
 
 }

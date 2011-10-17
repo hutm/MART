@@ -148,8 +148,7 @@ public class StageParameters implements Cloneable{
     public static String[] beatLMArrayForTrain;
     public static final int maxNumberOBeatsInMeasure = 4;
 
-    public static final int minNimberOfFramesForBeatSegment = 20;
-    public static final int maxNimberOfFramesForBeatSegment = 100;
+
 
     public static String[] beatJumpArrayForTrain = {BEAT_START, BEAT_END, DOWNBEAT_START, DOWNBEAT_END, NO_BEAT};
     public static String[] beatOnlyArrayForTrain = {BEAT_START, BEAT_END, NO_BEAT};

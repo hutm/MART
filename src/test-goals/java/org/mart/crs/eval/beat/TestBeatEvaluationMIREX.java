@@ -84,4 +84,20 @@ public class TestBeatEvaluationMIREX extends TestCase {
         evaluatorNema.evaluate();
     }
 
+    public void testBeatEvaluatorNemaQuaero() throws Exception {
+//        evaluateBeatDatabase("/home/hut/PhD/experiments/beatBeatles/results/Quaero", false);
+        evaluateBeatDatabase("/home/hut/PhD/experiments/beatBeatles/results/mazurka", false);
+
+    }
+
+
+
+    private void evaluateBeatDatabase(String dirPath, boolean isDownbeats) throws Exception {
+        BeatEvaluatorNema.isOnlyDownBeatEvaluation = isDownbeats;
+        BeatEvaluatorNema evaluatorNema = new BeatEvaluatorNema();
+        evaluatorNema.initializeDirectories(dirPath + "/output", dirPath + "/gt", dirPath + "/resultsHTML");
+        evaluatorNema.evaluate();
+    }
+
+
 }
