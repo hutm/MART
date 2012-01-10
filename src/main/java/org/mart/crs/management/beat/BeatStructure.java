@@ -168,6 +168,11 @@ public class BeatStructure implements Comparable<BeatStructure> {
                 Element beatElement = doc.createElement("beattype");
                 beatElement.setAttribute("id", "1");
                 beatElement.setAttribute("pattern", "0");
+
+                if(beatSegment.getBeat() == 1){
+                    beatSegment.setMeasure(1);
+                }
+
                 beatElement.setAttribute("measure", String.valueOf(beatSegment.getMeasure()));
                 beatElement.setAttribute("beat", String.valueOf(beatSegment.getBeat()));
                 beatElement.setAttribute("tatum", "1");

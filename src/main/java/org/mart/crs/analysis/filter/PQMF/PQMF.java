@@ -76,4 +76,9 @@ public class PQMF implements Filter {
         return h;
     }
 
+
+    public static void main(String[] args) {
+        calculateFilterImpulseResponce(1);
+        calculateFilterImpulseResponce(2);
+    }
 }

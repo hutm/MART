@@ -83,12 +83,24 @@ public class BeatLabelsConverter extends TestCase {
     }
 
 
-    public static void createListForMatlabBeatEvaluations(String gtFilePath, String outFilePath, String listFilePath) {
+    public static void createListForMatlabBeatEvaluations(String gtFilePath, String outFilePath, String outFolder) {
+
+        File outDirInitial = new File(outFilePath);
+        String outDirTransformed = String.format("%s/%s", outFolder, outDirInitial.getName());
+        String listFilePath = String.format("%s/%s.txt", outFolder, outDirInitial.getName());
+
+
+        String gtDirTransformed = String.format("%s/gt", outFolder);
+
+        transformLabels(gtFilePath, gtDirTransformed);
+        transformLabels(outFilePath, outDirTransformed);
+
+
         List<String> outStrings1 = new ArrayList<String>();
 
-        File[] files = HelperFile.getFile(gtFilePath).listFiles();
+        File[] files = HelperFile.getFile(gtDirTransformed).listFiles();
         for (File file : files) {
-            outStrings1.add(String.format("%s\t%s/%s", file.getPath(), outFilePath, file.getName()));
+            outStrings1.add(String.format("%s\t%s/%s", file.getPath(), outDirTransformed, file.getName()));
         }
 
         Collections.sort(outStrings1);

@@ -4,8 +4,8 @@
 <name>Waveform 1</name>
 <source>From file</source>
 <enabled>true</enabled>
-<AudioFileName>/home/hut/Beatles/data/wav/44100/03_-_I'm_Only_Sleeping.wav</AudioFileName>
-<SamplingRate>44100.0</SamplingRate>
+<AudioFileName>/home/hut/mirdata/chords/audio/03_-_I'm_Only_Sleeping.wav</AudioFileName>
+<SamplingRate>11025</SamplingRate>
 <Filtering>false</Filtering>
 <FilterFilePath/>
 </VisualComponent>

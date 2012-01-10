@@ -4,18 +4,28 @@
 <name>Waveform 1</name>
 <source>From file</source>
 <enabled>true</enabled>
-<AudioFileName>/home/hut/mirdata/beatenst/audio/0002_-_Pink_Floyd_-_Dark_Side_of_the_Moon_-_02_breathe.wav</AudioFileName>
-<SamplingRate>11025</SamplingRate>
+<AudioFileName>/home/hut/Beatles/data/wav44100/09_-_Girl.wav</AudioFileName>
+<SamplingRate>44100.0</SamplingRate>
 <Filtering>false</Filtering>
 <FilterFilePath/>
+</VisualComponent>
+<VisualComponent>
+<class>org.mart.gui.component.visual.ChordSequence</class>
+<name>Chord sequence 1</name>
+<source>Waveform 1</source>
+<enabled>true</enabled>
+<LabelsSource0>/home/hut/mirdata/beatles/chordLab</LabelsSource0>
+<LabelsSource1>/home/hut/work/!recognized/chords</LabelsSource1>
+<LabelsSource2/>
+<IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
 </VisualComponent>
 <VisualComponent>
 <class>org.mart.gui.component.visual.BeatSequence</class>
 <name>Beat sequence 1</name>
 <source>Waveform 1</source>
 <enabled>true</enabled>
-<LabelsSource0>/home/hut/mirdata/beatenst/labels2011</LabelsSource0>
-<LabelsSource1>/home/hut/temp/enstLabels2011</LabelsSource1>
+<LabelsSource0>/home/hut/mirdata/beatles/beatLab</LabelsSource0>
+<LabelsSource1>/home/hut/work/!recognized/beatBeatles</LabelsSource1>
 <LabelsSource2/>
 <IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
 </VisualComponent>
