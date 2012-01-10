@@ -4,10 +4,20 @@
 <name>Waveform 1</name>
 <source>From file</source>
 <enabled>true</enabled>
-<AudioFileName>/home/hut/mirdata/beatenst/audio/0400_-_George_Michael_-_Careless_Whisper_.wav</AudioFileName>
-<SamplingRate>11025</SamplingRate>
+<AudioFileName>/home/hut/Beatles/data/wav44100/09_-_Girl.wav</AudioFileName>
+<SamplingRate>44100.0</SamplingRate>
 <Filtering>false</Filtering>
 <FilterFilePath/>
+</VisualComponent>
+<VisualComponent>
+<class>org.mart.gui.component.visual.ChordSequence</class>
+<name>Chord sequence 1</name>
+<source>Waveform 1</source>
+<enabled>true</enabled>
+<LabelsSource0/>
+<LabelsSource1>/home/hut/work/!recognized/chords</LabelsSource1>
+<LabelsSource2/>
+<IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
 </VisualComponent>
 <VisualComponent>
 <class>org.mart.gui.component.visual.BeatSequence</class>
@@ -15,30 +25,8 @@
 <source>Waveform 1</source>
 <enabled>true</enabled>
 <LabelsSource0/>
-<LabelsSource1>/home/hut/mirdata/beatenst/labels</LabelsSource1>
+<LabelsSource1>/home/hut/work/!recognized/beatBeatles</LabelsSource1>
 <LabelsSource2/>
 <IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.ReassignedSpectrogram</class>
-<name>Reassigned spectrogram 1</name>
-<source>Waveform 1</source>
-<enabled>false</enabled>
-<FromFilePath/>
-<WindowSize>1024</WindowSize>
-<Overlapping>0.95</Overlapping>
-<WindowType>2</WindowType>
-<MinFreqInSpectrogram>0</MinFreqInSpectrogram>
-<MaxFreqInSpectrogram>1000</MaxFreqInSpectrogram>
-<ReassignedSpectrumTag>2</ReassignedSpectrumTag>
-<ReassignedThreshold>0.2</ReassignedThreshold>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.OnsetDetectionFunctionComponent</class>
-<name>OnsetDetection 1</name>
-<source>Reassigned spectrogram 1</source>
-<enabled>true</enabled>
-<RegressionWindowSize>7</RegressionWindowSize>
-<type>0</type>
 </VisualComponent>
 </PanelConfiguration>

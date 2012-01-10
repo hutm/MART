@@ -1,7 +1,10 @@
 package org.mart.crs.eval;
 
+import org.mart.crs.exec.operation.eval.chord.ChordEvaluatorNema;
+import org.mart.crs.exec.operation.eval.chord.ChordEvaluatorNemaFullDictionary;
 import org.mart.crs.exec.operation.eval.chord.EvaluatorOld;
 import org.mart.crs.management.label.chord.ChordSegment;
+import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.utils.helper.HelperFile;
 import junit.framework.TestCase;
 
@@ -15,10 +18,11 @@ import java.util.StringTokenizer;
  * @author: Hut
  */
 public class TestParseMIREX2010Results extends TestCase {
-    String folderDir = "d:\\temp\\mirex\\results\\";
-    String outFolder = "d:\\temp\\mirex\\results\\";
-    String[] outFolders = new String[]{"Ground-truth", "CWB1", "EW1", "EW2", "EW3", "EW4", "KO1", "MD1", "MK1", "MM1", "OFG1", "PP1", "PVM1", "RRHS1", "RRHS2", "UUOS1"};
-
+    String folderDir = "/home/hut/PhD/experiments/mirex2011Chords/labelsRaw/";
+    String outFolder = "/home/hut/PhD/experiments/mirex2011Chords/results/";
+//    String[] outFolders = new String[]{"Ground-truth", "CWB1", "EW1", "EW2", "EW3", "EW4", "KO1", "MD1", "MK1", "MM1", "OFG1", "PP1", "PVM1", "RRHS1", "RRHS2", "UUOS1"};
+    String[] outFolders = {"Ground-truth","BUURO1","BUURO2","BUURO3","BUURO4","BUURO5","CB1","CB2","CB3","KO1","KO2","NM1","NMSD1","NMSD2","NMSD3","PVM1","RHRC1","UUOS1","UUROS1"};
+//    String[] outFolders = {"Ground-truth", "NMSD2","NMSD3","PVM1","RHRC1","UUOS1","UUROS1"};
 
     public void testParseResults() {
 
@@ -69,10 +73,13 @@ public class TestParseMIREX2010Results extends TestCase {
                     System.out.println("File " + file.getName());
                     e.printStackTrace();
                 }
-                chordSegmentList.add(parsedChordSegment);
+                if (parsedChordSegment != null) {
+                    chordSegmentList.add(parsedChordSegment);
+                }
                 lineIndex++;
                 if (line.trim().endsWith("],") || line.trim().endsWith("]")) {
-                    //TODO LabelsParser.saveSegmentsInFile(chordSegmentList, paths[i] + "/" + file.getName().replaceAll("\\.js", ".lab"));
+                    ChordStructure chordStructure = new ChordStructure(chordSegmentList, file.getName().replaceAll("\\.js", ""));
+                    chordStructure.saveSegmentsInFile(paths[i], true);
                     break;
                 }
             }
@@ -93,13 +100,23 @@ public class TestParseMIREX2010Results extends TestCase {
         StringTokenizer tokenizer2 = new StringTokenizer(line, "\"");
         tokenizer2.nextToken();
         String chordName = tokenizer2.nextToken();
-        return new ChordSegment(startTime, endTime, chordName.trim());
+        return new ChordSegment(startTime, endTime, chordName.replace("dim(9)", "dim").replace("S", "N").trim());
     }
 
 
     public void testReevaluate() {
         for (int i = 1; i < outFolders.length; i++) {
-            EvaluatorOld.makeEvaluation(outFolder + outFolders[i], "d:\\temp\\mirex\\Ground-truth", outFolder + outFolders[i] + ".txt");
+            ChordEvaluatorNema evaluatorNema = new ChordEvaluatorNema();
+            evaluatorNema.initializeDirectories(outFolder + outFolders[i], outFolder + outFolders[0], "/home/hut/PhD/experiments/mirex2011Chords/html/" + outFolders[i] + ".txt");
+            evaluatorNema.evaluate();
+        }
+    }
+
+    public void testReevaluateFullDict() {
+        for (int i = 1; i < outFolders.length; i++) {
+            ChordEvaluatorNemaFullDictionary evaluatorNema = new ChordEvaluatorNemaFullDictionary();
+            evaluatorNema.initializeDirectories(outFolder + outFolders[i], outFolder + outFolders[0], "/home/hut/PhD/experiments/mirex2011Chords/htmlFullDict/" + outFolders[i] + ".txt");
+            evaluatorNema.evaluate();
         }
     }
 

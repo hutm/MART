@@ -76,12 +76,16 @@ public class ChordStructure implements Comparable<ChordStructure> {
     }
 
 
-    public void saveSegmentsInFile(String outDirectory) {
+    public void saveSegmentsInFile(String outDirectory, boolean isChordNameOriginal) {
         Collections.sort(chordSegments);
         try {
             FileWriter writer = new FileWriter(HelperFile.getFile(String.format("%s/%s%s", outDirectory, songName, Settings.LABEL_EXT)));
             for (ChordSegment cs : chordSegments) {
-                writer.write(cs + "\n");
+                if (!isChordNameOriginal) {
+                    writer.write(cs + "\n");
+                }     else{
+                    writer.write(String.format("%7.5f\t%7.5f\t%s\n",cs.getOnset(), cs.getOffset(), cs.getChordNameOriginal()));
+                }
             }
             writer.close();
 
@@ -89,6 +93,10 @@ public class ChordStructure implements Comparable<ChordStructure> {
             logger.error("Unexpected error occured: ");
             logger.error(Helper.getStackTrace(e));
         }
+    }
+
+    public void saveSegmentsInFile(String outDirectory) {
+        this.saveSegmentsInFile(outDirectory, false);
     }
 
 
