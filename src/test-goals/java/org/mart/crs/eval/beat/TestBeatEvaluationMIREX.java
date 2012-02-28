@@ -78,16 +78,16 @@ public class TestBeatEvaluationMIREX extends TestCase {
 
 
     public void testBeatEvaluatorNemaBeatles() throws Exception {
-        BeatEvaluatorNema.isOnlyDownBeatEvaluation = true;
+        BeatEvaluatorNema.isOnlyDownBeatEvaluation = false;
         BeatEvaluatorNema evaluatorNema = new BeatEvaluatorNema();
         evaluatorNema.initializeDirectories("/home/hut/PhD/experiments/beatBeatles/results/Beatles/output", "/home/hut/PhD/experiments/beatBeatles/results/Beatles/gt", "/home/hut/PhD/experiments/beatBeatles/results/Beatles/resultsHTML");
         evaluatorNema.evaluate();
     }
 
     public void testBeatEvaluatorNemaQuaero() throws Exception {
-        evaluateBeatDatabase("/home/hut/PhD/experiments/beatBeatles/results/Quaero", false);
+//        evaluateBeatDatabase("/home/hut/PhD/experiments/beatBeatles/results/Quaero", false);
 //        evaluateBeatDatabase("/home/hut/PhD/experiments/beatBeatles/results/mazurka", false);
-//        evaluateBeatDatabase("/home/hut/PhD/experiments/beatBeatles/results/hains", false);
+        evaluateBeatDatabase("/home/hut/PhD/experiments/beatBeatles/results/hains", false);
 
     }
 
@@ -101,14 +101,15 @@ public class TestBeatEvaluationMIREX extends TestCase {
 
 
     public void testcreateListsForMatlabEvaluation() throws Exception {
-        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Beatles/gt", "/home/hut/PhD/experiments/beatBeatles/results/Beatles/output/davies", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/Beatles/davies");
-        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Beatles/gt", "/home/hut/PhD/experiments/beatBeatles/results/Beatles/output/10.0_ACQuero_LMBEatles_NoStretching", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/Beatles/3dim");
+//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Beatles/gt", "/home/hut/PhD/experiments/beatBeatles/results/Beatles/output/davies", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/Beatles/davies");
+//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Beatles/gt", "/home/hut/PhD/experiments/beatBeatles/results/Beatles/output/10.0_ACQuero_LMBEatles_NoStretching", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/Beatles/3dim");
 
 //        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/hains/gt", "/home/hut/PhD/experiments/beatBeatles/results/hains/output/DAVIES", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/hains/davies");
 //        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/hains/gt", "/home/hut/PhD/experiments/beatBeatles/results/hains/output/retestForMirexFixed", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/hains/3dim");
-
-//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Quaero/gt", "/home/hut/PhD/experiments/beatBeatles/results/Quaero/output__1/lmWeight_10.00#acWeight_1.00#wip_3.00", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/qaero/3dim");
-//        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Quaero/gt", "/home/hut/PhD/experiments/beatBeatles/results/Quaero/output__1/DAVIES", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/qaero/davies");
+        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Quaero/gt", "/home/hut/PhD/experiments/beatBeatles/results/Quaero/output__1/thesis1BeatBeatlesLM", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/qaeroFixedBug/thesis1BeatBeatlesLM");
+        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Quaero/gt", "/home/hut/PhD/experiments/beatBeatles/results/Quaero/output__1/thesis2BeatBeatlesLM", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/qaeroFixedBug/thesis2BeatBeatlesLM");
+        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Quaero/gt", "/home/hut/PhD/experiments/beatBeatles/results/Quaero/output__1/thesis3BeatBeatlesLM", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/qaeroFixedBug/thesis3BeatBeatlesLM");
+        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Quaero/gt", "/home/hut/PhD/experiments/beatBeatles/results/Quaero/output__1/DAVIES", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/qaero/davies");
 
 
 //        BeatLabelsConverter.createListForMatlabBeatEvaluations("/home/hut/PhD/experiments/beatBeatles/results/Quaero/gt", "/home/hut/PhD/experiments/beatBeatles/results/Quaero/output__1/thesis3BeatBeatlesLM", "/home/hut/PhD/experiments/beatBeatles/matlabPlotsData/qaero/thesis3BeatBeatlesLM");
