@@ -55,13 +55,8 @@ public class BeatLabelsConverter extends TestCase {
     }
 
 
-    public static void transformLabels(String inDir, String outDir) {
-        HelperFile.createDir(outDir);
-        File[] files = HelperFile.getFile(inDir).listFiles();
-        for (File file : files) {
-            BeatStructure beatStructure = BeatStructure.getBeatStructure(file.getPath());
-            beatStructure.serializeIntoXML(String.format("%s/%s.xml", outDir, HelperFile.getNameWithoutExtension(file.getName())));
-        }
+    public void testTrainsformLabelsFromMazurka() {
+        transformLabels("/home/hut/mirdata/mazurka/labels", "/home/hut/mirdata/mazurka/labelsXML");
     }
 
 
@@ -107,6 +102,20 @@ public class BeatLabelsConverter extends TestCase {
         HelperFile.saveCollectionInFile(outStrings1, listFilePath, false);
 
     }
+
+
+
+
+
+    public static void transformLabels(String inDir, String outDir) {
+        HelperFile.createDir(outDir);
+        File[] files = HelperFile.getFile(inDir).listFiles();
+        for (File file : files) {
+            BeatStructure beatStructure = BeatStructure.getBeatStructure(file.getPath());
+            beatStructure.serializeIntoXML(String.format("%s/%s.xml", outDir, HelperFile.getNameWithoutExtension(file.getName())));
+        }
+    }
+
 
 
 }

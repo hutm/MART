@@ -58,5 +58,12 @@ public class TestChordEvaluationNema extends TestCase {
     }
 
 
+    public void testChordEvaluatorFastAlg() {
+        AbstractCRSEvaluator evaluatorNema = new ChordEvaluatorNema();
+        evaluatorNema.initializeDirectories("/home/hut/temp/beatles/bassNoNormalization07", "/home/hut/Beatles/labels", "/home/hut/temp/beatles/bassNoNormalization07_EVALRESULTS");
+        evaluatorNema.evaluate();
+
+    }
+
 
 }
