@@ -275,6 +275,28 @@ public class ChordStructure implements Comparable<ChordStructure> {
     }
 
 
+    public ChordStructure transpose(int numberOfSemitones){
+        List<ChordSegment> outList = new ArrayList<ChordSegment>();
+        for(ChordSegment chordSegment:chordSegments){
+            if (chordSegment.hasRoot()) {
+                int rootIndex = HelperArrays.transformIntValueToBaseRange(chordSegment.getRoot().ordinal() + numberOfSemitones, 12);
+                outList.add(new ChordSegment(chordSegment.getOnset(), chordSegment.getOffset(), Root.values()[rootIndex] + chordSegment.getChordType().getName()));
+            } else{
+                outList.add(chordSegment);
+            }
+        }
+        return new ChordStructure(outList, getSongName());
+    }
+    
+    public String getChordSequenceWithoutTimings(){
+        StringBuilder builder = new StringBuilder();
+        for(ChordSegment cs:chordSegments){
+            builder.append(cs.getChordName()).append(" ");
+        }
+        return builder.toString();
+    }
+
+
     public List<ChordSegment> getChordSegments() {
         return chordSegments;
     }

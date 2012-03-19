@@ -296,7 +296,7 @@ public class ChordSegment extends NemaChord implements Serializable {
     }
 
 
-    protected String preprocessChordLabel(String chordName) {
+    public static String preprocessChordLabel(String chordName) {
         String outChordLabel;
         if (chordName.length() <= 2 || chordName.indexOf(":") > 0 || chordName.indexOf("/") > 0 || chordName.equals(ChordType.NOT_A_CHORD.getName()) || chordName.equals(ChordType.UNKNOWN_CHORD.getName())) {
             outChordLabel = chordName;
@@ -331,7 +331,7 @@ public class ChordSegment extends NemaChord implements Serializable {
      * @return
      */
     public String toString() {
-        return String.format("%7.3f\t%7.3f\t%s\t%7.2f", onset, offset, preprocessChordLabel(getChordName()), logLikelihood);
+        return String.format("%7.3f\t%7.3f\t%s\t%7.2f", onset, offset, preprocessChordLabel(getChordName()), logLikelihood);   //TODO remove preprocessChordLabel method
     }
 
 

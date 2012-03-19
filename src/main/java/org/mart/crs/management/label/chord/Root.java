@@ -51,11 +51,11 @@ public enum Root {
         this.name = name;
     }
 
-    public static Root fromString(String text) {
+    public static Root fromString(String text) {                    //TODO maybe a possible bug if bemol symbol is not just after root note
         if (text != null) {
             String root;
             int ordinalOut = 0;
-            boolean isBemol = text.indexOf(BEMOL_SYMBOL) > 0;
+            boolean isBemol = text.indexOf(BEMOL_SYMBOL) > 0;              //TODO   && text.indexOf(BEMOL_SYMBOL) <= 2
             boolean isBemolDouble = text.indexOf(BEMOL_DOUBLE_SYMBOL) > 0;
             boolean isSharp = text.indexOf(SHARP_SYMBOL) > 0;
             boolean isSharpDouble = text.indexOf(SHARP_DOUBLE_SYMBOL) > 0;
