@@ -375,6 +375,23 @@ public abstract class PCP {
         return shiftedPCP;  //To change body of created methods use File | Settings | File Templates.
     }
 
+
+    //TODO substitute routines from the method
+    public static float[] shiftPCP(float[] pcp, int shift, boolean isToPutFromEndToBeginning){
+        float[] shiftedPCP = new float[pcp.length];
+        int index;
+        for (int j = 0; j < pcp.length; j++) {
+            index = j + shift;
+            if (!isToPutFromEndToBeginning && (index < 0 || index >= shiftedPCP.length)) {
+                //In this case just eliminate this value
+                continue;
+            }
+            index = HelperArrays.transformIntValueToBaseRange(index, pcp.length);
+            shiftedPCP[index] = pcp[j];
+        }
+        return shiftedPCP;
+    }
+
     public static float[][] shiftPCP(float[][] pcp, int shift) {
         return shiftPCP(pcp, shift, true);
     }
