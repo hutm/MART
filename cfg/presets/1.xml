@@ -4,8 +4,8 @@
 <name>Waveform 1</name>
 <source>From file</source>
 <enabled>true</enabled>
-<AudioFileName>/home/hut/mirdata/chords/audio/01_-_A_Hard_Day's_Night.wav</AudioFileName>
-<SamplingRate>44100.0</SamplingRate>
+<AudioFileName>/home/hut/work/JAZZ/audio/split-track02.wav</AudioFileName>
+<SamplingRate>0.0</SamplingRate>
 <Filtering>false</Filtering>
 <FilterFilePath/>
 </VisualComponent>
@@ -14,19 +14,10 @@
 <name>Chord sequence 1</name>
 <source>Waveform 1</source>
 <enabled>true</enabled>
-<LabelsSource0/>
-<LabelsSource1>/home/hut/Beatles/labels</LabelsSource1>
-<LabelsSource2/>
+<LabelsSource0>/home/hut/mirdata/chords/labels</LabelsSource0>
+<LabelsSource1>/home/hut/work/!recognized/chords</LabelsSource1>
+<LabelsSource2>/home/hut/temp/jamal</LabelsSource2>
 <IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
-</VisualComponent>
-<VisualComponent>
-<class>org.mart.gui.component.visual.BeatSequence</class>
-<name>Beat sequence 1</name>
-<source>Waveform 1</source>
-<enabled>true</enabled>
-<LabelsSource0/>
-<LabelsSource1>/home/hut/Beatles/labelsBeatsBeatles</LabelsSource1>
-<LabelsSource2/>
-<IsToUseMidiPlayBack>true</IsToUseMidiPlayBack>
+<IsToUseRecognizeNow>false</IsToUseRecognizeNow>
 </VisualComponent>
 </PanelConfiguration>
