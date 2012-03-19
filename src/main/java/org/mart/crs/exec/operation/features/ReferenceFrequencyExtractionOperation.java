@@ -83,7 +83,7 @@ public class ReferenceFrequencyExtractionOperation extends AbstractCRSOperation 
                 Tuner tuner = null;
                 try {
                     logger.info(String.format("Extracting reference frequency from file %s", HelperFile.getFile(filePath).getName()));
-                    Constructor c = Class.forName(Settings.REF_FREQ_TUNER).getConstructor(new Class[]{String.class});
+                    Constructor c = Class.forName("org.mart.tools.tuning." + Settings.REF_FREQ_TUNER).getConstructor(new Class[]{String.class});
                     tuner = (Tuner) c.newInstance(filePath);
                 } catch (InstantiationException e) {
                     e.printStackTrace();

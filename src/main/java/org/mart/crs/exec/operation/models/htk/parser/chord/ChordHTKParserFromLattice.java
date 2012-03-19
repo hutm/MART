@@ -16,6 +16,8 @@
 
 package org.mart.crs.exec.operation.models.htk.parser.chord;
 
+import org.mart.crs.config.ExecParams;
+import org.mart.crs.config.Settings;
 import org.mart.crs.management.label.LabelsParser;
 import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.ChordStructure;
@@ -90,7 +92,12 @@ public class ChordHTKParserFromLattice extends ChordHTKParser {
     }
 
     protected void setupMultiplicationCoeff(){
-        this.multiplicationCoeff = PRECISION_COEFF_LATTICE;
+        if (Settings.isSphinx) {
+            float frameStep = ExecParams._initialExecParameters.windowLength * (1 - ExecParams._initialExecParameters.overlapping)/ExecParams._initialExecParameters.samplingRate;
+            this.multiplicationCoeff = 1/(frameStep/0.01f);
+        }  else{
+            this.multiplicationCoeff = PRECISION_COEFF_LATTICE;
+        }
     }
 
 

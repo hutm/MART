@@ -139,6 +139,7 @@ public class Settings {
 
 
     public static boolean isMIREX;
+    public static boolean isSphinx;
     public static boolean isQUAERO;
 
 

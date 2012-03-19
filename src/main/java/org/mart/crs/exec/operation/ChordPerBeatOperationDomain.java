@@ -16,28 +16,16 @@
 
 package org.mart.crs.exec.operation;
 
-import static org.mart.crs.exec.scenario.stage.StageParameters.*;
-import static org.mart.crs.config.Settings.*;
+import org.mart.crs.exec.operation.ChordOperationDomain;
 
 /**
- * @version 1.0 17-Jun-2010 20:45:40
+ * @version 1.0 3/16/12 7:50 PM
  * @author: Hut
  */
-public abstract class Operation {
+public class ChordPerBeatOperationDomain extends ChordOperationDomain {
 
 
-    protected String workingDir;
 
 
-    public Operation(String workingDir) {
-        this.workingDir = workingDir;
-    }
-
-    protected Operation() {
-    }
-
-    public abstract void initialize();
-
-    public abstract void operate();
 
 }
