@@ -16,6 +16,8 @@
 
 package org.mart.crs.management.label;
 
+import org.mart.crs.config.Settings;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,13 +30,15 @@ import static org.mart.crs.utils.helper.HelperFile.getPathForFileWithTheSameName
 public class LabelsManager {
 
     public static final int NUMBER_OF_LABEL_SOURCES = 3;
+    public static final String RECOGNIZE_NOW_DIR = "recognizeNow";
 
     protected LabelsSource[] labelsSources;
 
     protected String[] possibleLabelExtensions;
 
     public LabelsManager(String[] possibleLabelExtensions) {
-        labelsSources = new LabelsSource[NUMBER_OF_LABEL_SOURCES];
+        labelsSources = new LabelsSource[NUMBER_OF_LABEL_SOURCES + 1];
+        labelsSources[NUMBER_OF_LABEL_SOURCES] = new LabelsSource(RECOGNIZE_NOW_DIR, false, "RecognizeNow!!!", new String[]{Settings.LABEL_EXT});
         this.possibleLabelExtensions = possibleLabelExtensions;
     }
 
