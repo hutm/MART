@@ -1,0 +1,64 @@
+<BeatStructure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" date="2011-09-18" format="20090701A">
+<media>1beats</media>
+<descriptiondefinition id="1">
+<type/>
+<generator version="0.1"/>
+</descriptiondefinition>
+<segment comment="-" length="0" sourcetrack="0" time="1.9219">
+<beattype beat="1" id="1" measure="1" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="2.7031">
+<beattype beat="2" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="3.4833">
+<beattype beat="3" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="4.2646">
+<beattype beat="4" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="5.0448">
+<beattype beat="1" id="1" measure="1" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="5.8219">
+<beattype beat="2" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="6.5979">
+<beattype beat="3" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="7.3740">
+<beattype beat="4" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="8.1500">
+<beattype beat="1" id="1" measure="1" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="8.9271">
+<beattype beat="2" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="9.7031">
+<beattype beat="3" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="10.4792">
+<beattype beat="4" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="11.2563">
+<beattype beat="1" id="1" measure="1" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="12.0313">
+<beattype beat="2" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="12.8083">
+<beattype beat="3" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="13.5844">
+<beattype beat="4" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="14.3604">
+<beattype beat="1" id="1" measure="1" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="15.1563">
+<beattype beat="2" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+<segment comment="-" length="0" sourcetrack="0" time="15.9510">
+<beattype beat="3" id="1" measure="0" pattern="0" tatum="1"/>
+</segment>
+</BeatStructure>
