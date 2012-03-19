@@ -73,6 +73,9 @@ public abstract class AbstractCRSOperation extends Operation {
         this.operationDomain = Settings.operationType.getOperationDomain(this);
     }
 
+    protected AbstractCRSOperation() {
+    }
+
 
     protected void setDataDirPath(String dataDirPath) {
         this.dataDirPath = dataDirPath;

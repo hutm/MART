@@ -45,6 +45,7 @@ import java.util.List;
 import static org.mart.crs.config.Settings.*;
 import static org.mart.crs.utils.helper.HelperData.*;
 import static org.mart.crs.utils.helper.HelperFile.*;
+
 /**
  * @version 1.0 Nov 10, 2009 11:26:44 AM
  * @author: Maksim Khadkevich
@@ -264,7 +265,7 @@ public class FeaturesManager {
                         int newRootIndex = 0;
                         if (curSegment.getChordType() == ChordType.NOT_A_CHORD) {
                             newRootIndex = rotation;
-                        } else{
+                        } else {
                             newRootIndex = HelperArrays.transformIntValueToBaseRange(curSegment.getRoot().ordinal() + rotation, Root.values().length);
                         }
                         int newRootLabelIndex = HelperArrays.transformIntValueToBaseRange(-1 * rotation, Root.values().length);
@@ -274,10 +275,18 @@ public class FeaturesManager {
                         }
 
                         String filePath;
-                        if(curSegment.getChordType() == ChordType.NOT_A_CHORD){
-                             filePath = filename.replaceAll(chordTypeName, String.format("%s%s", Root.values()[newRootLabelIndex].getName(), chordTypeName));
-                        }else{
-                             filePath = filename.replaceAll(chordTypeName, String.format("%s%s", chordTypeName, Root.values()[newRootLabelIndex].getName()));
+                        if (Settings.isSphinx) {
+                            if (curSegment.getChordType() == ChordType.NOT_A_CHORD) {
+                                filePath = filename.replaceAll(chordTypeName, String.format("%s%s", Root.values()[newRootLabelIndex].getName(), chordTypeName));
+                            } else {
+                                filePath = filename.replaceAll(chordTypeName, String.format("%s%s", Root.values()[newRootLabelIndex].getName(), chordTypeName));
+                            }
+                        } else {
+                            if (curSegment.getChordType() == ChordType.NOT_A_CHORD) {
+                                filePath = filename.replaceAll(chordTypeName, String.format("%s%s", Root.values()[newRootLabelIndex].getName(), chordTypeName));
+                            } else {
+                                filePath = filename.replaceAll(chordTypeName, String.format("%s%s", chordTypeName, Root.values()[newRootLabelIndex].getName()));
+                            }
                         }
 
                         fileNameToStore = String.format("%s/%s", dirName, filePath);
@@ -292,7 +301,7 @@ public class FeaturesManager {
     /**
      * If necessary, perform circular roration and save
      */
-    protected boolean isToSaveRotatedFeatures(){
+    protected boolean isToSaveRotatedFeatures() {
         return false;
     }
 
@@ -331,7 +340,7 @@ public class FeaturesManager {
         List<BeatSegment> segments;
         if (Settings.downbeatGranulation) {
             segments = beatStructure.getDownBeatPositions(true);
-        } else{
+        } else {
             segments = beatStructure.getBeatSegments();
         }
 
@@ -466,7 +475,7 @@ public class FeaturesManager {
 
     /**
      * This functions splits the feature vector stream into parts that contain only one chord segment. This is done
-     * after first-pass Viterbi decoding
+     * after first-pass ViterbiPath decoding
      *
      * @param featureVectorFilePath File path to the feature vector data
      * @param chordSegments         parsed data about chord segments' boundaries

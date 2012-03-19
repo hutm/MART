@@ -27,6 +27,7 @@ import org.mart.crs.exec.scenario.stage.StageParameters;
 import org.mart.crs.exec.scenario.stage.TestFeaturesStage;
 import org.mart.crs.exec.scenario.stage.TestRecognizeStage;
 import org.mart.crs.exec.scenario.stage.TrainModelsStage;
+import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.management.label.chord.ChordType;
 import org.mart.crs.management.label.chord.Root;
 import org.mart.crs.utils.filefilter.ExtensionFileFilter;
@@ -36,7 +37,9 @@ import org.mart.crs.utils.helper.HelperFile;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.mart.crs.config.Settings.*;
 import static org.mart.crs.exec.scenario.stage.StageParameters.*;
@@ -149,7 +152,52 @@ public class RecognizeOperation extends AbstractCRSOperation {
     }
 
     protected void createGrammarFile() {
-        createGrammarFile(false);
+//        createGrammarFile(false);
+        createGrammarFileFromGroundTruthForCoverID(); //TODO remove hardcoded String
+    }
+
+
+    protected void createGrammarFileFromGroundTruthForCoverID(){
+        try {
+            StringBuffer buffer = new StringBuffer();
+            List<String> sentences = new ArrayList<String>();
+            FileWriter writer = new FileWriter(getFile(gramFilePath));
+
+            String gtLabelsDir = Settings.chordLabelsGroundTruthDir; //TODO remove hardcoded String
+            //Read gtchord sequences from gt label files
+            File[] gtFiles = HelperFile.getFile(gtLabelsDir).listFiles();
+            for(File labelFile:gtFiles){
+                ChordStructure chordStructure = new ChordStructure(labelFile.getPath());
+                String fileNameVar = HelperFile.getNameWithoutExtension(labelFile.getPath()).replace("_Render", "");
+                
+                for(int i = 0; i < NUMBER_OF_SEMITONES_IN_OCTAVE; i++){
+                    String sentenceVar = String.format("$%s%d", fileNameVar, i);
+                    sentences.add(sentenceVar);
+                    buffer.append(sentenceVar).append(" = ");
+                    ChordStructure transposedStructure = chordStructure.transpose(i);
+                    String chordSequence = transposedStructure.getChordSequenceWithoutTimings();
+                    buffer.append(chordSequence).append(";\r\n");
+                }
+            }
+
+
+
+            buffer.append("$out = ");
+            for (ChordType modality : chordDictionary) {
+                    for (String sentence:sentences) {
+                        buffer.append(String.format("%s | ", sentence));
+                    }
+            }
+            buffer.deleteCharAt(buffer.length() - 2);
+            buffer.append(";\r\n");
+            writer.write(buffer.toString());
+            writer.write("($out)");
+
+            writer.close();
+        } catch (IOException e) {
+            logger.error("Problems: ");
+            logger.error(Helper.getStackTrace(e));
+        }
     }
 
 

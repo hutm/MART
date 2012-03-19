@@ -29,6 +29,7 @@ import org.mart.crs.exec.operation.models.training.chord.TrainingLanguageModelsO
 import org.mart.crs.exec.scenario.stage.StageParameters;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.features.FeaturesManager;
+import org.mart.crs.management.features.FeaturesManagerSphinx;
 import org.mart.crs.management.label.chord.ChordType;
 import org.mart.crs.management.label.chord.Root;
 import org.mart.crs.utils.helper.Helper;
@@ -163,6 +164,9 @@ public class ChordOperationDomain extends OperationDomain {
 
     @Override
     public FeaturesManager getFeaturesManager(String songFilePath, String outDirPath, boolean isForTraining, ExecParams execParams) {
+        if (Settings.isSphinx) {
+            return new FeaturesManagerSphinx(songFilePath, outDirPath, isForTraining, execParams);
+        }
         return new FeaturesManager(songFilePath, outDirPath, isForTraining, execParams);
     }
 }

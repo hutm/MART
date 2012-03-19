@@ -65,6 +65,16 @@ public class FeaturesExtractionOperation extends AbstractCRSOperation {
         outDirPath = currentStage.getFeaturesDirPath();
         refFreqFilePath = currentStage.getRefFreqFilePath();
     }
+    
+    
+    public FeaturesExtractionOperation(String fileListPath, boolean isForTraining, String outDirPath, String refFreqFilePath){
+        this.fileListPath = fileListPath;
+        this.isForTraining = isForTraining;
+        this.numberOfParralelThreads = Settings.threadsNumberForFeatureExtraction;
+
+        this.outDirPath = outDirPath;
+        this.refFreqFilePath = refFreqFilePath;
+    }
 
 
     @Override
@@ -83,6 +93,23 @@ public class FeaturesExtractionOperation extends AbstractCRSOperation {
 
         if (Settings.isToDeleteTrainFeaturesAfterTraining && !isForTraining) {
             HelperFile.deleteDirectory(outDirPath);
+        }
+
+        prepareOutputDirs();
+    }
+
+    //TODO remove this method
+    public void initializeSphinx() {
+        this.operationDomain = Settings.operationType.getOperationDomain(this);
+        this.execParams = ExecParams._initialExecParameters;
+        this.fileListCollection = HelperFile.readLinesFromTextFile(this.fileListPath);
+
+        File fileList = getFile(fileListPath);
+        logger.info("FileList to process: " + fileList.getPath());
+        if (!fileList.exists() || fileList.isDirectory()) {
+            logger.error("File " + fileListPath + " does not exist");
+            logger.error("Feature extraction was aborted...");
+            return;
         }
 
         prepareOutputDirs();

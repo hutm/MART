@@ -14,30 +14,29 @@
  * Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-package org.mart.crs.exec.operation;
+package org.mart.tools.simplechords;
 
-import static org.mart.crs.exec.scenario.stage.StageParameters.*;
-import static org.mart.crs.config.Settings.*;
+import org.mart.crs.utils.filefilter.ExtensionFileFilter;
+
+import java.io.File;
 
 /**
- * @version 1.0 17-Jun-2010 20:45:40
+ * @version 1.0 1/13/12 3:59 PM
  * @author: Hut
  */
-public abstract class Operation {
-
-
-    protected String workingDir;
-
-
-    public Operation(String workingDir) {
-        this.workingDir = workingDir;
+public class TestSimpleChordRecognizer {
+    
+    
+    public void testExtractBeatlesLabels(){
+        String fileNameIn = "";
+        String fileNameOut = "";
+        
+        File[] inFiles = new File(fileNameIn).listFiles(new ExtensionFileFilter(new String[]{".wav", ".mp3"}));
+        for(File inWavFile: inFiles){
+            SimpleChordRecognizer recognizer = new SimpleChordRecognizer(inWavFile.getPath(), fileNameOut);
+            recognizer.initialize();
+        }
     }
-
-    protected Operation() {
-    }
-
-    public abstract void initialize();
-
-    public abstract void operate();
-
+    
+    
 }
