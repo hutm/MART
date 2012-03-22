@@ -16,7 +16,13 @@
 
 package org.mart.crs.exec.operation;
 
-import org.mart.crs.exec.operation.ChordOperationDomain;
+import org.mart.crs.config.ExecParams;
+import org.mart.crs.config.Settings;
+import org.mart.crs.exec.operation.models.test.chord.RecognizeBeatSynchronousOperation;
+import org.mart.crs.exec.operation.models.test.chord.RecognizeConventionalVersionWithLMOperation;
+import org.mart.crs.exec.operation.models.training.chord.TrainingLanguageModelsOperation;
+import org.mart.crs.exec.scenario.stage.StageParameters;
+import org.mart.crs.management.features.FeaturesManager;
 
 /**
  * @version 1.0 3/16/12 7:50 PM
@@ -24,7 +30,20 @@ import org.mart.crs.exec.operation.ChordOperationDomain;
  */
 public class ChordPerBeatOperationDomain extends ChordOperationDomain {
 
+    @Override
+    public AbstractCRSOperation getRecognizeLanguageModelOperation(StageParameters stageParameters, ExecParams execParams) {
+            return new RecognizeBeatSynchronousOperation(stageParameters, execParams);
+    }
 
+    @Override
+    public AbstractCRSOperation getTrainLanguageModelsOperation(StageParameters stageParameters, ExecParams execParams) {
+        return new TrainingLanguageModelsOperation(stageParameters, execParams);
+    }
+
+    @Override
+    public FeaturesManager getFeaturesManager(String songFilePath, String outDirPath, boolean isForTraining, ExecParams execParams) {
+        return new FeaturesManager(songFilePath, outDirPath, isForTraining, execParams);
+    }
 
 
 

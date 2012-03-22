@@ -46,7 +46,7 @@ public class TextForLMCreator {
 
     protected static Logger logger = CRSLogger.getLogger(TextForLMCreator.class);
 
-    public static void process(String wavFileList, String outText, boolean isFactored) {
+    public void process(String wavFileList, String outText, boolean isFactored) {
         //wavFileList = "/home/hut/Beatles/list/all.txt";      //TODO Remove this this is just a stub
         List<String> wavFilePaths = HelperFile.readTokensFromTextFile(wavFileList, 1);
         logger.debug(String.format("read %d tokens from file %s", wavFilePaths.size(), wavFileList));
@@ -82,7 +82,7 @@ public class TextForLMCreator {
      * @param labelsDir labelsDir
      * @param outFile   outFile
      */
-    public static void createText(String labelsDir, String outFile) {
+    public void createText(String labelsDir, String outFile) {
         String fileList = System.getProperty("java.io.tmpdir") + File.separator + "labelsList";
         createFileList(labelsDir, fileList, new ExtensionFileFilter(new String[]{LABEL_EXT}), true);
         List<String> labelFilePathList = HelperFile.readTokensFromTextFile(fileList, 1);
@@ -92,7 +92,7 @@ public class TextForLMCreator {
     }
 
 
-    public static void createText(List<String> labelFilePaths, String outFile) {
+    public void createText(List<String> labelFilePaths, String outFile) {
         logger.debug("Creating output file " + outFile);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(outFile)));
@@ -162,7 +162,7 @@ public class TextForLMCreator {
      * @param keyTo
      * @return
      */
-    public static String shiftChords(String inLine, Root keyFrom, Root keyTo) {
+    public String shiftChords(String inLine, Root keyFrom, Root keyTo) {
         int shift = (keyTo.ordinal() - keyFrom.ordinal() + NUMBER_OF_SEMITONES_IN_OCTAVE) % NUMBER_OF_SEMITONES_IN_OCTAVE;
         return shiftChords(inLine, shift);
     }
@@ -175,7 +175,7 @@ public class TextForLMCreator {
      * @param shift
      * @return
      */
-    public static String shiftChords(String inLine, int shift) {
+    public String shiftChords(String inLine, int shift) {
         StringBuffer out = new StringBuffer();
         StringTokenizer tokenizer = new StringTokenizer(inLine);
         String chordLabel;
@@ -199,7 +199,7 @@ public class TextForLMCreator {
      *
      * @param labelsDir Dir with labels files
      */
-    public static void createTextForFactoredLM(String labelsDir, String textFilePath) throws IOException {
+    public void createTextForFactoredLM(String labelsDir, String textFilePath) throws IOException {
 
         String fileList = System.getProperty("java.io.tmpdir") + File.separator + "labelsList";
         createFileList(labelsDir, fileList, new ExtensionFileFilter(new String[]{LABEL_EXT}), true);
@@ -210,7 +210,7 @@ public class TextForLMCreator {
     }
 
 
-    public static void createTextForFactoredLM(List<String> labelsFilePaths, String textFilePath) throws IOException {
+    public void createTextForFactoredLM(List<String> labelsFilePaths, String textFilePath) throws IOException {
         FileWriter writer = new FileWriter(getFile(textFilePath));
 
         String beatFilePath;
@@ -237,7 +237,7 @@ public class TextForLMCreator {
     }
 
 
-    public static String parseChordSentence(String[] beatsArray, List<ChordSegment> chordSegments) {
+    public String parseChordSentence(String[] beatsArray, List<ChordSegment> chordSegments) {
         StringBuilder chordSentence = new StringBuilder();
 
         float startTime, endTime;
@@ -273,7 +273,7 @@ public class TextForLMCreator {
     }
 
 
-    public static void createTextInFLMFormat(String parsedTextFilePath, String outFilePath) throws IOException {
+    public void createTextInFLMFormat(String parsedTextFilePath, String outFilePath) throws IOException {
         File inFile = getFile(parsedTextFilePath);
         File outFile = getFile(outFilePath);
 
@@ -303,7 +303,7 @@ public class TextForLMCreator {
      * @param line line
      * @return compactLine
      */
-    public static String compactLine(String line, boolean isToQuantize, boolean isToIncludeOOVChords) {
+    public String compactLine(String line, boolean isToQuantize, boolean isToIncludeOOVChords) {
         String currentChord, token;
         int currentChordCount = 1;
         StringBuffer stringBuffer = new StringBuffer();
@@ -337,7 +337,7 @@ public class TextForLMCreator {
      * @param line input line
      * @return Map
      */
-    public static List<ChordSegment> parseCompactRepresentation(String line) {
+    public List<ChordSegment> parseCompactRepresentation(String line) {
         List<ChordSegment> out = new ArrayList<ChordSegment>();
         StringTokenizer chordTokenizer, tokenizer = new StringTokenizer(line);
         String token, chordToken, chordName, chordDuration;
@@ -364,10 +364,10 @@ public class TextForLMCreator {
      * @param segments
      * @return
      */
-    public static List<ChordSegment> getChordSegmentsList(String[] beatsArray, List<ChordSegment> segments) {
-        String chordSentence = TextForLMCreator.parseChordSentence(beatsArray, segments);
-        String chordSentenceCompact = TextForLMCreator.compactLine(chordSentence, false, true);
-        List<ChordSegment> chordDurations = TextForLMCreator.parseCompactRepresentation(chordSentenceCompact);
+    public List<ChordSegment> getChordSegmentsList(String[] beatsArray, List<ChordSegment> segments) {
+        String chordSentence = parseChordSentence(beatsArray, segments);
+        String chordSentenceCompact = compactLine(chordSentence, false, true);
+        List<ChordSegment> chordDurations = parseCompactRepresentation(chordSentenceCompact);
         return chordDurations;
     }
 
