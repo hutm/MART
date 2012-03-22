@@ -74,7 +74,7 @@ public class TrainingLanguageModelsOperation extends AbstractCRSOperation {
 
         //First create text for standard language model
         String textFilePath = lmDir + File.separator + "text_lan_model_standard";
-        TextForLMCreator.process(wavFileList, textFilePath, false);
+        (new TextForLMCreator()).process(wavFileList, textFilePath, false);
 
         String command = String.format("%s/ngram-count -text %s -order %d -wbdiscount -lm %s/%s", StageParameters.binariesDir, textFilePath, execParams.standardLmOrder,  lmDir, StageParameters.LMModelStandardVersion);
         Helper.execCmd(command);
@@ -117,7 +117,7 @@ public class TrainingLanguageModelsOperation extends AbstractCRSOperation {
         HelperFile.createDir(lmDir);
 
         String textFilePath = lmDir + File.separator + "text_lan_model_HVite_bigram";
-        TextForLMCreator.process(wavFileList, textFilePath, false);
+        (new TextForLMCreator()).process(wavFileList, textFilePath, false);
 
         String scriptFilePath = StageParameters.binariesDir + File.separator + "trainLMHVite" + SCRIPT_EXTENSION;
         String command = scriptFilePath + " " + lmDir + " " + textFilePath + " " + wordListLMPath + " " + netHViteFilePath;

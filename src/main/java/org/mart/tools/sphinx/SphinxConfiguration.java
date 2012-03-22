@@ -199,7 +199,7 @@ public class SphinxConfiguration {
 
         //First create text for standard language model
         String textFilePath = String.format("%s/text_lan_model_standard", tempDir);
-        TextForLMCreator.process(ExecParams._initialExecParameters._waveFilesTrainFileList, textFilePath, false);
+        (new TextForLMCreator()).process(ExecParams._initialExecParameters._waveFilesTrainFileList, textFilePath, false);
 
         String command = String.format("%s/ngram-count -text %s -order %d -wbdiscount -lm %s", StageParameters.binariesDir, textFilePath, ExecParams._initialExecParameters.standardLmOrder, lmFile);
         Helper.execCmd(command);
