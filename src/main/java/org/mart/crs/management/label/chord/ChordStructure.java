@@ -55,7 +55,6 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
     public void parseChordLabels(String labelFilePath) {
         File file;
-
         try {
 
             file = HelperFile.getFile(labelFilePath);

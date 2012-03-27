@@ -1,7 +1,8 @@
 package org.mart.crs.core;
 
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * User: Hut
@@ -12,7 +13,7 @@ public class AudioReaderTest {
 
     @Test
     public void testAudioReader(){
-        AudioReader reader = new AudioReader(this.getClass().getResource("/1.wav").getPath());
+        AudioReader reader = new AudioReader(this.getClass().getResource("/audio/1.wav").getPath());
         Assert.assertEquals(reader.getSamples().length, 222514);
 
     }

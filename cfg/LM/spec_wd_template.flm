@@ -1,10 +1,10 @@
 1
 W : 7 D(0) W(-1) W(-2) W(-3) D(-1) D(-2) D(-3) FLMfilePathCount FLMfilePathLM 8
-D0W1W2W3D1D2D3 D3 kndiscount gtmin 1 interpolate 
-D0W1W2W3D1D2 W3 kndiscount gtmin 1 interpolate 
-D0W1W2D1D2 D2 kndiscount gtmin 1 interpolate 
-D0W1W2D1 W2 kndiscount gtmin 1 interpolate 
-D0W1D1 D1 kndiscount gtmin 1 interpolate 
-D0W1 W1 kndiscount gtmin 1 interpolate 
-D0 D0 kndiscount gtmin 1 interpolate 
+D0W1W2W3D1D2D3 D3 wbdiscount gtmin 1 interpolate 
+D0W1W2W3D1D2 W3 wbdiscount gtmin 1 interpolate 
+D0W1W2D1D2 D2 wbdiscount gtmin 1 interpolate 
+D0W1W2D1 W2 wbdiscount gtmin 1 interpolate 
+D0W1D1 D1 wbdiscount gtmin 1 interpolate 
+D0W1 W1 wbdiscount gtmin 1 interpolate 
+D0 D0 wbdiscount gtmin 1 interpolate 
 0 0 wbdiscount gtmin 1 interpolate

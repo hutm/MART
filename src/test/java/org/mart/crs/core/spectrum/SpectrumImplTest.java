@@ -1,5 +1,6 @@
 package org.mart.crs.core.spectrum;
 
+import org.testng.annotations.Test;
 import rasmus.interpreter.sampled.util.FFT;
 
 /**
@@ -12,7 +13,7 @@ import rasmus.interpreter.sampled.util.FFT;
 public class SpectrumImplTest {
 
 
-    @org.junit.Test
+    @Test
     public void testFFTAndFFTInverse(){
         double[] data = new double[64];
         for(int i = 0; i < data.length; i++){

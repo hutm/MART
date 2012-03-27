@@ -1,7 +1,7 @@
 package org.mart.crs.utils;
 
 import junit.framework.Assert;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * @version 1.0 7/11/11 11:19 AM

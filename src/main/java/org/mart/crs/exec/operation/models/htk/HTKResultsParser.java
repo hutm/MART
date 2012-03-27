@@ -335,7 +335,7 @@ public class HTKResultsParser {
                 }
 
                 try {
-                    if (IS_FACTORED_LM_FOR_STANDARD_VERSION || IS_FACTORED_LM) {
+                    if (IS_FACTORED_LM) {
                         tokenizerChordName = new StringTokenizer(chordName_unparsed, ":");
                         chordName = tokenizerChordName.nextToken().substring(2);
                     } else {

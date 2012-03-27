@@ -1,8 +1,0 @@
-1
-W : 5 W(-1) W(-2) W(-3) W(-4) W(-5) LMfilePathCount LMfilePathLM 6
-W1W2W3W4W5 W5 kndiscount gtmin 1 interpolate 
-W1W2W3W4 W4 kndiscount gtmin 1 interpolate 
-W1W2W3 W3 kndiscount gtmin 1 interpolate 
-W1W2 W2 kndiscount gtmin 1 interpolate 
-W1 W1 kndiscount gtmin 1 interpolate 
-0 0  wbdiscount gtmin 1 interpolate

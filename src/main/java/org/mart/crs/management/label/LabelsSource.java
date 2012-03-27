@@ -42,6 +42,10 @@ public class LabelsSource {
         this.possibleExtensions = possibleExtensions;
     }
 
+    public LabelsSource(String path, boolean groundTruth, String name, String possibleExtension) {
+        this(path, groundTruth, name, new String[]{possibleExtension});
+    }
+
     public String getPath() {
         return path;
     }
