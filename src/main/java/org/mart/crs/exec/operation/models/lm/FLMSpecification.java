@@ -26,36 +26,10 @@ import java.util.StringTokenizer;
  * @version 1.0 24.04.2009 21:47:48
  * @author: Maksim Khadkevich
  */
-public class SpecificationFLMCreator {
+public class FLMSpecification {
 
+    //If to use Duration for zero level
     public static boolean isDO = false;
-    public static int maxNumberOfWords = 10;
-    public static int maxNumberOfDurations = 0;
-    public static String fileNameToStore = "D:\\temp\\script\\FLMTrain\\finalResults";
-    public static String fileNameResults = "D:\\temp\\script\\FLMTrain\\excel";
-
-
-    public static void main(String[] args) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileNameToStore));
-
-        String filePath;
-        for (int i = 1; i <= maxNumberOfWords; i++) {
-            for (int j = 0; j <= maxNumberOfDurations; j++) {
-                filePath = "D:\\temp\\script\\FLMTrain\\" + i + "_" + j + ".flm";
-                createFLMSpec(filePath, i, j);
-                Helper.execCmd("D:\\temp\\script\\FLMTrain\\traintest.bat " + filePath, writer);
-                writer.write("It was FLM : W = " + i + " , D = " + j + "\n");
-                writer.write("------------------------------------------\n");
-            }
-        }
-
-        writer.close();
-
-        parseResults(fileNameToStore, fileNameResults, maxNumberOfWords, maxNumberOfDurations);
-
-//        createFLMSpec("D:\\temp\\script\\FLMTrain\\test.flm", 3, 0);
-    }
-
 
     public static void createFLMSpec(String outFile, int nW, int nD) {
         try {
@@ -122,6 +96,11 @@ public class SpecificationFLMCreator {
     }
 
 
+    /**
+     *  Missing perplexity computation.
+     *  Parsing a bunch of files to find the lowest perplexity and store to txt file
+     */
+    @Deprecated
     public static void parseResults(String inFilePath, String outFilePath, int nW, int nD) throws IOException {
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(outFilePath));

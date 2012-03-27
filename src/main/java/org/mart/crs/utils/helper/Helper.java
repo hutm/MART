@@ -106,7 +106,7 @@ public class Helper {
             Runtime rt = Runtime.getRuntime();
             logger.debug(command);
 
-            final Process pr = rt.exec(command);
+            final Process pr = rt.exec(command, new String[]{String.format("PATH=%s:./bin/", System.getenv("PATH"))});
 
             Thread shutDownHook = new Thread() {
                 public void run() {
@@ -209,7 +209,7 @@ public class Helper {
         String line = "";
         while ((line = reader.readLine()) != null) {
             for (String from : replaceMap.keySet()) {
-                line = line.replaceAll(from, replaceMap.get(from).replaceAll("\\\\", "/")).replaceAll("/", "\\\\\\\\");
+                line = line.replace(from, replaceMap.get(from));
             }
             writer.write(line + "\n");
         }

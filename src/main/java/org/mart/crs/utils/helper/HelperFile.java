@@ -275,6 +275,38 @@ public class HelperFile {
         return outFile;
     }
 
+    /**
+     * Returns File in the resource path location
+     * @param resourcePath Resource relative file path
+     * @return Found file
+     * @throws FileNotFoundException If file was not found 
+     */
+    public static File getResourceFile(String resourcePath) throws FileNotFoundException{
+        if(!resourcePath.startsWith("/")){
+            resourcePath = "/" + resourcePath;
+        }
+        URL myTestURL = HelperFile.class.getResource(resourcePath);
+        File myFile;
+        try {
+            myFile = new File(myTestURL.toURI());
+        } catch (NullPointerException e) {
+            throw new FileNotFoundException(String.format("Could not find resource %s in resources", resourcePath));
+        } catch (URISyntaxException e) {
+            throw new FileNotFoundException(String.format("Could not find resource %s in resources", resourcePath));
+        }
+        return myFile;
+    }
+
+    /**
+     * Returns file path for a given resource
+     * @param resourcePath Resource relative file path
+     * @return   Found file path
+     * @throws java.io.FileNotFoundException If file was not found
+     */
+    public static String getResourceFilePath(String resourcePath) throws FileNotFoundException{
+       return getResourceFile(resourcePath).getPath();
+    }
+
 
     public static String getShortFileName(String filePath) {
         return (getFile(filePath).getName());
@@ -363,6 +395,9 @@ public class HelperFile {
         }
     }
 
+    public static void saveCollectionInFile(Collection<String> collection, String filePathToStore) {
+        saveCollectionInFile(collection, filePathToStore, false);
+    }
 
     /**
      * Reads Strings from File

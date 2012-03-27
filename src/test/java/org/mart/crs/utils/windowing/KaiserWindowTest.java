@@ -1,6 +1,7 @@
 package org.mart.crs.utils.windowing;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 /**
  * @version 1.0 19-Sep-2010 19:43:52

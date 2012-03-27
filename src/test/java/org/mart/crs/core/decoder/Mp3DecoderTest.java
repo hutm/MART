@@ -2,7 +2,8 @@ package org.mart.crs.core.decoder;
 
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.utils.AudioHelper;
-import org.junit.Test;
+import org.testng.annotations.*;
+
 
 import java.io.IOException;
 
@@ -12,9 +13,9 @@ import java.io.IOException;
  */
 public class Mp3DecoderTest {
 
-    @Test
+    @Test(enabled = false)
     public void testReadMp3() throws IOException {
-        String filePath = this.getClass().getResource("/1.mp3").getPath();
+        String filePath = this.getClass().getResource("/audio/1.mp3").getPath();
         AudioReader reader = new AudioReader(filePath);
         AudioHelper.play(reader);
     }

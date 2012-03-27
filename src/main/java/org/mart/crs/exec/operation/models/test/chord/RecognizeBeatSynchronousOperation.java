@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
 import static org.mart.crs.exec.scenario.stage.StageParameters.*;
 import static org.mart.crs.config.Settings.*;
 
@@ -77,7 +78,6 @@ public class RecognizeBeatSynchronousOperation extends RecognizeOperation {
         evaluator.evaluate(recognizedFolder, Settings.chordLabelsGroundTruthDir, recognizedFolder + ".txt");
 
 
-
         ChordHTKParser parser = new ChordHTKParserHypotheses(outFilePath, recognizedFolder);
         parser.parseResults();
         List<ChordStructure> songList = parser.getResults();
@@ -107,11 +107,7 @@ public class RecognizeBeatSynchronousOperation extends RecognizeOperation {
             if (IS_FACTORED_LM) {
                 command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -factored -lm " + lmDir + File.separator + LMSpecFactoredFileName + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
             } else {
-                if (IS_FACTORED_LM_FOR_STANDARD_VERSION) {
-                    command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -factored -lm " + lmDir + File.separator + LMSpecFileName + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
-                } else {
-                    command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -lm " + lmDir + File.separator + LMModelStandardVersion + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
-                }
+                command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -lm " + lmDir + File.separator + LMModelStandardVersion + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
             }
             Helper.execCmd(command, null, false);
 

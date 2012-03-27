@@ -17,9 +17,9 @@
 package org.mart.crs.exec.operation.models.training.chord;
 
 import org.mart.crs.config.ExecParams;
-import org.mart.crs.exec.operation.models.lm.TextForLMCreator;
+import org.mart.crs.config.Settings;
+import org.mart.crs.exec.operation.models.lm.LanguageModelChordPerBeat;
 import org.mart.crs.exec.scenario.stage.StageParameters;
-import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
 
 import java.io.File;
@@ -38,14 +38,11 @@ public class TrainingLanguageModelsPerBeatOperation extends TrainingLanguageMode
 
     @Override
     protected void createLanguageModels() throws IOException {
-
         HelperFile.createDir(lmDir);
-
-        //First create text for standard language model
         String textFilePath = lmDir + File.separator + "text_lan_model_standard";
-        (new TextForLMCreator()).process(wavFileList, textFilePath, false);
 
-        String command = String.format("%s/ngram-count -text %s -order %d -wbdiscount -lm %s/%s", StageParameters.binariesDir, textFilePath, execParams.standardLmOrder,  lmDir, StageParameters.LMModelStandardVersion);
-        Helper.execCmd(command);
+        (new LanguageModelChordPerBeat(Settings.chordLabelsGroundTruthDir, Settings.beatLabelsGroundTruthDir, wavFileList, textFilePath)).process();
+
+
     }
 }

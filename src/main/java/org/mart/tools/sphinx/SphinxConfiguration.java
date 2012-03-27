@@ -20,29 +20,22 @@ import org.apache.log4j.Logger;
 import org.mart.crs.config.ExecParams;
 import org.mart.crs.config.Settings;
 import org.mart.crs.exec.operation.features.FeaturesExtractionOperation;
-import org.mart.crs.exec.operation.models.htk.HTKResultsParser;
-import org.mart.crs.exec.operation.models.htk.parser.chord.ChordHTKParser;
 import org.mart.crs.exec.operation.models.htk.parser.chord.ChordHTKParserFromLattice;
-import org.mart.crs.exec.operation.models.lm.TextForLMCreator;
-import org.mart.crs.exec.scenario.stage.StageParameters;
+import org.mart.crs.exec.operation.models.lm.LanguageModelChord;
 import org.mart.crs.logging.CRSLogger;
-import org.mart.crs.management.beat.BeatsManager;
-import org.mart.crs.management.features.FeaturesManagerSphinx;
-import org.mart.crs.management.features.extractor.FeaturesExtractorHTK;
 import org.mart.crs.management.label.LabelsParser;
-import org.mart.crs.management.label.chord.ChordSegment;
-import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.management.label.chord.ChordType;
 import org.mart.crs.management.label.chord.Root;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
 
-import java.io.*;
-import java.util.*;
-
-import static org.mart.crs.config.Settings.IS_FACTORED_LM;
-import static org.mart.crs.config.Settings.IS_FACTORED_LM_FOR_STANDARD_VERSION;
-import static org.mart.crs.config.Settings.WAV_EXT;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Configuration issues are addressed here
@@ -199,10 +192,15 @@ public class SphinxConfiguration {
 
         //First create text for standard language model
         String textFilePath = String.format("%s/text_lan_model_standard", tempDir);
-        (new TextForLMCreator()).process(ExecParams._initialExecParameters._waveFilesTrainFileList, textFilePath, false);
+        LanguageModelChord languageModel = new LanguageModelChord(Settings.chordLabelsGroundTruthDir, ExecParams._initialExecParameters._waveFilesTrainFileList, textFilePath);
+        languageModel.process();
+        languageModel.createLanguageModel(ExecParams._initialExecParameters.standardLmOrder, lmFile);
 
-        String command = String.format("%s/ngram-count -text %s -order %d -wbdiscount -lm %s", StageParameters.binariesDir, textFilePath, ExecParams._initialExecParameters.standardLmOrder, lmFile);
-        Helper.execCmd(command);
+        //First create text for standard language model
+
+
+
+
     }
 
 

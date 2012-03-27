@@ -149,7 +149,6 @@ public class Settings {
 
     //Language modelling
     public static boolean IS_FACTORED_LM = false;
-    public static boolean IS_FACTORED_LM_FOR_STANDARD_VERSION = false;
 
     public static boolean IS_QUANTIZED_DURATION = true;
 

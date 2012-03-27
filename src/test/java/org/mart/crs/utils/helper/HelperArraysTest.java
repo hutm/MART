@@ -1,6 +1,7 @@
 package org.mart.crs.utils.helper;
 
-import org.junit.Test;
+
+import org.testng.annotations.Test;
 
 /**
  * @version 1.0 15-Oct-2010 18:42:56

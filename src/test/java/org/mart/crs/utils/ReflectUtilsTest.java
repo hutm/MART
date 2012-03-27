@@ -2,7 +2,8 @@ package org.mart.crs.utils;
 
 import org.mart.crs.config.ExecParams;
 import org.mart.crs.exec.scenario.BatchParameter;
-import org.junit.Assert;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ReflectUtilsTest {
     /**
      * Method: setVariableValue(Class classOrObject, String fieldName, String unparsedValue)
      */
-    @org.junit.Test
+    @Test
     public void testSetVariableValue() throws Exception {
         ExecParams execParams = new ExecParams();
         List<BatchParameter> fields = ReflectUtils.getSettingsVariables(execParams, "_TRAIN_FEATURES_");

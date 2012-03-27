@@ -32,8 +32,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+
 import static org.mart.crs.exec.scenario.stage.StageParameters.*;
 import static org.mart.crs.config.Settings.*;
+
 /**
  * @version 1.0 11-Jun-2010 17:34:13
  * @author: Hut
@@ -65,7 +67,7 @@ public class RecognizeConventionalVersionWithLMOperation extends RecognizeOperat
         List<String> latticeFilePathList = HelperFile.readTokensFromTextFile(fileList, 1);
 
         //Transform all lattices into FLM originalFormat
-        if (IS_FACTORED_LM_FOR_STANDARD_VERSION || IS_FACTORED_LM) {
+        if (IS_FACTORED_LM) {
             logger.info("Transforming lattices into FLM originalFormat");
             new HTKLatticeTransformer().transformFolder(latticeFilePathList, false);
         }
@@ -82,11 +84,7 @@ public class RecognizeConventionalVersionWithLMOperation extends RecognizeOperat
             if (IS_FACTORED_LM) {
                 command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -factored -lm " + lmDir + File.separator + LMSpecFactoredFileName + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
             } else {
-                if (IS_FACTORED_LM_FOR_STANDARD_VERSION) {
-                    command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -factored -lm " + lmDir + File.separator + LMSpecFileName + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
-                } else {
-                    command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -lm " + lmDir + File.separator + LMModelStandardVersion + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
-                }
+                command = binariesDir + "/lattice-tool" + EXECUTABLE_EXTENSION + " -debug 0 -in-lattice " + inLattice + " -out-lattice " + outLattice + " -read-htk -write-htk -lm " + lmDir + File.separator + LMModelStandardVersion + " -htk-logbase 2.71828 -no-nulls -no-htk-nulls -order " + execParams.latticeRescoringOrder;
             }
             Helper.execCmd(command, null, false);
 
