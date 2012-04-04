@@ -1,8 +1,8 @@
 package org.mart.crs.lm;
 
+import junit.framework.TestCase;
 import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.ChordStructure;
-import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.FileWriter;

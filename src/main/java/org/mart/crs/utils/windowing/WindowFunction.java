@@ -16,9 +16,9 @@
 
 package org.mart.crs.utils.windowing;
 
-import org.mart.crs.utils.helper.HelperArrays;
 import jnt.FFT.ComplexFloatFFT;
 import jnt.FFT.ComplexFloatFFT_Mixed;
+import org.mart.crs.utils.helper.HelperArrays;
 
 /**
  * @version 1.0 25-Aug-2010 10:56:24

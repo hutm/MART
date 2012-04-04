@@ -1,10 +1,10 @@
 package org.mart.crs.HTK;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.Settings;
 import org.mart.crs.management.features.FeaturesManager;
 import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.ChordStructure;
-import junit.framework.TestCase;
 
 import java.util.List;
 

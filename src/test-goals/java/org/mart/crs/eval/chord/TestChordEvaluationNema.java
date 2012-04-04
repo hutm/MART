@@ -1,8 +1,8 @@
 package org.mart.crs.eval.chord;
 
+import junit.framework.TestCase;
 import org.mart.crs.exec.operation.eval.AbstractCRSEvaluator;
 import org.mart.crs.exec.operation.eval.chord.ChordEvaluatorNema;
-import junit.framework.TestCase;
 import org.mart.crs.exec.operation.eval.chord.ChordEvaluatorNemaFullDictionary;
 
 

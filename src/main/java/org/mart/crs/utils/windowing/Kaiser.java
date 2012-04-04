@@ -16,7 +16,6 @@
 
 package org.mart.crs.utils.windowing;
 
-import org.mart.crs.config.ExecParams;
 
 /**
  * @version 1.0 25-Aug-2010 11:30:35
@@ -24,10 +23,12 @@ import org.mart.crs.config.ExecParams;
  */
 public class Kaiser extends WindowFunction{
 
+    public static float kaiserWindowAlpha = 16;
+    
     @Override
     public float getFunction(int i, int offset, int width) {
 
-        float alpha = ExecParams._initialExecParameters.kaiserWindowAlpha;
+        float alpha = kaiserWindowAlpha;
         int m = width;
 
         float I0alpha = I0(alpha);

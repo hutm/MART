@@ -16,17 +16,19 @@
 
 package org.mart.crs.management.label.chord;
 
-import org.mart.crs.logging.CRSLogger;
-import org.mart.crs.utils.helper.Helper;
-import org.mart.crs.utils.helper.HelperArrays;
 import org.apache.log4j.Logger;
 import org.imirsel.nema.model.NemaChord;
 import org.imirsel.nema.model.util.ChordConversionUtil;
+import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.utils.helper.Helper;
+import org.mart.crs.utils.helper.HelperArrays;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static org.mart.crs.config.Settings.NUMBER_OF_SEMITONES_IN_OCTAVE;
+import static org.mart.crs.management.config.Configuration.NUMBER_OF_SEMITONES_IN_OCTAVE;
 import static org.mart.crs.management.label.chord.ChordType.NOT_A_CHORD;
 import static org.mart.crs.management.label.chord.ChordType.UNKNOWN_CHORD;
 
@@ -383,5 +385,9 @@ public class ChordSegment extends NemaChord implements Serializable {
     public String getChordNameOriginal() {
         return chordNameOriginal;
     }
+
+
+
+
 }
 

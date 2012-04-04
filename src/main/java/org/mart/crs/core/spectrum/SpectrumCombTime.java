@@ -16,19 +16,17 @@
 
 package org.mart.crs.core.spectrum;
 
-import org.mart.crs.config.ExecParams;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperArrays;
 
 import static org.mart.crs.core.spectrum.HarmonicFrofileVector.NUMBER_OF_HARMONICS;
-import static org.mart.crs.utils.helper.HelperArrays.searchPeakIndexes;
 
 /**
  * @version 1.0 Dec 16, 2009 12:57:27 PM
  * @author: Maksim Khadkevich
  */
-public class SpectrumCombTime extends SpectrumImpl {
+public class SpectrumCombTime extends SpectrumImplMatrixData {
 
 
     private HarmonicFrofileVector[] harmonicProfileVectors;
@@ -37,18 +35,18 @@ public class SpectrumCombTime extends SpectrumImpl {
 
     private float fundamentalFreqCenter;
 
-    public SpectrumCombTime(AudioReader audioReader, float fundamentalFreqCenter, ExecParams execParams) {
-        super(audioReader, execParams);
+    public SpectrumCombTime(AudioReader audioReader, int windowLength, float overLapping, float fundamentalFreqCenter) {
+        super(audioReader, windowLength, 0, overLapping);
         this.fundamentalFreqCenter = fundamentalFreqCenter;
     }
 
-    public SpectrumCombTime(float[] samples, float sampleRate, int windowLength, float _overLapping, float fundamentalFreqCenter, ExecParams execParams) {
-        super(samples, sampleRate, windowLength, _overLapping, execParams);
+    public SpectrumCombTime(float[] samples, float sampleRate, int windowLength, float overLapping, float fundamentalFreqCenter) {
+        super(samples, sampleRate, windowLength, 0, overLapping);
         this.fundamentalFreqCenter = fundamentalFreqCenter;
     }
 
-    public SpectrumCombTime(SpectrumImpl spectrum, float fundamentalFreqCenter, ExecParams execParams){
-        super(spectrum.getMagSpec(), spectrum.getSampleRate(), spectrum.getSampleRateSpectrum(), spectrum.getWindowLength(), spectrum.getWindowType(), spectrum.getOverlapping(), execParams);
+    public SpectrumCombTime(SpectrumImpl spectrum, float fundamentalFreqCenter){
+        super(spectrum.getMagSpec(), spectrum.getSampleRate(), spectrum.getSampleRateSpectrum(), spectrum.getWindowLength(), spectrum.getWindowType(), spectrum.getOverlapping());
         this.fundamentalFreqCenter = fundamentalFreqCenter;
     }
 

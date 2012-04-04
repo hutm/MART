@@ -1,5 +1,8 @@
 package org.mart.crs.eval;
 
+import com.jamal.JamalException;
+import com.jamal.client.MatlabClient;
+import junit.framework.TestCase;
 import org.mart.crs.analysis.filterbank.FilterBankManager;
 import org.mart.crs.config.ExecParams;
 import org.mart.crs.config.Settings;
@@ -8,9 +11,6 @@ import org.mart.crs.exec.operation.eval.FMeasure;
 import org.mart.crs.exec.operation.eval.sinusoid.SinusoidExtractorEvaluation;
 import org.mart.crs.utils.filefilter.ExtensionFileFilter;
 import org.mart.crs.utils.helper.HelperFile;
-import com.jamal.JamalException;
-import com.jamal.client.MatlabClient;
-import junit.framework.TestCase;
 
 import java.io.File;
 

@@ -16,17 +16,13 @@
 
 package org.mart.crs.management.beat;
 
-import org.mart.crs.config.ExecParams;
-import org.mart.crs.config.Settings;
-import org.mart.crs.core.AudioReader;
-import org.mart.crs.core.onset.OnsetDetectionFunction;
+import org.apache.log4j.Logger;
+import org.mart.crs.config.Extensions;
 import org.mart.crs.core.spectrum.SpectrumCrossCorrelationBasedImpl;
-import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrum;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.beat.segment.BeatSegment;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +62,7 @@ public class TempoExtractor {
         for (int i = 0; i < out.length; i++) {
             out[i] = onsetDetectionFunction[i] * 1000;
         }
-        spectrumCrossCorrelationBased = new SpectrumCrossCorrelationBasedImpl(out, sampleRate, 200, ExecParams._initialExecParameters);
+        spectrumCrossCorrelationBased = new SpectrumCrossCorrelationBasedImpl(out, sampleRate, 200);
         float startTime = 0;
         List<float[]> allBeats = new ArrayList<float[]>();
         while (getIndexForTimeInstant(startTime + CONTEXT_LENGTH) < onsetDetectionFunction.length) {
@@ -135,13 +131,15 @@ public class TempoExtractor {
         }
 
         BeatStructure beatStructure = new BeatStructure(beatSegments);
-        beatStructure.setSongName(HelperFile.getNameWithoutExtension(xmlPath + Settings.WAV_EXT));
+        beatStructure.setSongName(HelperFile.getNameWithoutExtension(xmlPath + Extensions.WAV_EXT));
         beatStructure.serializeIntoXML(xmlPath);
     }
 
 
+
+    //TODO: move to tests
     public static void main(String[] args) {
-//        String fileName = "0001 - U2 - The Joshua Tree - With or without you";
+/*//        String fileName = "0001 - U2 - The Joshua Tree - With or without you";
 //        String fileName = "09_-_Girl_short";
         String fileName = "all";
 
@@ -151,7 +149,7 @@ public class TempoExtractor {
         ReassignedSpectrum reassignedSpectrum =  new ReassignedSpectrum(reader, ExecParams._initialExecParameters);
         OnsetDetectionFunction onsetDetecionFunction = new OnsetDetectionFunction(reassignedSpectrum);
         TempoExtractor tempoExtractor = new TempoExtractor(onsetDetecionFunction.getDetectionFunction(), reassignedSpectrum.getSampleRateSpectrum());
-        tempoExtractor.extractBeats(outXMLPath);
+        tempoExtractor.extractBeats(outXMLPath);*/
     }
 
 

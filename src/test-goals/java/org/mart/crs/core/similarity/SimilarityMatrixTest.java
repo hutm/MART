@@ -1,12 +1,11 @@
 package org.mart.crs.core.similarity;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.ExecParams;
 import org.mart.crs.config.Settings;
 import org.mart.crs.core.AudioReader;
-import org.mart.crs.core.pcp.PCPBuilder;
-import org.mart.crs.core.pcp.spectral.PCP;
+import org.mart.crs.core.pcp.PCP;
 import org.mart.crs.core.spectrum.SpectrumImpl;
-import junit.framework.TestCase;
 
 /**
  * SimilarityMatrix Tester.

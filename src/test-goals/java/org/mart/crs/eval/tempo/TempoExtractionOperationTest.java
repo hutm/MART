@@ -1,7 +1,7 @@
 package org.mart.crs.eval.tempo;
 
-import org.mart.crs.exec.operation.eval.tempo.TempoExtractionOperation;
 import junit.framework.TestCase;
+import org.mart.crs.exec.operation.eval.tempo.TempoExtractionOperation;
 
 /**
  * TempoExtractionOperation Tester.

@@ -16,10 +16,9 @@
 
 package org.mart.tools.svf.extractor;
 
-import org.mart.crs.config.ExecParams;
-import org.mart.crs.core.pcp.PCPBuilder;
-import org.mart.crs.core.pcp.spectral.PCP;
+import org.mart.crs.core.pcp.PCP;
 import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.core.spectrum.SpectrumImplMatrixData;
 import org.mart.crs.utils.helper.HelperArrays;
 
 
@@ -36,13 +35,14 @@ public class ChromaPlusEnergyFeatureExtractor extends ChromaFeatureExtractor{
     protected float samplingRate;
 
     public float[][] extract(float[][] data, float sampleRate){
-        return this.extract(new SpectrumImpl(data, sampleRate, sampleRate, ExecParams._initialExecParameters));
+        return this.extract(new SpectrumImplMatrixData(data, sampleRate, sampleRate));
     }
 
     public float[][] extract(SpectrumImpl spectrum) {
 
         samplingRate = spectrum.getSampleRate();
-        PCP pcp = new PCPBuilder(PCPBuilder.BASIC_ALG).setSpectrum(spectrum).build();
+        PCP pcp = PCP.getPCP(PCP.BASIC_ALG);
+        pcp.initSpectrum(spectrum);
         float[][] chromagram;
 
         if (IS_UNWRAPPED_CHROMA) {

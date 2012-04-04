@@ -16,9 +16,6 @@
 
 package org.mart.crs.audio.musique;
 
-import org.mart.crs.audio.musique.decoder.DecoderInputStream;
-import org.mart.crs.logging.CRSLogger;
-import org.mart.crs.utils.AudioHelper;
 import com.jssrc.resample.JSSRCResampler;
 import com.tulskiy.musique.audio.AudioFileReader;
 import com.tulskiy.musique.audio.Decoder;
@@ -26,6 +23,9 @@ import com.tulskiy.musique.playlist.Track;
 import com.tulskiy.musique.system.Decoders;
 import com.tulskiy.musique.system.TrackIO;
 import org.apache.log4j.Logger;
+import org.mart.crs.audio.musique.decoder.DecoderInputStream;
+import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.utils.AudioHelper;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;

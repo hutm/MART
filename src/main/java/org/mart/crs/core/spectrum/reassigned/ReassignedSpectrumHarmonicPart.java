@@ -16,7 +16,6 @@
 
 package org.mart.crs.core.spectrum.reassigned;
 
-import org.mart.crs.config.ExecParams;
 import org.mart.crs.core.AudioReader;
 
 /**
@@ -25,37 +24,26 @@ import org.mart.crs.core.AudioReader;
  */
 public class ReassignedSpectrumHarmonicPart extends ReassignedSpectrum {
 
-    public ReassignedSpectrumHarmonicPart(AudioReader audioReader, int startSampleIndex, int endSampleIndex, int windowLength, int windowType, float overlapping, float threshold, ExecParams execParams) {
-        super(audioReader, startSampleIndex, endSampleIndex, windowLength, windowType, overlapping, execParams);
+
+    public ReassignedSpectrumHarmonicPart(AudioReader audioReader, int startSampleIndex, int endSampleIndex, int windowLength, int windowType, float overlapping, float threshold) {
+        super(audioReader, startSampleIndex, endSampleIndex, windowLength, windowType, overlapping);
         this.threshold = threshold;
     }
 
-    public ReassignedSpectrumHarmonicPart(AudioReader audioReader, int windowLength, int windowType, float overlapping, float threshold, ExecParams execParams) {
-        super(audioReader, windowLength, windowType, overlapping, execParams);
+    public ReassignedSpectrumHarmonicPart(AudioReader audioReader, int windowLength, int windowType, float overlapping, float threshold) {
+        super(audioReader, windowLength, windowType, overlapping);
         this.threshold = threshold;
     }
 
-    public ReassignedSpectrumHarmonicPart(float[] samples, int startSampleIndex, int endSampleIndex, float sampleRate, float threshold, ExecParams execParams) {
-        super(samples, startSampleIndex, endSampleIndex, sampleRate, execParams);
+    public ReassignedSpectrumHarmonicPart(float[] samples, int startSampleIndex, int endSampleIndex, float sampleRate, int windowLength, int windowType, float overlapping, float threshold) {
+        super(samples, startSampleIndex, endSampleIndex, sampleRate, windowLength, windowType, overlapping);
         this.threshold = threshold;
     }
 
-    public ReassignedSpectrumHarmonicPart(float[] samples, float sampleRate, float threshold, ExecParams execParams) {
-        super(samples, sampleRate, execParams);
+    public ReassignedSpectrumHarmonicPart(float[] samples, float sampleRate, int windowLength, int windowType, float overlapping, float threshold) {
+        super(samples, sampleRate, windowLength, windowType, overlapping);
         this.threshold = threshold;
     }
-
-    public ReassignedSpectrumHarmonicPart(AudioReader audioReader, int startSampleIndex, int endSampleIndex, float threshold, ExecParams execParams) {
-        super(audioReader, startSampleIndex, endSampleIndex, execParams);
-        this.threshold = threshold;
-    }
-
-    public ReassignedSpectrumHarmonicPart(AudioReader audioReader, float threshold, ExecParams execParams) {
-        super(audioReader, execParams);
-        this.threshold = threshold;
-    }
-
-
 
     protected boolean checkCondition(float phaseDoubleDerivative){
         return Math.abs(1 + phaseDoubleDerivative) <  threshold;

@@ -1,8 +1,8 @@
 package org.mart.crs.labelling;
 
+import junit.framework.TestCase;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.FileReader;

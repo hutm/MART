@@ -1,7 +1,7 @@
 package org.mart.crs.filter;
 
-import org.mart.crs.analysis.filter.PQMF.PQMFHarmonicExtraction;
 import junit.framework.TestCase;
+import org.mart.crs.analysis.filter.PQMF.PQMFHarmonicExtraction;
 
 /**
  * @version 1.0 Jul 14, 2009 11:47:08 PM

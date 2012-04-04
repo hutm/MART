@@ -16,13 +16,13 @@
 
 package org.mart.tools.svf;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.MedianFilter;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.tools.svf.extractor.SVFExtractor;
 import org.mart.tools.svf.extractor.SVFFeatureExtractorInterface;
-import org.apache.log4j.Logger;
 
 
 public class SVF {

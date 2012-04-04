@@ -1,11 +1,10 @@
 package simpleClasses;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.ExecParams;
 import org.mart.crs.core.AudioReader;
-import org.mart.crs.core.spectrum.ReassignedFromMatlabFitz;
-import org.mart.crs.core.spectrum.ReassignedSpectrumLikeFitz;
+import org.mart.crs.core.spectrum.reassigned.ReassignedFromMatlabFitz;
 import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrum;
-import junit.framework.TestCase;
 
 /**
  * @version 1.0 18-Oct-2010 21:48:23

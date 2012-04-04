@@ -16,18 +16,19 @@
 
 package org.mart.crs.management.beat;
 
-import org.mart.crs.config.Settings;
+import org.apache.log4j.Logger;
+import org.mart.crs.config.Extensions;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.beat.segment.BeatSegment;
 import org.mart.crs.management.beat.segment.BeatSegmentState;
 import org.mart.crs.management.beat.segment.MeasureSegment;
-import org.mart.crs.management.onset.OnsetStructure;
 import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.filefilter.ExtensionFileFilter;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -74,16 +75,16 @@ public class BeatStructure implements Comparable<BeatStructure> {
 
     public static BeatStructure getBeatStructure(String sourceFilePath) {
         String extension = HelperFile.getExtension(sourceFilePath);
-        if (extension.equals(Settings.BEAT_EXT)) {
+        if (extension.equals(Extensions.BEAT_EXT)) {
             return new BeatStructureXML(sourceFilePath);
         }
-        if (extension.equals(Settings.BEAT_TXT_EXT)) {
+        if (extension.equals(Extensions.BEAT_TXT_EXT)) {
             return new BeatStructureText(sourceFilePath);
         }
-        if (extension.equals(Settings.BEAT_MAZURKA_EXT)) {
+        if (extension.equals(Extensions.BEAT_MAZURKA_EXT)) {
             return new BeatStructureMazurka(sourceFilePath);
         }
-        if (extension.equals(Settings.ONSET_EXT)) {
+        if (extension.equals(Extensions.ONSET_EXT)) {
             return new BeatStructureText(sourceFilePath);
         }
         throw new IllegalArgumentException(String.format("Cannot extract beat structure from file %s with extension %s", sourceFilePath, extension));
@@ -282,9 +283,9 @@ public class BeatStructure implements Comparable<BeatStructure> {
 
 
     public static void transfromLabelsToMIREXFormat(String resultsDir, String outDir, boolean isGroundTruth, boolean isOnlyDownBeats) {
-        File[] files = HelperFile.getFile(resultsDir).listFiles(new ExtensionFileFilter(Settings.BEAT_EXTENSIONS));
+        File[] files = HelperFile.getFile(resultsDir).listFiles(new ExtensionFileFilter(Extensions.BEAT_EXTENSIONS));
         HelperFile.getFile(outDir).mkdirs();
-        String extension = Settings.TXT_EXT;
+        String extension = Extensions.TXT_EXT;
         if (!isGroundTruth) {
             extension = ".out.txt";
         }

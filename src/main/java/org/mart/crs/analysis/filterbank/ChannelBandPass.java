@@ -17,8 +17,6 @@
 package org.mart.crs.analysis.filterbank;
 
 import org.mart.crs.analysis.filter.EllipticFBFilter;
-import org.mart.crs.config.ExecParams;
-import org.mart.crs.config.Settings;
 import org.mart.crs.core.spectrum.SpectrumCrossCorrelationBasedImpl;
 import org.mart.crs.logging.CRSException;
 import org.mart.crs.management.xml.XMLManager;
@@ -28,6 +26,8 @@ import static org.mart.crs.management.xml.Tags.END_FREQ_TAG;
 import static org.mart.crs.management.xml.Tags.START_FREQ_TAG;
 
 public class ChannelBandPass extends Channel {
+
+    public static boolean isToConsiderHigerPeaks = false;
 
     protected float startFreq;
     protected float endFreq;
@@ -55,18 +55,12 @@ public class ChannelBandPass extends Channel {
         float[] filteredSamples = new float[0];
         float[] periodicityData = new float[0];
         filteredSamples = filterSamples(samples);
-        if(Settings.IS_TO_UPSAMPLE){
-            //TODO fix upsampling by factor of 2
-//            CRSResampler resampler = new XuggleResampler(samplingFreq, samplingFreq * 2);
-//            this.samplingFreq = samplingFreq * 2;
-//            filteredSamples = HelperArrays.getIntegerAsFloat(resampler.resample(HelperArrays.getFloatAsInteger(filteredSamples)));
-        }
 
         if (!(filter instanceof EllipticFBFilter)) {
-            SpectrumCrossCorrelationBasedImpl spectrumCCB = new SpectrumCrossCorrelationBasedImpl(filteredSamples, samplingFreq, 100, ExecParams._initialExecParameters); //TODO use instead of magic number 100 numberOfPointsCC. Needs testing
+            SpectrumCrossCorrelationBasedImpl spectrumCCB = new SpectrumCrossCorrelationBasedImpl(filteredSamples, samplingFreq, 100); //TODO use instead of magic number 100 numberOfPointsCC. Needs testing
             float startFreq = getStartFreqFactored(this.startFreq, this.endFreq, freqRangeEnlargementFactor);
             float endFreq = getEndFreqFactored(this.startFreq, this.endFreq, freqRangeEnlargementFactor);
-            periodicityData = spectrumCCB.analyzeSCCBFrame(startFreq, endFreq, true, ExecParams._initialExecParameters.isToConsiderHigerPeaks);
+            periodicityData = spectrumCCB.analyzeSCCBFrame(startFreq, endFreq, true, isToConsiderHigerPeaks);
         } else{
             periodicityData = new float[filteredSamples.length];
             float freq = startFreq + (endFreq - startFreq) / 2; //TODO add log scaling

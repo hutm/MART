@@ -16,18 +16,10 @@ package suite;/*
 
 import org.mart.crs.utils.helper.HelperFile;
 import org.testng.Assert;
-import org.testng.TestNG;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import org.testng.xml.Parser;
-import org.testng.xml.XmlSuite;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.List;
 
 import static org.mart.crs.utils.helper.HelperFile.getResourceFilePath;
 

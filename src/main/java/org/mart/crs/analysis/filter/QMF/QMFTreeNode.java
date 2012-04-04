@@ -17,13 +17,17 @@
 package org.mart.crs.analysis.filter.QMF;
 
 
-import org.mart.crs.config.ExecParams;
 
 /**
  * @version 1.0 27.04.2009 15:58:33
  * @author: Maksim Khadkevich
  */
 public class QMFTreeNode implements Comparable {
+
+    /**
+     * Sampling rate of the top filter
+     */
+    public static float initialSamplingRate = 44100;
 
     private String id;
     private float[] data;
@@ -42,7 +46,7 @@ public class QMFTreeNode implements Comparable {
         } else {
             this.samplingRate = root.getSamplingRate() / 2;
         }
-        float[] freqRange = getFrequencyRange(ExecParams._initialExecParameters.samplingRate);
+        float[] freqRange = getFrequencyRange(initialSamplingRate);
         startFreq = freqRange[0];
         endFreq = freqRange[1];
     }
@@ -50,8 +54,8 @@ public class QMFTreeNode implements Comparable {
     private QMFTreeNode() {
         this.id = "";
         this.data = null;
-        this.samplingRate = ExecParams._initialExecParameters.samplingRate;
-        this.endFreq = ExecParams._initialExecParameters.samplingRate / 2;
+        this.samplingRate = initialSamplingRate;
+        this.endFreq = initialSamplingRate / 2;
     }
 
     public static QMFTreeNode getRootNode() {

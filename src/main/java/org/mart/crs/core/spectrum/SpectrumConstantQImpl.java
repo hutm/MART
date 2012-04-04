@@ -16,18 +16,15 @@
 
 package org.mart.crs.core.spectrum;
 
-import org.mart.crs.config.ExecParams;
-import org.mart.crs.core.AudioReader;
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.config.Configuration;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.windowing.WindowFunction;
 import org.mart.crs.utils.windowing.WindowOption;
 import org.mart.crs.utils.windowing.WindowType;
-import org.apache.log4j.Logger;
 import rasmus.interpreter.sampled.util.FFTConstantQ;
 
-import static org.mart.crs.config.Settings.NUMBER_OF_SEMITONES_IN_OCTAVE;
-import static org.mart.crs.config.Settings.START_NOTE_FOR_PCP_UNWRAPPED;
 
 /**
  * Constant-Q spectrum of an audioReader object
@@ -35,7 +32,8 @@ import static org.mart.crs.config.Settings.START_NOTE_FOR_PCP_UNWRAPPED;
  * @version 1.0 23.03.2009 16:03:24
  * @author: Maksim Khadkevich
  */
-public class SpectrumConstantQImpl extends SpectrumImpl {
+//TODO : write tests
+public class SpectrumConstantQImpl extends SpectrumImplPhaseComponents {
 
     public static double THRESHOLD = 0.01; //Threshold for Constant-Q Transform
 
@@ -45,18 +43,15 @@ public class SpectrumConstantQImpl extends SpectrumImpl {
     private int fftframesize;
     private int outputbins;
 
-    public SpectrumConstantQImpl(AudioReader audioReader, ExecParams execParams) {
-        this(audioReader.getSamples(), audioReader.getSampleRate(), execParams);
+
+    public SpectrumConstantQImpl(float[] samples, int startSampleIndex, int endSampleIndex, float sampleRate, int windowLength, int windowType, float overlapping) {
+        super(samples, startSampleIndex, endSampleIndex, sampleRate, windowLength, windowType, overlapping);
     }
 
-    public SpectrumConstantQImpl(float[] samples, float sampleRate, ExecParams execParams) {
-        super(samples, sampleRate, execParams);
-    }
-
-    private void init() {
+    protected void initialize() {
         if (fftcq == null) {
             logger.info("Creating Constant-Q spectrum");
-            fftcq = new FFTConstantQ(getSampleRate(), Helper.getFreqForMIDINote(START_NOTE_FOR_PCP_UNWRAPPED), Helper.getFreqForMIDINote(START_NOTE_FOR_PCP_UNWRAPPED), NUMBER_OF_SEMITONES_IN_OCTAVE, THRESHOLD);
+            fftcq = new FFTConstantQ(getSampleRate(), Helper.getFreqForMIDINote(Configuration.START_NOTE_FOR_PCP_UNWRAPPED), Helper.getFreqForMIDINote(Configuration.START_NOTE_FOR_PCP_UNWRAPPED), Configuration.NUMBER_OF_SEMITONES_IN_OCTAVE, THRESHOLD);
 
             fftframesize = fftcq.getFFTSize();
             logger.debug("FFT frame size = " + fftframesize);
@@ -66,11 +61,10 @@ public class SpectrumConstantQImpl extends SpectrumImpl {
     }
 
 
-
-    protected float[][] processFrame(int startIndexInSamples, int length) {
+    //TODO: needs refactoring to the base class
+    protected void processFrame(int startIndexInSamples, int length) {
         float[][] out = new float[2][];
         try {
-            init();
             double[] fftbuffer = new double[fftframesize];
             double[] fftoutbuffer = new double[outputbins * 2]; //Because complex numbers
 
@@ -82,7 +76,7 @@ public class SpectrumConstantQImpl extends SpectrumImpl {
                 }
             }
 
-            WindowFunction.apply(fftbuffer, 0, fftbuffer.length, WindowType.values()[execParams.windowType], WindowOption.WINDOW);
+            WindowFunction.apply(fftbuffer, 0, fftbuffer.length, WindowType.values()[this.windowType], WindowOption.WINDOW);
             
             fftcq.calc(fftbuffer, fftoutbuffer);
 
@@ -93,8 +87,6 @@ public class SpectrumConstantQImpl extends SpectrumImpl {
             logger.error("Error while calculating spectrum ");
             logger.error(Helper.getStackTrace(e));
         }
-        return out;
-
     }
 
 

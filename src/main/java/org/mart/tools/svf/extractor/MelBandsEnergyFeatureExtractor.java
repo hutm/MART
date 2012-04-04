@@ -16,8 +16,8 @@
 
 package org.mart.tools.svf.extractor;
 
-import org.mart.crs.config.ExecParams;
 import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.core.spectrum.SpectrumImplMatrixData;
 
 /**
  * User: hut
@@ -37,7 +37,7 @@ public class MelBandsEnergyFeatureExtractor implements SVFFeatureExtractorInterf
 
 
     public float[][] extract(float[][] data, float sampleRate){
-        return extract(new SpectrumImpl(data, sampleRate, sampleRate, ExecParams._initialExecParameters));
+        return extract(new SpectrumImplMatrixData(data, sampleRate, sampleRate));
     }
 
     public float[][] extract(SpectrumImpl spectrum) {

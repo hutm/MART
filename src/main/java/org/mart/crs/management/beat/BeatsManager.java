@@ -17,28 +17,30 @@
 package org.mart.crs.management.beat;
 
 import at.ofai.music.beatroot.BeatRoot;
-import org.mart.crs.config.Settings;
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.CRSThreadPoolExecutor;
 import org.mart.crs.utils.filefilter.ExtensionFileFilter;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.util.List;
 
-import static org.mart.crs.config.Settings.BEAT_EXT;
-import static org.mart.crs.config.Settings.WAV_EXT;
+import static org.mart.crs.config.Extensions.BEAT_EXT;
+import static org.mart.crs.config.Extensions.WAV_EXT;
 import static org.mart.crs.utils.helper.HelperFile.*;
 
 /**
- * Extracts beats from audio files and saves to text file
+ * Extracts beats from audio files and saves to text file using BeatRoot software by S. Dixon
  *
  * @version 1.0 01.04.2009 19:18:25
  * @author: Maksim Khadkevich
  */
+@Deprecated
 public class BeatsManager {
 
+    public static int threadsNumberForFeatureExtraction = 2;
+    
     public static boolean isToDetectBeats;
     public static boolean forceReDetectBeats;
 
@@ -74,7 +76,7 @@ public class BeatsManager {
         out.mkdirs();
         final List<String> filesToProcessList = HelperFile.readTokensFromTextFile(fileList, 1);
 
-        CRSThreadPoolExecutor poolExecutor = new CRSThreadPoolExecutor(Settings.threadsNumberForFeatureExtraction);
+        CRSThreadPoolExecutor poolExecutor = new CRSThreadPoolExecutor(threadsNumberForFeatureExtraction);
 
         for (final String filePath : filesToProcessList) {
             Runnable runnable = new Runnable() {

@@ -16,11 +16,11 @@
 
 package org.mart.crs.management.tempo;
 
-import org.mart.crs.management.beat.BeatStructure;
-import org.mart.crs.management.beat.segment.BeatSegment;
 import org.apache.commons.math.stat.clustering.Cluster;
 import org.apache.commons.math.stat.clustering.EuclideanFloatPoint;
 import org.apache.commons.math.stat.clustering.KMeansPlusPlusClusterer;
+import org.mart.crs.management.beat.BeatStructure;
+import org.mart.crs.management.beat.segment.BeatSegment;
 
 import java.util.ArrayList;
 import java.util.List;

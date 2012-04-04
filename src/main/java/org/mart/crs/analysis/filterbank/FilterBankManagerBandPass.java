@@ -16,15 +16,15 @@
 
 package org.mart.crs.analysis.filterbank;
 
-import org.mart.crs.config.ExecParams;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.core.spectrum.SpectrumImplMatrixData;
 import org.mart.crs.logging.CRSException;
+import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.crs.utils.helper.HelperData;
 import org.mart.crs.utils.helper.HelperFile;
-import org.mart.crs.management.xml.XMLManager;
 import org.w3c.dom.Element;
 
 import java.io.*;
@@ -274,7 +274,7 @@ public class FilterBankManagerBandPass extends FilterBankManager {
 
         float[][] spectrumData = new float[channelList.get(0).getDominantFrequencyEnergies().length][numberOfFreqBins];
 
-        SpectrumImpl spectrum = new SpectrumImpl(spectrumData, sampleRate, sampRateSpectrum, ExecParams._initialExecParameters);
+        SpectrumImpl spectrum = new SpectrumImplMatrixData(spectrumData, sampleRate, sampRateSpectrum);
         int sampleNumber = Math.round(spectrumData.length * frameSizeOfFeaturesInSecs * sampleRate);
         spectrum.setSampleNumber(sampleNumber);
 
@@ -307,7 +307,7 @@ public class FilterBankManagerBandPass extends FilterBankManager {
 
         float[][] spectrumData = new float[channelList.get(0).getDominantFrequencyEnergies().length][numberOfFreqBins];
 
-        SpectrumImpl spectrum = new SpectrumImpl(spectrumData, sampleRate, sampRateSpectrum, ExecParams._initialExecParameters);
+        SpectrumImpl spectrum = new SpectrumImplMatrixData(spectrumData, sampleRate, sampRateSpectrum);
         int sampleNumber = Math.round(spectrumData.length * frameSizeOfFeaturesInSecs * sampleRate);
         XMLManager.logger.info(String.format("%d %f %d", spectrumData.length, frameSizeOfFeaturesInSecs, sampleNumber));
         spectrum.setSampleNumber(sampleNumber);

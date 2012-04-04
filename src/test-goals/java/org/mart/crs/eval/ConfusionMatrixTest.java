@@ -1,7 +1,7 @@
 package org.mart.crs.eval;
 
-import org.mart.crs.exec.operation.eval.chord.confusion.ConfusionChordManager;
 import org.junit.Test;
+import org.mart.crs.exec.operation.eval.chord.confusion.ConfusionChordManager;
 
 /**
  * @version 1.0 11-Mar-2010 15:45:39

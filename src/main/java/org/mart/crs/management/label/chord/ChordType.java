@@ -16,11 +16,10 @@
 
 package org.mart.crs.management.label.chord;
 
-import org.mart.crs.config.Settings;
+
+import org.mart.crs.management.config.Configuration;
 
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @version 1.0 4/27/11 3:03 PM
@@ -47,10 +46,11 @@ public enum ChordType {
     public static ChordType[] chordDictionary;
 
     public static final ChordType[] CHORD_DICTIONARY_FULL = new ChordType[]{NOT_A_CHORD, MAJOR_CHORD, MINOR_CHORD, SEVEN_CHORD, MAJOR_6_CHORD, MINOR_7_CHORD, MAJOR_7_CHORD, NINE_CHORD, SUS4_CHORD, SUS2_CHORD, AUG_CHORD, DIM_CHORD};
+    public static final boolean isToUseChordWrappersToTrainChordChildren = true;
 
 
     static{
-        String[] chordDictionaryStrings = Settings.chordDictionary;
+        String[] chordDictionaryStrings = Configuration.chordDictionary;
         chordDictionary = new ChordType[chordDictionaryStrings.length];
         for(int i = 0; i < chordDictionaryStrings.length; i++){
             chordDictionary[i] = fromString(chordDictionaryStrings[i]);
@@ -176,6 +176,8 @@ public enum ChordType {
     };
     public static String[] BIAB_AUG = new String[]{"aug", "+"};
     public static String[] BIAB_DIM = new String[]{"dim", "m7b5"};
+
+
 
 
 

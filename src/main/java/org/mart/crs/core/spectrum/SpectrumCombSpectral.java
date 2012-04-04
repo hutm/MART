@@ -16,12 +16,8 @@
 
 package org.mart.crs.core.spectrum;
 
-import org.mart.crs.config.ExecParams;
-import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.crs.utils.helper.Helper;
-
-import static org.mart.crs.utils.helper.Helper.getFreqForMIDINote;
-import static org.mart.crs.utils.helper.Helper.getMidiNoteForFreq;
+import org.mart.crs.utils.helper.HelperArrays;
 
 
 /**
@@ -37,14 +33,14 @@ public class SpectrumCombSpectral extends SpectrumCombTime {
     protected float filterWidthSemitoneScale;
     protected boolean inverse;
 
-    public SpectrumCombSpectral(SpectrumImpl spectrum, float fundamentalFreqCenter, ExecParams execParams) {
-        super(spectrum, fundamentalFreqCenter, execParams);
+    public SpectrumCombSpectral(SpectrumImpl spectrum, float fundamentalFreqCenter) {
+        super(spectrum, fundamentalFreqCenter);
         this.filterWidthSemitoneScale = DEFAULT_FILTER_WIDTH_SEMITONE_SCALE;
         filterSpectrum(fundamentalFreqCenter);
     }
 
-    public SpectrumCombSpectral(SpectrumImpl spectrum, float fundamentalFreqCenter, float filterWidthSemitoneScale, boolean inverse, ExecParams execParams) {
-        super(spectrum, fundamentalFreqCenter, execParams);
+    public SpectrumCombSpectral(SpectrumImpl spectrum, float fundamentalFreqCenter, float filterWidthSemitoneScale, boolean inverse) {
+        super(spectrum, fundamentalFreqCenter);
         this.filterWidthSemitoneScale = filterWidthSemitoneScale;
         this.inverse = inverse;
         filterSpectrum(fundamentalFreqCenter);

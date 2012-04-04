@@ -16,10 +16,10 @@
 
 package org.mart.crs.analysis.filter.PQMF;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.analysis.filterbank.FilterBankManagerBandPass;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.logging.CRSLogger;
-import org.apache.log4j.Logger;
 
 /**
  * @version 1.0 Jul 14, 2009 11:31:24 PM

@@ -1,10 +1,10 @@
 package org.mart.crs.lm;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.Settings;
 import org.mart.crs.exec.operation.models.lm.TextForLMCreator;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.io.*;
 import java.util.*;

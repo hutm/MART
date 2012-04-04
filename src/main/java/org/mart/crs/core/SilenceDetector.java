@@ -16,7 +16,6 @@
 
 package org.mart.crs.core;
 
-import org.mart.crs.config.Settings;
 import org.mart.crs.utils.AudioHelper;
 import org.mart.crs.utils.helper.Helper;
 
@@ -29,6 +28,11 @@ import java.util.List;
  * @author: Hut
  */
 public class SilenceDetector {
+
+    //Silence detection
+    public static final float SILENCE_DETECTION_STEP = 0.02f; //In sec //TODO read this parameter from the config
+    public static final float SILENCE_DETECTION_THRESHOLD = 0.04f; //TODO read this parameter from the config
+    public static final float SILENCE_SEGMENT_MIN_DURATION = 0.4f; //in sec //TODO read this parameter from the config
 
 
     protected List<float[]> silenceIntervals = new ArrayList<float[]>();
@@ -46,14 +50,14 @@ public class SilenceDetector {
     public void detectSilence() {
         float[] samples = audioReader.getSamples();
         //First calculate array of RMS Data
-        int length = (int) Math.floor(audioReader.getDuration() / (Settings.SILENCE_DETECTION_STEP)) + 1;
+        int length = (int) Math.floor(audioReader.getDuration() / (SILENCE_DETECTION_STEP)) + 1;
         float[] RMSData = new float[length];
         int counter = 0, startSample, endSample;
-        while ((counter + 1) * Settings.SILENCE_DETECTION_STEP * audioReader.getSampleRate() < samples.length) {
-            startSample = (int) Math.floor(counter * Settings.SILENCE_DETECTION_STEP * audioReader.getSampleRate());
-            endSample = (int) Math.floor((counter + 1) * Settings.SILENCE_DETECTION_STEP * audioReader.getSampleRate());
+        while ((counter + 1) * SILENCE_DETECTION_STEP * audioReader.getSampleRate() < samples.length) {
+            startSample = (int) Math.floor(counter * SILENCE_DETECTION_STEP * audioReader.getSampleRate());
+            endSample = (int) Math.floor((counter + 1) * SILENCE_DETECTION_STEP * audioReader.getSampleRate());
             RMSData[counter++] = AudioHelper.getRMSEnergy(samples, startSample, endSample);
         }
-        this.silenceIntervals = Helper.detectSilenceIntervals(RMSData, Settings.SILENCE_DETECTION_THRESHOLD, (int) (Settings.SILENCE_SEGMENT_MIN_DURATION / Settings.SILENCE_DETECTION_STEP), Settings.SILENCE_DETECTION_STEP, audioReader.getDuration());
+        this.silenceIntervals = Helper.detectSilenceIntervals(RMSData, SILENCE_DETECTION_THRESHOLD, (int) (SILENCE_SEGMENT_MIN_DURATION / SILENCE_DETECTION_STEP), SILENCE_DETECTION_STEP, audioReader.getDuration());
     }
 }

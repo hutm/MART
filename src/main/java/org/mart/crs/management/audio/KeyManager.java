@@ -16,10 +16,10 @@
 
 package org.mart.crs.management.audio;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -27,12 +27,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.mart.crs.config.Settings.keysGroudTruthFilePath;
 
 /**
  * @version 1.0 Feb 6, 2010 5:21:34 PM
  * @author: Maksim Khadkevich
  */
+@Deprecated
 public class KeyManager {
 
     protected static Logger logger = CRSLogger.getLogger(KeyManager.class);
@@ -42,9 +42,9 @@ public class KeyManager {
     private Map<String, String> keysMap;
     private Map<String, String> keysMapGT;
 
-    public void KeyManager(String keyDataFile) {
+    public void KeyManager(String keyDataFile, String keysGroudTruthFilePath) {
         keysMap = initializeMap(keyDataFile);
-        keysMapGT = initializeMap( keysGroudTruthFilePath);
+        keysMapGT = initializeMap(keysGroudTruthFilePath);
     }
 
 

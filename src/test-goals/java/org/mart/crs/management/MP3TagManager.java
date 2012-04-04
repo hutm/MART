@@ -1,7 +1,5 @@
 package org.mart.crs.management;
 
-import org.mart.crs.config.Settings;
-import org.mart.crs.utils.helper.HelperFile;
 import org.blinkenlights.jid3.ID3Exception;
 import org.blinkenlights.jid3.ID3Tag;
 import org.blinkenlights.jid3.MP3File;
@@ -10,6 +8,8 @@ import org.blinkenlights.jid3.v1.ID3V1_0Tag;
 import org.blinkenlights.jid3.v1.ID3V1_1Tag;
 import org.blinkenlights.jid3.v2.ID3V2_3_0Tag;
 import org.junit.Test;
+import org.mart.crs.config.Settings;
+import org.mart.crs.utils.helper.HelperFile;
 
 import java.io.File;
 import java.util.ArrayList;

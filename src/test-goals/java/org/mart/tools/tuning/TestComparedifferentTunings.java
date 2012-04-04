@@ -1,9 +1,9 @@
 package org.mart.tools.tuning;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.Settings;
 import org.mart.crs.management.audio.ReferenceFreqManager;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.util.ArrayList;
 import java.util.Collections;

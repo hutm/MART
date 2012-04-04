@@ -1,7 +1,7 @@
 package org.mart.crs.management.midi;
 
-import org.mart.crs.utils.filefilter.ExtensionFileFilter;
 import junit.framework.TestCase;
+import org.mart.crs.utils.filefilter.ExtensionFileFilter;
 
 import java.io.File;
 import java.io.IOException;

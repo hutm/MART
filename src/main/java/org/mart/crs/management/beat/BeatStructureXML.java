@@ -16,12 +16,12 @@
 
 package org.mart.crs.management.beat;
 
+import com.sun.org.apache.xerces.internal.dom.DeferredElementImpl;
 import org.mart.crs.management.beat.segment.BeatSegment;
 import org.mart.crs.management.beat.segment.BeatSegmentState;
 import org.mart.crs.management.xml.Tags;
 import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.helper.Helper;
-import com.sun.org.apache.xerces.internal.dom.DeferredElementImpl;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

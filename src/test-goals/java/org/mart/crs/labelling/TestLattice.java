@@ -1,7 +1,7 @@
 package org.mart.crs.labelling;
 
-import org.mart.crs.management.label.lattice.Lattice;
 import junit.framework.TestCase;
+import org.mart.crs.management.label.lattice.Lattice;
 
 /**
  * @version 1.0 Nov 11, 2009 3:27:09 PM

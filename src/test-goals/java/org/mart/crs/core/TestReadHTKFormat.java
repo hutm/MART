@@ -1,9 +1,9 @@
 package org.mart.crs.core;
 
-import org.mart.crs.core.pcp.spectral.PCP;
+import junit.framework.TestCase;
+import org.mart.crs.core.pcp.PCP;
 import org.mart.crs.management.features.FeatureVector;
 import org.mart.crs.management.features.FeaturesManager;
-import junit.framework.TestCase;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
