@@ -16,19 +16,16 @@
 
 package org.mart.crs.utils.helper;
 
-import org.mart.crs.config.Settings;
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.Root;
-import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.mart.crs.config.Settings.NUMBER_OF_SEMITONES_IN_OCTAVE;
-import static org.mart.crs.config.Settings.START_NOTE_FOR_PCP_UNWRAPPED;
-import static org.mart.crs.utils.helper.HelperArrays.calculateMean;
+import static org.mart.crs.management.config.Configuration.*;
 
 /**
  * User: Hut
@@ -81,19 +78,19 @@ public class Helper {
 
 
     public static float getFreqForMIDINote(float midiNote) {
-        return getFreqForMIDINote(midiNote, Settings.REFERENCE_FREQUENCY);
+        return getFreqForMIDINote(midiNote, REFERENCE_FREQUENCY);
     }
 
     public static float getMidiNoteForFreq(float freq) {
-        return getMidiNoteForFreq(freq, Settings.REFERENCE_FREQUENCY);
+        return getMidiNoteForFreq(freq, REFERENCE_FREQUENCY);
     }
 
     public static float getFreqForMIDINote(float midiNote, float refFreq) {
-        return (float) (refFreq * Math.pow(2, (midiNote - Settings.REFERENCE_FREQUENCY_MIDI_NOTE) / 12));
+        return (float) (refFreq * Math.pow(2, (midiNote - REFERENCE_FREQUENCY_MIDI_NOTE) / 12));
     }
 
     public static float getMidiNoteForFreq(double freq, double refFreq) {
-        return (float) (12 * Math.log(freq / refFreq) / Math.log(2) + Settings.REFERENCE_FREQUENCY_MIDI_NOTE);
+        return (float) (12 * Math.log(freq / refFreq) / Math.log(2) + REFERENCE_FREQUENCY_MIDI_NOTE);
     }
 
     public static void execCmd(final String command, final BufferedWriter writer) {

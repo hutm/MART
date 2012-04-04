@@ -16,16 +16,16 @@
 
 package org.mart.crs.analysis.filterbank;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.analysis.filter.Filter;
 import org.mart.crs.analysis.filter.FilterManager;
 import org.mart.crs.core.spectrum.SpectrumImpl;
 import org.mart.crs.logging.CRSException;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.xml.Tags;
 import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.AudioHelper;
 import org.mart.crs.utils.helper.Helper;
-import org.apache.log4j.Logger;
-import org.mart.crs.management.xml.Tags;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.w3c.dom.Element;
 

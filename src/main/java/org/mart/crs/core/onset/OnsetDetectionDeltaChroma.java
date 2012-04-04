@@ -16,7 +16,7 @@
 
 package org.mart.crs.core.onset;
 
-import org.mart.crs.core.pcp.spectral.PCP;
+import org.mart.crs.core.pcp.PCP;
 import org.mart.crs.utils.helper.HelperArrays;
 
 /**

@@ -16,13 +16,13 @@
 
 package org.mart.crs.management.label;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
-import org.mart.crs.management.label.chord.ChordSegment;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

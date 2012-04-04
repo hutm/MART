@@ -16,10 +16,10 @@
 
 package org.mart.crs.management.xml;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;

@@ -1,7 +1,7 @@
 package org.mart.crs.utils;
 
-import org.mart.crs.utils.helper.HelperFile;
 import junit.framework.TestCase;
+import org.mart.crs.utils.helper.HelperFile;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

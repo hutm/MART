@@ -16,10 +16,10 @@
 
 package org.mart.crs.management.midi;
 
-import org.mart.crs.utils.helper.Helper;
 import edu.columbia.ee.csmit.MidiKaraoke.PianoRoll;
 import edu.columbia.ee.csmit.MidiKaraoke.PianoRollViewParser;
 import edu.columbia.ee.csmit.MidiKaraoke.TimedNote;
+import org.mart.crs.utils.helper.Helper;
 
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequence;

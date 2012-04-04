@@ -26,11 +26,11 @@
 
 package org.mart.crs.analysis.filter;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.xml.Tags;
 import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.helper.Helper;
-import org.apache.log4j.Logger;
-import org.mart.crs.management.xml.Tags;
 import org.w3c.dom.Element;
 
 

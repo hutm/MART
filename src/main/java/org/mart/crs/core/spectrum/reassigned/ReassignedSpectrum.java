@@ -16,32 +16,25 @@
 
 package org.mart.crs.core.spectrum.reassigned;
 
-import org.mart.crs.config.ExecParams;
-import org.mart.crs.config.Settings;
-import org.mart.crs.core.AudioReader;
-import org.mart.crs.core.spectrum.SpectrumImpl;
-import org.mart.crs.utils.Histogram;
-import org.mart.crs.utils.helper.Helper;
-import org.mart.crs.utils.windowing.WindowOption;
-import org.mart.crs.utils.windowing.WindowFunction;
 import de.dfki.maths.Complex;
+import org.mart.crs.core.AudioReader;
+import org.mart.crs.core.spectrum.SpectrumImplPhaseComponents;
+import org.mart.crs.utils.windowing.WindowFunction;
+import org.mart.crs.utils.windowing.WindowOption;
 import org.mart.crs.utils.windowing.WindowType;
 
 /**
  * @version 1.0 18-May-2010 13:51:00
  * @author: Hut
  */
-public class ReassignedSpectrum extends SpectrumImpl {
+public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
 
-    protected int numberOfFreqBinsInTheOutputSpectrogram;
 
-    protected boolean[][] harmonicComponentsMatrix;
-    protected boolean[][] percussiveComponentsMatrix;
-    protected boolean[][] noiseComponentsMatrix;
+    {
+        this.saveComplexComponents = false;
+        this.savePhaseSpectrum = false;
+    }
 
-    protected float[][] timeReasStatistics;
-    protected float[][] frequencyReasStatistics;
-    protected float[][] energyReasStatistics;
 
     protected float[][] timeReasValues;
     protected float[][] frequencyReasValues;
@@ -53,75 +46,36 @@ public class ReassignedSpectrum extends SpectrumImpl {
     protected float threshold;
 
 
-    public ReassignedSpectrum(AudioReader audioReader, int startSampleIndex, int endSampleIndex, int windowLength, int windowType, float overlapping, ExecParams execParams) {
-        super(audioReader, startSampleIndex, endSampleIndex, windowLength, windowType, overlapping, execParams);
-        this.numberOfFreqBinsInTheOutputSpectrogram = execParams.numberOfFreqBinsInTheOutputSpectrogram;
+    public ReassignedSpectrum(AudioReader audioReader, int startSampleIndex, int endSampleIndex, int windowLength, int windowType, float overlapping) {
+        super(audioReader, startSampleIndex, endSampleIndex, windowLength, windowType, overlapping);
     }
 
-    public ReassignedSpectrum(AudioReader audioReader, int windowLength, int windowType, float overlapping, ExecParams execParams) {
-        super(audioReader, 0, audioReader.getSamples().length - 1, windowLength, windowType, overlapping, execParams);
-        this.numberOfFreqBinsInTheOutputSpectrogram = execParams.numberOfFreqBinsInTheOutputSpectrogram;
+    public ReassignedSpectrum(AudioReader audioReader, int windowLength, int windowType, float overlapping) {
+        super(audioReader, 0, audioReader.getSamples().length - 1, windowLength, windowType, overlapping);
     }
 
-
-    public ReassignedSpectrum(float[] samples, int startSampleIndex, int endSampleIndex, float sampleRate, ExecParams execParams) {
-        super(samples, startSampleIndex, endSampleIndex, sampleRate, execParams);
-        this.threshold = execParams.reassignedSpectrogramThreshold;
-        this.numberOfFreqBinsInTheOutputSpectrogram = execParams.numberOfFreqBinsInTheOutputSpectrogram;
+    public ReassignedSpectrum(float[] samples, int startSampleIndex, int endSampleIndex, float sampleRate, int windowLength, int windowType, float overlapping) {
+        super(samples, startSampleIndex, endSampleIndex, sampleRate, windowLength, windowType, overlapping);
     }
 
-    public ReassignedSpectrum(float[] samples, float sampleRate, ExecParams execParams) {
-        super(samples, 0, samples.length - 1, sampleRate, execParams);
-        this.numberOfFreqBinsInTheOutputSpectrogram = execParams.numberOfFreqBinsInTheOutputSpectrogram;
+    public ReassignedSpectrum(float[] samples, float sampleRate, int windowLength, int windowType, float overlapping) {
+        super(samples, sampleRate, windowLength, windowType, overlapping);
     }
 
 
-    public ReassignedSpectrum(AudioReader audioReader, int startSampleIndex, int endSampleIndex, ExecParams execParams) {
-        this(audioReader.getSamples(), startSampleIndex, endSampleIndex, audioReader.getSampleRate(), execParams);
-        this.numberOfFreqBinsInTheOutputSpectrogram = execParams.numberOfFreqBinsInTheOutputSpectrogram;
+    protected void initializeSpectrumDataArrays(int startFrame, int endFrame) {
+        timeReasValues = new float[numberOfFrames][windowLength / 2];
+        frequencyReasValues = new float[numberOfFrames][windowLength / 2];
+        energyReasValues = new float[numberOfFrames][windowLength / 2];
     }
 
-    public ReassignedSpectrum(AudioReader audioReader, ExecParams execParams) {
-        this(audioReader.getSamples(), 0, audioReader.getSamples().length - 1, audioReader.getSampleRate(), execParams);
-        this.numberOfFreqBinsInTheOutputSpectrogram = execParams.numberOfFreqBinsInTheOutputSpectrogram;
-    }
-
-
-    protected void initializeSpectrumDataArrays(int numberOfFrames) {
-        if (Settings.saveMagSpectrum) {
-            magSpec = new float[numberOfFrames][getNumberOfSpectralBins()];
-        }
-        if (Settings.savePhaseSpectrum) {
-            phaseSpec = new float[numberOfFrames][];
-        }
-        if (Settings.saveHPSRelatedInformation) {
-            complexSpectrumRealPart = new float[numberOfFrames][];
-            complexSpectrumImagPart = new float[numberOfFrames][];
-            harmonicComponentsMatrix = new boolean[numberOfFrames][];
-            percussiveComponentsMatrix = new boolean[numberOfFrames][];
-            noiseComponentsMatrix = new boolean[numberOfFrames][];
-        }
-
-        if (Settings.saveReassignmentStatistics) {
-            timeReasStatistics = new float[numberOfFrames][windowLength / 2];
-            frequencyReasStatistics = new float[numberOfFrames][windowLength / 2];
-            energyReasStatistics = new float[numberOfFrames][windowLength / 2];
-        }
-        if (Settings.saveNoResolutionRepresentation) {
-            timeReasValues = new float[numberOfFrames][windowLength / 2];
-            frequencyReasValues = new float[numberOfFrames][windowLength / 2];
-            energyReasValues = new float[numberOfFrames][windowLength / 2];
-        }
-
-    }
-
-    protected void initializeSpectrumDataArrays(int startIndex, int endIndex) {
+/*    protected void initializeSpectrumDataArrays(int startIndex, int endIndex) {
         super.initializeSpectrumDataArrays(startIndex, endIndex);
         harmonicComponentsMatrix = new boolean[numberOfFrames][];
         percussiveComponentsMatrix = new boolean[numberOfFrames][];
         noiseComponentsMatrix = new boolean[numberOfFrames][];
         for (int i = startIndex; i < endIndex; i++) {
-            if (Settings.saveHPSRelatedInformation) {
+            if (Settings.saveComplexComponents) {
                 harmonicComponentsMatrix[i] = new boolean[windowLength / 2];
                 percussiveComponentsMatrix[i] = new boolean[windowLength / 2];
                 noiseComponentsMatrix[i] = new boolean[windowLength / 2];
@@ -137,12 +91,7 @@ public class ReassignedSpectrum extends SpectrumImpl {
                 energyReasValues[i] = new float[windowLength / 2];
             }
         }
-    }
-
-
-    protected int getNumberOfSpectralBins() {
-        return numberOfFreqBinsInTheOutputSpectrogram;
-    }
+    }*/
 
 
     /**
@@ -151,7 +100,7 @@ public class ReassignedSpectrum extends SpectrumImpl {
      * @param samples samples
      * @return
      */
-    protected float[][] calculateSpectrumOfFrame(float[] samples, float centerFrameSample) {
+    protected void spectralTransform(float[] samples, float centerFrameSample) {
         float[] samplesWindowDrivative = new float[samples.length];
         float[] samplesWindowTimeWeighted = new float[samples.length];
         float[] samplesWindowTimeWeightedDerivative = new float[samples.length];
@@ -171,194 +120,193 @@ public class ReassignedSpectrum extends SpectrumImpl {
         double[] samples_d_timeWeighted = getSamplesWithProperLengthAndType(samplesWindowTimeWeighted, 0);
         double[] samples_d_timeWeightedDerivative = getSamplesWithProperLengthAndType(samplesWindowTimeWeightedDerivative, 0);
 
+        int currentFrameIndex = getIndexForSample(centerFrameSample);
 
-        float[][] out = new float[2][numberOfFreqBinsInTheOutputSpectrogram];
-        try {
-            int currentFrameIndex = getIndexForSample(centerFrameSample);
+        fft.calcReal(samples_d, -1);
+        Complex[] complexSpectrum = extractComplexSpec(samples_d);
 
-            fft.calcReal(samples_d, -1);
+        fft.calcReal(samples_d_derivative, -1);
+        Complex[] complexSpectrumDerivative = extractComplexSpec(samples_d_derivative);
 
-            if (Settings.saveHPSRelatedInformation) {
-                complexSpectrumRealPart[currentFrameIndex] = extractComplexSpecRealPart(samples_d);
-                complexSpectrumImagPart[currentFrameIndex] = extractComplexSpecImagPart(samples_d);
-                harmonicComponentsMatrix[currentFrameIndex] = new boolean[complexSpectrumRealPart[currentFrameIndex].length];
-                percussiveComponentsMatrix[currentFrameIndex] = new boolean[complexSpectrumRealPart[currentFrameIndex].length];
-                noiseComponentsMatrix[currentFrameIndex] = new boolean[complexSpectrumRealPart[currentFrameIndex].length];
+        fft.calcReal(samples_d_timeWeighted, -1);
+        Complex[] complexSpectrumTimeWeighted = extractComplexSpec(samples_d_timeWeighted);
+
+        fft.calcReal(samples_d_timeWeightedDerivative, -1);
+        Complex[] complexSpectrumTimeWeightedDerivative = extractComplexSpec(samples_d_timeWeightedDerivative);
+
+        innerSpectralDataExtraction(currentFrameIndex, samples_d);
+        innerSpectralDataExtractionReassigned(currentFrameIndex, centerFrameSample, complexSpectrum, complexSpectrumDerivative, complexSpectrumTimeWeighted, complexSpectrumTimeWeightedDerivative);
+    }
+
+    /**
+     * Data from ffttransformedSamples is extracted here.
+     * @param currentFrameIndex  currentFrameIndex
+     * @param ffttransformedSamples   ffttransformedSamples
+     */
+    protected void innerSpectralDataExtraction(int currentFrameIndex, double[] ffttransformedSamples){
+        this.energyReasValues[currentFrameIndex] = extractMagSpec(ffttransformedSamples);
+    }
+
+
+
+    protected void innerSpectralDataExtractionReassigned(int currentFrameIndex, float centerFrameSample,  Complex[] complexSpectrum, Complex[] complexSpectrumDerivative, Complex[] complexSpectrumTimeWeighted, Complex[] complexSpectrumTimeWeightedDerivative) {
+
+
+        float[] spectralFram = energyReasValues[currentFrameIndex];
+
+        for (int i = 0; i < spectralFram.length; i++) {
+
+            ReassignedFrame frame = new ReassignedFrame();
+            frame.setCurrentFrameIndex(currentFrameIndex);
+            frame.setCurrentFreqIndex(i);
+
+            //Initialize with negative values first
+            frequencyReasValues[currentFrameIndex][i] = -1;
+            timeReasValues[currentFrameIndex][i] = -1;
+
+            //Frequency reassignment
+            Complex devisionResult = complexSpectrumDerivative[i].divide(complexSpectrum[i]);
+            float centerFrequency = index2freq(i, 0.5f * sampleRate / spectralFram.length);
+            frame.setFreqDelta(devisionResult.getImag());
+
+
+            //Time reassignment
+            Complex divisionResultTime = complexSpectrumTimeWeighted[i].divide(complexSpectrum[i]);
+            frame.setTimeDelta(divisionResultTime.getReal());
+
+
+            //Now calculate phaseDoubleDerivative and check the necessary condition
+            Complex firstTerm = complexSpectrumTimeWeightedDerivative[i].divide(complexSpectrum[i]);
+            Complex secondTerm = (complexSpectrumTimeWeighted[i].divide(complexSpectrum[i]));
+            secondTerm = secondTerm.multiply(complexSpectrumDerivative[i].divide(complexSpectrum[i]));
+
+            frame.setPhaseDoubleDerivative((firstTerm.getReal() - secondTerm.getReal()) * 2 * (float) Math.PI);
+
+
+            if (checkCondition(frame.getPhaseDoubleDerivative())) {
+                frequencyReasValues[currentFrameIndex][i] = centerFrequency - frame.getFreqDelta();
+                timeReasValues[currentFrameIndex][i] = centerFrameSample + frame.getTimeDelta() * sampleRate;
             }
 
-            float[] magSpectrum = extractMagSpec(samples_d);
-            Complex[] complexSpectrum = extractComplexSpec(samples_d);
+            additionalCalculations(frame);
 
-            fft.calcReal(samples_d_derivative, -1);
-            Complex[] complexSpectrumDerivative = extractComplexSpec(samples_d_derivative);
-
-            fft.calcReal(samples_d_timeWeighted, -1);
-            Complex[] complexSpectrumTimeWeighted = extractComplexSpec(samples_d_timeWeighted);
-
-            fft.calcReal(samples_d_timeWeightedDerivative, -1);
-            Complex[] complexSpectrumTimeWeightedDerivative = extractComplexSpec(samples_d_timeWeightedDerivative);
-
-            float reassignedFreq;
-            int newBinIndex;
-            float timeDelta;
-            for (int i = 0; i < magSpectrum.length; i++) {
-
-                //Frequency reassignment
-                Complex devisionResult = complexSpectrumDerivative[i].divide(complexSpectrum[i]);
-                float centerFrequency = index2freq(i, 0.5f * sampleRate / magSpectrum.length);
-                float deltaFreq = devisionResult.getImag();
-                reassignedFreq = centerFrequency - deltaFreq;
-                newBinIndex = freq2index(reassignedFreq, (0.5f * sampleRate) / numberOfFreqBinsInTheOutputSpectrogram);
-                boolean deltaFreqOK = isDeltaFrequencyOK(deltaFreq);
-
-
-                //Time reassignment
-                Complex devisionResultTime = complexSpectrumTimeWeighted[i].divide(complexSpectrum[i]);
-                timeDelta = devisionResultTime.getReal();
-                float newStartIndexInSamples = centerFrameSample + Math.round(timeDelta * sampleRate);
-                int frameIndex = getIndexForSample(newStartIndexInSamples);
-                boolean deltaTimeOK = isDeltaTimeOK(timeDelta);
-
-
-                if (!(deltaFreqOK && deltaTimeOK)) {
-                    if (!isToRemoveEnergyIfConditionsAreNotMet()) {
-                        newBinIndex = i;
-                        frameIndex = currentFrameIndex;
-                        reassignedFreq = centerFrequency;
-                        centerFrameSample -= timeDelta * sampleRate;
-                        deltaFreqOK = true;
-                        deltaTimeOK = true;
-                    } else {
-                        continue;
-                    }
-                }
-
-                //Now calculate phaseDoubleDerivative and check the necessary condition
-                Complex firstTerm = complexSpectrumTimeWeightedDerivative[i].divide(complexSpectrum[i]);
-
-                Complex secondTerm = (complexSpectrumTimeWeighted[i].divide(complexSpectrum[i]));
-                secondTerm = secondTerm.multiply(complexSpectrumDerivative[i].divide(complexSpectrum[i]));
-
-
-                float phaseDoubleDerivative = (firstTerm.getReal() - secondTerm.getReal()) * 2 * (float) Math.PI;
-
-
-                if (checkCondition(phaseDoubleDerivative)) {
-                    if (deltaFreqOK && deltaTimeOK) {
-                        if (Settings.saveMagSpectrum) {
-                            if (newBinIndex >= 0 && newBinIndex < out[0].length && frameIndex >= 0 && frameIndex < this.magSpec.length) {
-                                if (magSpec[frameIndex] != null && magSpec[frameIndex].length > 0) { //Is necessary when building only a part of a spectrum
-                                    this.magSpec[frameIndex][newBinIndex] += magSpectrum[i];
-                                }
-                            }
-                        }
-                        if (Settings.saveReassignmentStatistics) {
-                            frequencyReasStatistics[currentFrameIndex][i] = -1 * devisionResult.getImag();
-                            timeReasStatistics[currentFrameIndex][i] = timeDelta * sampleRate;
-                            energyReasStatistics[currentFrameIndex][i] = magSpectrum[i];
-                        }
-                        if (Settings.saveNoResolutionRepresentation) {
-                            frequencyReasValues[currentFrameIndex][i] = reassignedFreq;
-                            timeReasValues[currentFrameIndex][i] = centerFrameSample + timeDelta * sampleRate;
-                            energyReasValues[currentFrameIndex][i] = magSpectrum[i];
-                        }
-                    }
-                }
-
-
-                if (Settings.saveHPSRelatedInformation) {
-                    if (Math.abs(1 + phaseDoubleDerivative) < threshold) {
-                        harmonicComponentsMatrix[currentFrameIndex][i] = true;
-                    } else if (Math.abs(phaseDoubleDerivative) < threshold) {
-                        percussiveComponentsMatrix[currentFrameIndex][i] = true;
-                    } else {
-                        noiseComponentsMatrix[currentFrameIndex][i] = true;
-                    }
-                }
-
-
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            logger.error("Error while calculating spectrum ");
-            logger.error(Helper.getStackTrace(e));
         }
-        return out;
     }
 
 
-    protected boolean isDeltaFrequencyOK(float deltaFreq) {
-        return true;
-    }
-
-    protected boolean isDeltaTimeOK(float deltaFreq) {
-        return true;
+    protected void additionalCalculations(ReassignedFrame frame){
+        //Overloadded in child classes
     }
 
 
-    protected boolean isToRemoveEnergyIfConditionsAreNotMet() {
-        return false;
+    public void initialsizeMagSpectrum(int numberOfFreqBinsInTheOutputSpectrogram){
+        this.magSpec = new float[energyReasValues.length][numberOfFreqBinsInTheOutputSpectrogram];
+        for(int i = 0; i < energyReasValues.length; i++){
+            for(int j = 0; j < energyReasValues[i].length; j++){
+                int newFrameIndex = getIndexForSample(timeReasValues[i][j]);
+                int newBinIndex = freq2index(frequencyReasValues[i][j], (0.5f * sampleRate) / numberOfFreqBinsInTheOutputSpectrogram);
+
+                //check that there is no out of bound error
+                if (newBinIndex >= 0 && newBinIndex < magSpec[0].length && newFrameIndex >= 0 && newFrameIndex < this.magSpec.length) {
+                    magSpec[newFrameIndex][newBinIndex] += energyReasValues[i][j];
+                }
+            }
+        }
     }
+
 
     protected boolean checkCondition(float phaseDoubleDerivative) {
         return true; //no filtering. All energies are added.
     }
 
 
-    public boolean[][] getHarmonicComponentsMatrix() {
-        return harmonicComponentsMatrix;
-    }
-
-    public boolean[][] getNoiseComponentsMatrix() {
-        return noiseComponentsMatrix;
-    }
-
-    public boolean[][] getPercussiveComponentsMatrix() {
-        return percussiveComponentsMatrix;
-    }
-
-    public float[][] getTimeReasStatistics() {
-        return timeReasStatistics;
-    }
-
-    public float[][] getFrequencyReasStatistics() {
-        return frequencyReasStatistics;
-    }
-
-    public float[][] getEnergyReasStatistics() {
-        return energyReasStatistics;
-    }
-
     public float[][] getTimeReasValues() {
+        initialize();
         return timeReasValues;
     }
 
     public float[][] getFrequencyReasValues() {
+        initialize();
         return frequencyReasValues;
     }
 
     public float[][] getEnergyReasValues() {
+        initialize();
         return energyReasValues;
     }
 
-    public static void main(String[] args) {
-        //Test array version of Reassignment calculation
-        String fileName = "/home/hut/Beatles/data/wav/01_-_Drive_My_Car.wav";
+
+/*    public static void main(String[] args) {
+    //Test array version of Reassignment calculation
+    String fileName = "/home/hut/Beatles/data/wav/01_-_Drive_My_Car.wav";
 //        String fileName = "/home/hut/data/!audio/0001 - U2 - The Joshua Tree - With or without you.wav";
-        AudioReader reader = new AudioReader(fileName, 11025);
+    AudioReader reader = new AudioReader(fileName, 11025);
 
 
-        Settings.saveReassignmentStatistics = true;
-        Settings.saveMagSpectrum = false;
+    Settings.saveReassignmentStatistics = true;
+    Settings.saveMagSpectrum = false;
 
 
-        ReassignedSpectrum spectrum = new ReassignedSpectrum(reader.getSamples(), 0.4f, ExecParams._initialExecParameters);
+    ReassignedSpectrum spectrum = null;//= new ReassignedSpectrum(reader.getSamples(), 0.4f);   //TODO: move to tests
 
-        spectrum.getMagSpec();
+    spectrum.getMagSpec();
 
-        Histogram histogram = new Histogram(spectrum.frequencyReasStatistics, spectrum.energyReasStatistics, 0);
-        histogram.initialize();
+    Histogram histogram = new Histogram(spectrum.frequencyReasStatistics, spectrum.energyReasStatistics, 0);
+    histogram.initialize();
 
-        logger.info("done");
+    logger.info("done");
+}*/
+
+
+    class ReassignedFrame{
+
+        protected float timeDelta;
+        protected float freqDelta;
+
+        protected int currentFrameIndex;
+        protected int currentFreqIndex;
+
+        protected float phaseDoubleDerivative;
+
+        public float getTimeDelta() {
+            return timeDelta;
+        }
+
+        public void setTimeDelta(float timeDelta) {
+            this.timeDelta = timeDelta;
+        }
+
+        public float getFreqDelta() {
+            return freqDelta;
+        }
+
+        public void setFreqDelta(float freqDelta) {
+            this.freqDelta = freqDelta;
+        }
+
+        public int getCurrentFrameIndex() {
+            return currentFrameIndex;
+        }
+
+        public void setCurrentFrameIndex(int currentFrameIndex) {
+            this.currentFrameIndex = currentFrameIndex;
+        }
+
+        public int getCurrentFreqIndex() {
+            return currentFreqIndex;
+        }
+
+        public void setCurrentFreqIndex(int currentFreqIndex) {
+            this.currentFreqIndex = currentFreqIndex;
+        }
+
+        public float getPhaseDoubleDerivative() {
+            return phaseDoubleDerivative;
+        }
+
+        public void setPhaseDoubleDerivative(float phaseDoubleDerivative) {
+            this.phaseDoubleDerivative = phaseDoubleDerivative;
+        }
     }
 
 

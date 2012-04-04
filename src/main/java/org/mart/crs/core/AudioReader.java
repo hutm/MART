@@ -16,13 +16,13 @@
 
 package org.mart.crs.core;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.audio.musique.AudioSampleInputStream;
 import org.mart.crs.audio.musique.AudioSampleInputStreamArray;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.AudioHelper;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperArrays;
-import org.apache.log4j.Logger;
 import org.mart.crs.utils.helper.HelperFile;
 
 import javax.sound.sampled.AudioFileFormat;

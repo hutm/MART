@@ -1,7 +1,7 @@
 package simpleClasses;
 
-import org.mart.crs.utils.helper.HelperArrays;
 import junit.framework.TestCase;
+import org.mart.crs.utils.helper.HelperArrays;
 
 import java.util.Random;
 

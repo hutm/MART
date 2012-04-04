@@ -16,10 +16,7 @@
 
 package org.mart.crs.management.beat;
 
-import org.mart.crs.config.ExecParams;
-import org.mart.crs.config.Settings;
-import org.mart.crs.core.AudioReader;
-import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.config.Extensions;
 import org.mart.crs.management.beat.segment.BeatSegment;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.crs.utils.helper.HelperFile;
@@ -49,7 +46,7 @@ public class StatisticalInference {
         List<String> files = HelperFile.readLinesFromTextFile(fileListPath);
         for (String filePath : files) {
             initializeData(filePath);
-            String labelsPath = HelperFile.getPathForFileWithTheSameName(filePath, gtDirPath, Settings.BEAT_EXT);
+            String labelsPath = HelperFile.getPathForFileWithTheSameName(filePath, gtDirPath, Extensions.BEAT_EXT);
             BeatStructure beatStructure = BeatStructure.getBeatStructure(labelsPath);
             List<BeatSegment> downbeats = beatStructure.getDownBeatPositions(true);
             List<BeatSegment> nonDownbeats = beatStructure.getDownBeatPositions(false);
@@ -103,8 +100,9 @@ public class StatisticalInference {
     }
 
 
+    //TODO: needs refactoring
     public void initializeData(String audioFilePath) {
-        AudioReader reader = new AudioReader(audioFilePath);
+        /*AudioReader reader = new AudioReader(audioFilePath);
         SpectrumImpl spectrum = new SpectrumImpl(reader, ExecParams._initialExecParameters);
         float[][] magSpec = spectrum.getMagSpec();
         float[][] spectralData = new float[magSpec.length][1];
@@ -119,7 +117,7 @@ public class StatisticalInference {
 
         this.data = spectralData;
         this.sampleRate = spectrum.getSampleRateSpectrum();
-        this.delay = 0;
+        this.delay = 0;*/
     }
 
 

@@ -1,9 +1,9 @@
 package org.mart.crs.management.chord;
 
+import junit.framework.TestCase;
 import org.mart.crs.management.beat.BeatStructure;
 import org.mart.crs.management.beat.BeatStructureText;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.io.File;
 import java.io.IOException;

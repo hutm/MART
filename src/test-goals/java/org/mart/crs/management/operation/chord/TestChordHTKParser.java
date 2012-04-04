@@ -1,8 +1,8 @@
 package org.mart.crs.management.operation.chord;
 
+import junit.framework.TestCase;
 import org.mart.crs.exec.operation.models.htk.parser.chord.ChordHTKParser;
 import org.mart.crs.exec.operation.models.htk.parser.chord.ChordHTKParserFromLattice;
-import junit.framework.TestCase;
 
 /**
  * @version 1.0 5/14/11 3:37 PM

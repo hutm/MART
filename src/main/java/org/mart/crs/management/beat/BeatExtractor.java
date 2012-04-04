@@ -16,11 +16,11 @@
 
 package org.mart.crs.management.beat;
 
-import org.mart.crs.config.ExecParams;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.core.onset.OnsetDetectionFunction;
 import org.mart.crs.core.spectrum.SpectrumImpl;
 import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrumPercussivePart;
+import org.mart.crs.management.config.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +43,9 @@ public class BeatExtractor {
         buildOnsetDetectors();
     }
 
-    public BeatExtractor(String audioFilePath){
-        AudioReader reader = new AudioReader(audioFilePath, ExecParams._initialExecParameters.samplingRate);
-        this.spectrum = new ReassignedSpectrumPercussivePart(reader, ExecParams._initialExecParameters.reassignedSpectrogramThreshold, ExecParams._initialExecParameters);
+    public BeatExtractor(String audioFilePath, float sapmlingRate, float reassignedSpectrogramThreshold){
+        AudioReader reader = new AudioReader(audioFilePath, sapmlingRate);
+        this.spectrum = new ReassignedSpectrumPercussivePart(reader, Configuration.windowLengthDefault, Configuration.windowTypeDefault, Configuration.overlappingDefault, reassignedSpectrogramThreshold);
         buildOnsetDetectors();
     }
 
@@ -96,7 +96,7 @@ public class BeatExtractor {
 
 
     public static void main(String[] args) {
-        BeatExtractor extractor = new BeatExtractor("d:/My Documents/!audio/0001 - U2 - The Joshua Tree - With or without you.wav");
+        BeatExtractor extractor = new BeatExtractor("d:/My Documents/!audio/0001 - U2 - The Joshua Tree - With or without you.wav", 11025f, Configuration.reassignedthresholdDefault);
         System.out.println(extractor.getOnsetDetectionSamplingFreq());
     }
 }

@@ -16,12 +16,13 @@
 
 package org.mart.crs.management.label.lattice;
 
+import org.apache.log4j.Logger;
+import org.mart.crs.config.Extensions;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -29,7 +30,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-import static org.mart.crs.config.Settings.CHROMA_EXT;
 import static org.mart.crs.utils.helper.HelperFile.getFile;
 
 /**
@@ -200,7 +200,7 @@ public class Lattice {
             songFolder = songFolder.replaceAll("\\\\", "/");
 
             String header = "VERSION=1.0\n" +
-                    "UTTERANCE=" + songName + "/secPass" + CHROMA_EXT + "\n" +
+                    "UTTERANCE=" + songName + "/secPass" + Extensions.CHROMA_EXT + "\n" +
                     "lmname=work\\temp\\net\n" +
                     "lmscale=1.00   wdpenalty=-11.00\n" +
                     "acscale=1.00  \n" +

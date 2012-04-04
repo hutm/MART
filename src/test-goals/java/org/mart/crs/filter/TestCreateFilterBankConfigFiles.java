@@ -1,11 +1,11 @@
 package org.mart.crs.filter;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.ConfigSettings;
 import org.mart.crs.management.xml.Tags;
 import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -13,6 +13,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
+
 import static org.mart.crs.management.xml.Tags.*;
 
 /**

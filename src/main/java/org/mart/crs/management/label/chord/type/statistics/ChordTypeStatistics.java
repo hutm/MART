@@ -16,7 +16,7 @@
 
 package org.mart.crs.management.label.chord.type.statistics;
 
-import org.mart.crs.config.Settings;
+import org.mart.crs.config.Extensions;
 import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.utils.filefilter.ExtensionFileFilter;
@@ -44,7 +44,7 @@ public class ChordTypeStatistics {
 
 
     public void fillStatistics() {
-        File[] gtFiles = HelperFile.getFile(gtFilePath).listFiles(new ExtensionFileFilter(Settings.LABEL_EXT, false));
+        File[] gtFiles = HelperFile.getFile(gtFilePath).listFiles(new ExtensionFileFilter(Extensions.LABEL_EXT, false));
         for (File gtFile : gtFiles) {
             ChordStructure chordStructure = new ChordStructure(gtFile.getPath());
             for (ChordSegment chordSegment : chordStructure.getChordSegments()) {
@@ -91,10 +91,11 @@ public class ChordTypeStatistics {
     }
 
 
-    public static void main(String[] args) {
+    //TODO: move to tests
+/*    public static void main(String[] args) {
         ChordTypeStatistics chordTypeStatistics = new ChordTypeStatistics(Settings.chordLabelsGroundTruthDir);
         chordTypeStatistics.fillStatistics();
-    }
+    }*/
 
 
 }

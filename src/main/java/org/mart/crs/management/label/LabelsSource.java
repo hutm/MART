@@ -16,8 +16,8 @@
 
 package org.mart.crs.management.label;
 
-import org.mart.crs.logging.CRSLogger;
 import org.apache.log4j.Logger;
+import org.mart.crs.logging.CRSLogger;
 
 import java.util.ArrayList;
 import java.util.List;

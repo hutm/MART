@@ -16,7 +16,6 @@
 
 package org.mart.crs.core.spectrum;
 
-import org.mart.crs.config.ExecParams;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.utils.helper.HelperArrays;
 
@@ -36,8 +35,8 @@ public class SpectrumCrossCorrelationBasedImpl extends SpectrumImpl {
     private double sum, absLeft, absRight;
 
 
-    public SpectrumCrossCorrelationBasedImpl(AudioReader audioReader, int crossCorrSpectrNumberOfBins, ExecParams execParams) {
-        this(audioReader.getSamples(), audioReader.getSampleRate(), crossCorrSpectrNumberOfBins, execParams);
+    public SpectrumCrossCorrelationBasedImpl(AudioReader audioReader, int crossCorrSpectrNumberOfBins) {
+        this(audioReader.getSamples(), audioReader.getSampleRate(), crossCorrSpectrNumberOfBins);
     }
 
     /**
@@ -46,8 +45,8 @@ public class SpectrumCrossCorrelationBasedImpl extends SpectrumImpl {
      * @param samples    samples
      * @param sampleRate samplerate
      */
-    public SpectrumCrossCorrelationBasedImpl(float[] samples, float sampleRate, int crossCorrSpectrNumberOfBins, ExecParams execParams) {
-        super(samples, sampleRate, execParams);
+    public SpectrumCrossCorrelationBasedImpl(float[] samples, float sampleRate, int crossCorrSpectrNumberOfBins) {
+//        super(samples, sampleRate);  //TODO: fix it. Did not tested this class after refactoring
         this.crossCorrSpectrNumberOfBins = crossCorrSpectrNumberOfBins;
         this.sampleRate = sampleRate;
         this.sampleRateSpectrum = sampleRate;
@@ -55,7 +54,7 @@ public class SpectrumCrossCorrelationBasedImpl extends SpectrumImpl {
     }
 
 
-    protected void initializespectrum() {
+    protected void initialize() {
 //        logger.debug("Creating SpectrumCrossCorrelationBased object...");
 
         logger.debug("Number of samples to process: " + sampleNumber);

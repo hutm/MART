@@ -1,11 +1,11 @@
 package org.mart.crs.eval.beat;
 
+import junit.framework.TestCase;
 import org.mart.crs.exec.operation.eval.beat.BeatEvaluator;
 import org.mart.crs.exec.operation.eval.beat.BeatEvaluatorNema;
 import org.mart.crs.labelling.beat.BeatLabelsConverter;
 import org.mart.crs.management.beat.BeatStructure;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.io.File;
 import java.util.List;

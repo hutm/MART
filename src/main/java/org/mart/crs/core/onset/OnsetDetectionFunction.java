@@ -16,8 +16,8 @@
 
 package org.mart.crs.core.onset;
 
-import org.mart.crs.config.Settings;
 import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.management.config.Configuration;
 import org.mart.crs.utils.helper.HelperArrays;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class OnsetDetectionFunction extends AbstractOnsetDetectionFunction {
 
 
     protected void computeOnsetDetection(){
-        if (Settings.initializationByParts) {
+        if (Configuration.initializationByParts) {
             int extractionWindowLength = Math.round(SpectrumImpl.SEGMENT_SIZE_FOR_MEMORY_OPTIMIZED_EXTRACTION * spectrum.getSampleRateSpectrum());
 
             int counter = 0;

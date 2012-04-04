@@ -1,10 +1,10 @@
 package org.mart.crs.management.chord;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.Settings;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.io.File;
 import java.util.Arrays;

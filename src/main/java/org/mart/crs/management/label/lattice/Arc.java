@@ -16,8 +16,8 @@
 
 package org.mart.crs.management.label.lattice;
 
-import org.mart.crs.management.label.chord.ChordSegment;
 import org.imirsel.nema.model.NemaSegment;
+import org.mart.crs.management.label.chord.ChordSegment;
 
 public class Arc extends ChordSegment {
 

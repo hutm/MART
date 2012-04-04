@@ -36,6 +36,11 @@ import static org.mart.crs.management.xml.Tags.CHANNEL_TAG;
  */
 public class FilterBankManager extends XMLManager {
 
+    public static String FILTERBANK_CONFIG_PATH = "cfg/filters/PQQMFconfig.xml";
+    public static String FILTERBANK_CONFIG_QMF_PATH = "cfg/filters/QMFconfig.cfg";
+
+
+
     protected AudioReader audioReader;
     protected float frameSizeOfFeaturesInSecs;
 

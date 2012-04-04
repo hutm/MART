@@ -16,7 +16,7 @@
 
 package org.mart.crs.management.label;
 
-import org.mart.crs.config.Settings;
+import org.mart.crs.config.Extensions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class LabelsManager {
 
     public LabelsManager(String[] possibleLabelExtensions) {
         labelsSources = new LabelsSource[NUMBER_OF_LABEL_SOURCES + 1];
-        labelsSources[NUMBER_OF_LABEL_SOURCES] = new LabelsSource(RECOGNIZE_NOW_DIR, false, "RecognizeNow!!!", new String[]{Settings.LABEL_EXT});
+        labelsSources[NUMBER_OF_LABEL_SOURCES] = new LabelsSource(RECOGNIZE_NOW_DIR, false, "RecognizeNow!!!", new String[]{Extensions.LABEL_EXT});
         this.possibleLabelExtensions = possibleLabelExtensions;
     }
 

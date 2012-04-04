@@ -16,7 +16,7 @@
 
 package org.mart.crs.core.similarity;
 
-import org.mart.crs.config.Settings;
+import org.mart.crs.management.config.Configuration;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.tools.svf.SVF;
 import org.mart.tools.svf.extractor.SVFExtractor;
@@ -71,7 +71,7 @@ public class SimilarityMatrix {
 
 
     protected void computeDetectionFunction() {
-        if (!Settings.initializationByParts) {
+        if (!Configuration.initializationByParts) {
             getSimilarityMatrix();
             int length = features.length;
             detectionFunction = new float[length];

@@ -16,18 +16,17 @@
 
 package org.mart.crs.management.label.chord;
 
-import org.mart.crs.config.Settings;
-import org.mart.crs.exec.operation.models.htk.HTKResultsParser;
+import org.apache.log4j.Logger;
+import org.mart.crs.config.Extensions;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.crs.utils.helper.HelperFile;
-import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.*;
 
-import static org.mart.crs.config.Settings.LABEL_EXT;
+import static org.mart.crs.config.Extensions.LABEL_EXT;
 
 /**
  * @version 1.0 3/29/11 11:38 AM
@@ -78,7 +77,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
     public void saveSegmentsInFile(String outDirectory, boolean isChordNameOriginal) {
         Collections.sort(chordSegments);
         try {
-            FileWriter writer = new FileWriter(HelperFile.getFile(String.format("%s/%s%s", outDirectory, songName, Settings.LABEL_EXT)));
+            FileWriter writer = new FileWriter(HelperFile.getFile(String.format("%s/%s%s", outDirectory, songName, Extensions.LABEL_EXT)));
             for (ChordSegment cs : chordSegments) {
                 if (!isChordNameOriginal) {
                     writer.write(cs + "\n");
@@ -184,8 +183,8 @@ public class ChordStructure implements Comparable<ChordStructure> {
      * @param outDirPath
      * @param intervals
      * @param isForMIREX
-     * @deprecated needs refactoring
      */
+    @Deprecated
     public static void addNonChordSegments(String inDirPath, String outDirPath, Map<String, List<float[]>> intervals, boolean isForMIREX, String labelExtension) {
         File outDir = HelperFile.getFile(outDirPath);
         if (!outDir.exists()) {
@@ -268,7 +267,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
         }
 
         LABEL_EXT = labelExtension;
-        HTKResultsParser.storeResults(mapForStorage, outDirPath);
+//        HTKResultsParser.storeResults(mapForStorage, outDirPath);    //TODO: needs refactoring
         LABEL_EXT = ".lab";
 
     }

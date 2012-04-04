@@ -16,9 +16,9 @@
 
 package org.mart.crs.utils;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.helper.Helper;
-import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
 package org.mart.crs.eval;
 
+import junit.framework.TestCase;
 import org.mart.crs.exec.operation.eval.AbstractCRSEvaluator;
 import org.mart.crs.exec.operation.eval.chord.ChordEvaluatorNema;
 import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -16,12 +16,12 @@
 
 package org.mart.crs.analysis.filter;
 
-import org.mart.crs.config.ConfigSettings;
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSException;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.config.Configuration;
 import org.mart.crs.management.xml.XMLManager;
 import org.mart.crs.utils.helper.Helper;
-import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
 
 import java.lang.reflect.Constructor;
@@ -51,7 +51,7 @@ public class FilterManager extends XMLManager {
         Filter filter = null;
         String filterFilePath = getStringData(rootElement, FILTER_FILE_PATH_TAG);
         if(!filterFilePath.equals("")){
-            filter = FilterManager.getFilter(ConfigSettings.CONFIG_FILTERS_ROOT_FILE_PATH + filterFilePath);
+            filter = FilterManager.getFilter(Configuration.CONFIG_FILTERS_ROOT_FILE_PATH + filterFilePath);
             return filter;
         }
         String className = getStringData(rootElement, CLASS_TAG);

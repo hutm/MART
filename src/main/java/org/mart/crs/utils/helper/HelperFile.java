@@ -16,9 +16,9 @@
 
 package org.mart.crs.utils.helper;
 
+import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.filefilter.ExtensionFileFilter;
-import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.net.URISyntaxException;

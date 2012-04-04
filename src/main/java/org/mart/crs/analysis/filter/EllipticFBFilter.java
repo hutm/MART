@@ -16,14 +16,14 @@
 
 package org.mart.crs.analysis.filter;
 
-import org.mart.crs.logging.CRSLogger;
-import org.mart.crs.management.xml.XMLManager;
-import org.mart.crs.utils.helper.Helper;
-import org.mart.crs.utils.helper.HelperArrays;
 import com.jamal.JamalException;
 import com.jamal.client.MatlabClient;
 import org.apache.log4j.Logger;
+import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.xml.Tags;
+import org.mart.crs.management.xml.XMLManager;
+import org.mart.crs.utils.helper.Helper;
+import org.mart.crs.utils.helper.HelperArrays;
 import org.w3c.dom.Element;
 
 

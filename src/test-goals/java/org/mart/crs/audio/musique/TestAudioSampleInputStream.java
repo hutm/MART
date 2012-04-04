@@ -1,8 +1,8 @@
 package org.mart.crs.audio.musique;
 
+import junit.framework.TestCase;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.utils.helper.HelperArrays;
-import junit.framework.TestCase;
 
 import java.io.IOException;
 

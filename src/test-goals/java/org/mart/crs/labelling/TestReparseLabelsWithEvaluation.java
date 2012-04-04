@@ -1,9 +1,9 @@
 package org.mart.crs.labelling;
 
+import junit.framework.TestCase;
 import org.mart.crs.config.Settings;
 import org.mart.crs.exec.operation.eval.chord.EvaluatorOld;
 import org.mart.crs.utils.helper.HelperFile;
-import junit.framework.TestCase;
 
 import java.io.File;
 

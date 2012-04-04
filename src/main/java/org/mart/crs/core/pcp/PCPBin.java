@@ -75,7 +75,7 @@ public class PCPBin implements Comparable {
 
     @Override
     public boolean equals(Object obj) {
-        return this.toString().equals(((PCPBin) obj).toString());
+        return this.toString().equals( obj.toString());
     }
 
     @Override
