@@ -94,7 +94,7 @@ public class HelperFile {
         }
         try {
             File dir = getFile(dirPath);
-            File[] fileList = dir.listFiles(new ExtensionFileFilter(new String[]{extension}));
+            File[] fileList = dir.listFiles(new ExtensionFileFilter(extension));
             String returnValue;
             for (File f : fileList) {
                 if (f.isDirectory()) {
@@ -104,7 +104,7 @@ public class HelperFile {
                     }
                 } else {
                     String fileNameWithoutExtension;
-                    if ((fileName.lastIndexOf(".") < 0)) {
+                    if ((fileName.lastIndexOf(".") < 0 && fileName.indexOf(".") == fileName.lastIndexOf("."))) {
                         fileNameWithoutExtension = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
                     } else {
                         fileNameWithoutExtension = fileName.substring(fileName.lastIndexOf(File.separator) + 1, fileName.lastIndexOf("."));
@@ -137,11 +137,11 @@ public class HelperFile {
             File[] fileList;
             if (extensions == null) {
                 fileList = dir.listFiles();
-            } else{
+            } else {
                 fileList = dir.listFiles(new ExtensionFileFilter(extensions));
             }
             for (File f : fileList) {
-                if(f.isDirectory()){
+                if (f.isDirectory()) {
                     continue;
                 }
                 String fileNameWithoutExtension = getNameWithoutExtension(f.getName());
@@ -277,12 +277,13 @@ public class HelperFile {
 
     /**
      * Returns File in the resource path location
+     *
      * @param resourcePath Resource relative file path
      * @return Found file
-     * @throws FileNotFoundException If file was not found 
+     * @throws FileNotFoundException If file was not found
      */
-    public static File getResourceFile(String resourcePath) throws FileNotFoundException{
-        if(!resourcePath.startsWith("/")){
+    public static File getResourceFile(String resourcePath) throws FileNotFoundException {
+        if (!resourcePath.startsWith("/")) {
             resourcePath = "/" + resourcePath;
         }
         URL myTestURL = HelperFile.class.getResource(resourcePath);
@@ -299,12 +300,13 @@ public class HelperFile {
 
     /**
      * Returns file path for a given resource
+     *
      * @param resourcePath Resource relative file path
-     * @return   Found file path
+     * @return Found file path
      * @throws java.io.FileNotFoundException If file was not found
      */
-    public static String getResourceFilePath(String resourcePath) throws FileNotFoundException{
-       return getResourceFile(resourcePath).getPath();
+    public static String getResourceFilePath(String resourcePath) throws FileNotFoundException {
+        return getResourceFile(resourcePath).getPath();
     }
 
 

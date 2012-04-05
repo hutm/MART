@@ -34,6 +34,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -54,18 +55,19 @@ public class BeatStructure implements Comparable<BeatStructure> {
     protected BeatStructure(String sourceFilePath) {
         this.sourceFilePath = sourceFilePath;
         this.beatSegments = new ArrayList<BeatSegment>();
-        this.measureSegments = new ArrayList<MeasureSegment>();
         this.songName = HelperFile.getNameWithoutExtension(sourceFilePath);
         parseFromSource();
+        formMeasureStructure();
     }
 
 
     public BeatStructure(List<BeatSegment> beatSegmentList) {
         this.beatSegments = beatSegmentList;
+        formMeasureStructure();
     }
 
     public BeatStructure(List<BeatSegment> beatSegmentList, String songName) {
-        this.beatSegments = beatSegmentList;
+        this(beatSegmentList);
         this.songName = songName;
     }
 
@@ -97,7 +99,10 @@ public class BeatStructure implements Comparable<BeatStructure> {
 
 
     protected void formMeasureStructure() {
+        this.measureSegments = new ArrayList<MeasureSegment>();
+
         MeasureSegment lastSegment = null;
+        Collections.sort(beatSegments);
         for (int i = 0; i < beatSegments.size(); i++) {
             BeatSegment beat = beatSegments.get(i);
             if (beat.isDownBeat()) {

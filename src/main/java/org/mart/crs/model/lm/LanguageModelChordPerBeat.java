@@ -65,7 +65,17 @@ public class LanguageModelChordPerBeat extends LanguageModelChord{
             ChordStructure chordStructure = new ChordStructure(chordFilePath);
             BeatStructure beatStructure = BeatStructure.getBeatStructure(beatFilePath);
 
+
+            List<BeatSegment> segments = beatStructure.getBeatSegments();
+            segments.add(new BeatSegment(0, 0));
+            List<ChordSegment> chordSegments = chordStructure.getChordSegments();
+            segments.add(new BeatSegment(chordSegments.get(chordSegments.size() - 1).getOffset(), 0));
+            beatStructure = new BeatStructure(segments, beatStructure.getSongName());
+
             for (BeatSegment beatSegment : beatStructure.getBeatSegments()) {
+                if(beatSegment.getTimeInstant() == beatSegment.getNextBeatTimeInstant()){
+                    continue;
+                }
                 ChordSegment tempSegmentWithBeatDuration = new ChordSegment(beatSegment.getTimeInstant(), beatSegment.getNextBeatTimeInstant(), ChordType.NOT_A_CHORD.getName());
                 TreeMap<Float, ChordSegment> intersectionchords = new TreeMap<Float, ChordSegment>();
                 for (ChordSegment chordSegment : chordStructure.getChordSegments()) {
