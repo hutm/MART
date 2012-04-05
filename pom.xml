@@ -169,7 +169,9 @@
                                 <fileset dir="cfg"/>
                             </copy>
 
-                            <mkdir dir="${build.dir}/logs"/>
+                            <copy file="${build.directory}/${name}-${version}.jar"
+                                  todir="${build.dir}/lib"/>
+
                         </tasks>
                     </configuration>
                     <goals>

@@ -23,7 +23,7 @@ import java.util.List;
  * @version 1.0 07/11/10 22:30
  * @author: Hut
  */
-public class BeatSegment {
+public class BeatSegment implements  Comparable<BeatSegment>{
 
     protected double timeInstant;
     protected double nextBeatTimeInstant;
@@ -124,4 +124,15 @@ public class BeatSegment {
     }
 
 
+    @Override
+    public int compareTo(BeatSegment o) {
+        double cmp = this.timeInstant - o.timeInstant;
+        if (cmp > 0){
+            return 1;
+        }
+        if(cmp < 0){
+            return -1;
+        }
+        return 0;
+    }
 }
