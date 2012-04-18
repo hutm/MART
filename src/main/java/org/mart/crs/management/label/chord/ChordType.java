@@ -43,9 +43,9 @@ public enum ChordType {
     DIM_CHORD("dim", new int[]{0, 3, 6}, UNKNOWN_CHORD);
 
 
+    public static final ChordType[] CHORD_DICTIONARY_FULL = new ChordType[]{NOT_A_CHORD, MAJOR_CHORD, MINOR_CHORD, SEVEN_CHORD, MAJOR_6_CHORD, MINOR_7_CHORD, MAJOR_7_CHORD, NINE_CHORD, SUS4_CHORD, SUS2_CHORD, AUG_CHORD, DIM_CHORD};
     public static ChordType[] chordDictionary;
 
-    public static final ChordType[] CHORD_DICTIONARY_FULL = new ChordType[]{NOT_A_CHORD, MAJOR_CHORD, MINOR_CHORD, SEVEN_CHORD, MAJOR_6_CHORD, MINOR_7_CHORD, MAJOR_7_CHORD, NINE_CHORD, SUS4_CHORD, SUS2_CHORD, AUG_CHORD, DIM_CHORD};
     public static final boolean isToUseChordWrappersToTrainChordChildren = true;
 
 

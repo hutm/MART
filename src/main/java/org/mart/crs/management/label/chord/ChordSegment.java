@@ -18,6 +18,7 @@ package org.mart.crs.management.label.chord;
 
 import org.apache.log4j.Logger;
 import org.imirsel.nema.model.NemaChord;
+import org.imirsel.nema.model.NemaSegment;
 import org.imirsel.nema.model.util.ChordConversionUtil;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.helper.Helper;
@@ -85,26 +86,35 @@ public class ChordSegment extends NemaChord implements Serializable {
                 this.logLikelihood = logLikelihood;
             }
         }
+
+        //Now parse n-best hypotheses
+        if(comps.length > 5 && comps[4].equals("|")){
+            for(int i = 5; i <comps.length; i += 2){
+                hypotheses.add(new ChordSegment(this.onset, this.offset, preprocessChordLabel(comps[i]), Helper.parseDouble(comps[i+1])));
+            }
+        }
     }
 
 
     protected int[] getNotesFromLabel(String chordLabel) {
         int[] notes = null;
         try {
-            notes = ChordConversionUtil.getInstance().convertShorthandToNotenumbers(preprocessChordLabel(chordLabel));
+            if (!chordLabel.equals(ChordType.UNKNOWN_CHORD.toString())) {
+                notes = ChordConversionUtil.getInstance().convertShorthandToNotenumbers(preprocessChordLabel(chordLabel));
+                return notes;
+            }
         } catch (Exception e) {
             logger.debug("Couldn't parse NemaChord from Chord String: " + chordLabel + " from " + preprocessChordLabel(chordLabel));
-            this.chordType = ChordType.UNKNOWN_CHORD;
-        }
-        if (notes == null) {
             try {
                 notes = ChordConversionUtil.getInstance().convertIntervalsToNotenumbers(preprocessChordLabel(chordLabel));
-            } catch (Exception e) {
+                return notes;
+            } catch (Exception e1) {
                 logger.debug("Couldn't parse NemaChord from Interval String: " + chordLabel);
-                this.chordType = ChordType.UNKNOWN_CHORD;
-                notes = ChordType.UNKNOWN_CHORD.getNotes();
             }
         }
+
+        this.chordType = ChordType.UNKNOWN_CHORD;
+        notes = ChordType.UNKNOWN_CHORD.getNotes();
         return notes;
     }
 
@@ -189,7 +199,7 @@ public class ChordSegment extends NemaChord implements Serializable {
                     continue;
                 }
                 this.chordType = chordType;
-                if(this.chordType.getName().equals(UNKNOWN_CHORD.getName())){
+                if (this.chordType.getName().equals(UNKNOWN_CHORD.getName())) {
                     this.chordType = UNKNOWN_CHORD;
                 }
                 if ((this.chordType != NOT_A_CHORD && this.chordType != UNKNOWN_CHORD)) {
@@ -282,7 +292,7 @@ public class ChordSegment extends NemaChord implements Serializable {
         return out;
     }
 
-    public int[] getNotesWithoutDuplicates(){
+    public int[] getNotesWithoutDuplicates() {
         return getNotesWithoutDuplicates(this.notes);
 
     }
@@ -386,6 +396,17 @@ public class ChordSegment extends NemaChord implements Serializable {
         return chordNameOriginal;
     }
 
+
+    public int compareTo(NemaSegment o) {
+        double cmp = this.onset - o.getOnset();
+        if (cmp > 0){
+            return 1;
+        }
+        if(cmp < 0){
+            return -1;
+        }
+        return 0;
+    }
 
 
 

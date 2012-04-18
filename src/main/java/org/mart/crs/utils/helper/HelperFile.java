@@ -104,14 +104,17 @@ public class HelperFile {
                     }
                 } else {
                     String fileNameWithoutExtension;
-                    if ((fileName.lastIndexOf(".") < 0 && fileName.indexOf(".") == fileName.lastIndexOf("."))) {
-                        fileNameWithoutExtension = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
-                    } else {
+                    if ((fileName.lastIndexOf(".") > 0)) {
                         fileNameWithoutExtension = fileName.substring(fileName.lastIndexOf(File.separator) + 1, fileName.lastIndexOf("."));
+                        if ((fileNameWithoutExtension + extension).equalsIgnoreCase(f.getName())) {
+                            return f.getAbsolutePath();
+                        }
                     }
+                    fileNameWithoutExtension = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
                     if ((fileNameWithoutExtension + extension).equalsIgnoreCase(f.getName())) {
                         return f.getAbsolutePath();
                     }
+
                 }
             }
         } catch (Exception e) {

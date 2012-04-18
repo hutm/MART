@@ -460,6 +460,9 @@ public class HelperArrays {
      * @return
      */
     public static float[] average(float[][] data, int startIndex, int endIndex) {
+        if(data.length == 0){
+            return  new float[]{};
+        }
         float[] out = new float[data[startIndex].length];
         for (int i = startIndex; i < endIndex; i++) {
             for (int j = 0; j < out.length; j++) {

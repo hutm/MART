@@ -43,6 +43,9 @@ public class BeatStructureText extends BeatStructure {
 
         for(String line:lines){
             String[] tokens = line.split("\\s+");
+            if(tokens[1].equalsIgnoreCase("New")){
+                continue;
+            }
             float startTime = 0;
             int beatNumber = 0;
             try {
@@ -60,7 +63,5 @@ public class BeatStructureText extends BeatStructure {
         }
         formMeasureStructure();
     }
-
-
 
 }
