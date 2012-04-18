@@ -302,6 +302,15 @@ public class BeatStructure implements Comparable<BeatStructure> {
     }
 
 
+    public void addTrailingBeats(double songDuration){
+        if (beatSegments.get(0).getTimeInstant() > 0.01) {
+            this.beatSegments.add(new BeatSegment(0, 0));
+        }
+        this.beatSegments.add(new BeatSegment(songDuration, 0));
+        formMeasureStructure();
+    }
+
+
     public int compareTo(BeatStructure o) {
         return songName.compareTo(o.getSongName());
     }

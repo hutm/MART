@@ -103,7 +103,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
         for (ChordSegment cs : chordSegments) {
             buffer.append(cs).append(" | ");
             for (ChordSegment hypo : cs.getHypotheses()) {
-                buffer.append(hypo.getChordName()).append(" ").append(hypo.getLogLikelihood()).append(" ");
+                buffer.append(String.format("%s %5.3f ", ChordSegment.preprocessChordLabel(hypo.getChordName()), hypo.getLogLikelihood()));
             }
             buffer.append("\r\n");
         }
@@ -294,9 +294,23 @@ public class ChordStructure implements Comparable<ChordStructure> {
         return builder.toString();
     }
 
+    public double[] getTimeGrid(){
+        double[] out = new double[chordSegments.size() + 1];
+        for(int i = 0; i < chordSegments.size(); i++){
+            out[i] = chordSegments.get(i).getOnset();
+        }
+        out[out.length - 1] = chordSegments.get(chordSegments.size() - 1).getOffset();
+        return out;
+    }
+
 
     public List<ChordSegment> getChordSegments() {
         return chordSegments;
+    }
+
+    public double getSongDuration(){
+        Collections.sort(chordSegments);
+        return chordSegments.get(chordSegments.size() - 1).getOffset();
     }
 
     public int compareTo(ChordStructure o) {

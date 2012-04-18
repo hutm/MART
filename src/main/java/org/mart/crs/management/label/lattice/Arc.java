@@ -21,16 +21,22 @@ import org.mart.crs.management.label.chord.ChordSegment;
 
 public class Arc extends ChordSegment {
 
-    private double acWeigth;
-    private double lmWeigth;
+    protected int startIndex;
+    protected int endIndex;
+
+    protected double acWeigth;
+    protected double lmWeigth;
 
 
     public Arc(double startTime, double endTime, String name) {
         super(startTime, endTime, name);
     }
 
-    public Arc(double startTime, double endTime, String name, double acWeigth, double lmWeigth) {
-        super(startTime, endTime, name);
+    public Arc(int startIndex, int endIndex, String name, double acWeigth, double lmWeigth) {
+        super(startIndex, endIndex, name);
+        this.startIndex = startIndex;
+        this.endIndex = endIndex;
+        this.chordNameOriginal = name;
         this.acWeigth = acWeigth;
         this.lmWeigth = lmWeigth;
     }
@@ -53,6 +59,14 @@ public class Arc extends ChordSegment {
 
     public void setLmWeigth(float lmWeigth) {
         this.lmWeigth = lmWeigth;
+    }
+
+    public int getStartIndex() {
+        return startIndex;
+    }
+
+    public int getEndIndex() {
+        return endIndex;
     }
 
     @Override

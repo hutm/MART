@@ -22,6 +22,7 @@ import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.management.label.chord.ChordSegment;
 import org.mart.crs.management.label.chord.ChordStructure;
 import org.mart.crs.utils.helper.Helper;
+import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.crs.utils.helper.HelperFile;
 
 import java.io.BufferedReader;
@@ -50,8 +51,10 @@ public class Lattice {
 
 
     //Lattice data
-    private int[] nodes;
-    List<Arc> arcs;
+    protected int[] nodes;
+    protected List<Arc> arcs;
+
+    protected double[] timeGrid;
 
 
     /**
@@ -71,7 +74,7 @@ public class Lattice {
      */
     public Lattice(ChordStructure aSong) {
         this.song = aSong;
-        initializeFromSong();
+        initializeFromSong(song.getTimeGrid());
     }
 
 
@@ -91,7 +94,6 @@ public class Lattice {
             while ((line = reader.readLine()) != null && line.length() > 0) {
 
                 Arc arc;
-
                 if (line.startsWith("N=") || line.startsWith("NODES=")) {
                     int numberOfNodes = Integer.parseInt(line.substring(line.indexOf("=") + 1, line.indexOf(" ")));
                     nodes = new int[numberOfNodes];
@@ -127,7 +129,7 @@ public class Lattice {
                             if (isOnlyChordLabelWithoutDuration && chord.startsWith("W-")) {
                                 chord = chord.substring(2, chord.indexOf(":"));
                             }
-//                            arc.setChordName(chord); //TODO refactor
+                            arc.setLabel(chord); //TODO refactor
                         }
                         if (token.startsWith("a=")) {
                             acScore = Float.parseFloat(token.substring(2));
@@ -153,25 +155,37 @@ public class Lattice {
     /**
      * Read a lattice from Song object
      */
-    public void initializeFromSong() {
-
+    public void initializeFromSong(double[] timeGrid) {
+        this.timeGrid = timeGrid;
         Arc arc;
         arcs = new ArrayList<Arc>();
 
         List<Integer> nodesList = new ArrayList<Integer>();
         for (ChordSegment segment : song.getChordSegments()) {
-            int startTime = (int)Math.round(segment.getOnset());
-            int endTime = (int)Math.round(segment.getOffset());
-            if (!nodesList.contains(startTime)) {
-                nodesList.add(startTime);
+            int startIndex = -1;
+            int endIndex = -1;
+            for(int i = 0; i < timeGrid.length; i++){
+                if(segment.getOnset() == timeGrid[i]){
+                    startIndex = i;
+                }
+                if(segment.getOffset() == timeGrid[i]){
+                    endIndex = i;
+                }
             }
-            if (!nodesList.contains(endTime)) {
-                nodesList.add(endTime);
+            if(startIndex < 0 || endIndex < 0){
+                logger.error(String.format("Could not find grid elements for segment [%5.2f %5.2f] ", segment.getOnset(), segment.getOffset()));
+            }
+
+            if (!nodesList.contains(startIndex)) {
+                nodesList.add(startIndex);
+            }
+            if (!nodesList.contains(endIndex)) {
+                nodesList.add(endIndex);
             }
 
             List<ChordSegment> hypotheses = segment.getHypotheses();
             for (ChordSegment hypo : hypotheses) {
-                arc = new Arc(segment.getOnset(), segment.getOffset(), hypo.getChordName(), hypo.getLogLikelihood(), 0.0f);
+                arc = new Arc(startIndex, endIndex, hypo.getChordName(), hypo.getLogLikelihood(), 0.0f);
                 arcs.add(arc);
             }
 
@@ -199,7 +213,8 @@ public class Lattice {
             String songFolder = getFile(filePathToStore).getParentFile().getCanonicalPath();
             songFolder = songFolder.replaceAll("\\\\", "/");
 
-            String header = "VERSION=1.0\n" +
+            String header = "#" + Helper.getDoubleArrayAsString(timeGrid) + "\r\n";
+            header = header + "VERSION=1.0\n" +
                     "UTTERANCE=" + songName + "/secPass" + Extensions.CHROMA_EXT + "\n" +
                     "lmname=work\\temp\\net\n" +
                     "lmscale=1.00   wdpenalty=-11.00\n" +
@@ -217,29 +232,9 @@ public class Lattice {
             int startIndex, endIndex;
             int counter = 0;
             for (Arc arc : arcs) {
-                startIndex = -1;
-                for (int i = 0; i < nodes.length; i++) {
-                    float startTime_ = Math.round(arc.getOnset());
-                    if (startTime_ == nodes[i]) {
-                        startIndex = i;
-                        break;
-                    }
-                }
-                endIndex = -1;
-                for (int i = 0; i < nodes.length; i++) {
-                    float endTime_ = Math.round(arc.getOffset());
-                    if (endTime_ == nodes[i]) {
-                        endIndex = i;
-                        break;
-                    }
-                }
-
-                if (startIndex < 0 || endIndex < 0) {
-                    logger.error("Error: Could not find nodes for ark " + arc);
-                } else {
-                    writer.write("J=" + counter++ + "\tS=" + startIndex + "\tE=" + endIndex + "\tW=" + arc.getChordName() + "\tv=1" + "\ta=" + arc.getAcWeigth() + "\tl=" + arc.getLmWeigth() + "\n");
-                }
-
+                startIndex = arc.getStartIndex();
+                endIndex = arc.getEndIndex();
+                writer.write(String.format("J=%d\tS=%d\tE=%d\tW=%s\tv=1\ta=%2.2f\tl=%2.2f\n", counter++, startIndex, endIndex, arc.getChordName(), arc.getAcWeigth(), arc.getLmWeigth() ));
             }
 
             writer.close();

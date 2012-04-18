@@ -647,6 +647,15 @@ public class Helper {
         return out;
     }
 
+
+    public static String getDoubleArrayAsString(double[] array){
+        StringBuilder builder = new StringBuilder();
+        for(double number : array){
+            builder.append(number).append(" ");
+        }
+        return builder.toString();
+    }
+
     public static String getStringValueForObject(Object o) {
         if (o instanceof String) {
             return (String) o;
