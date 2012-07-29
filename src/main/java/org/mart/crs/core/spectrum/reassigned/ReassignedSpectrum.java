@@ -154,7 +154,54 @@ public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
 
         float[] spectralFram = energyReasValues[currentFrameIndex];
 
+
+
+//        float energy, a, b, c, d, f, e, g, h, div1R, div1I, div2R, div2I, div3R, div3I, div3R2, div3I2,
+//                phaseDoubleDerivative, reassfreq;
+//        for (int i = 1; i < spectralFram.length; i++) {
+//
+//            a = complexSpectrumDerivative[i].getReal();
+//            b = complexSpectrumDerivative[i].getImag();
+//            c = complexSpectrum[i].getReal();
+//            d = complexSpectrum[i].getImag();
+//            e = complexSpectrumTimeWeighted[i].getReal();
+//            f = complexSpectrumTimeWeighted[i].getImag();
+//            g = complexSpectrumTimeWeightedDerivative[i].getReal();
+//            h = complexSpectrumTimeWeightedDerivative[i].getImag();
+//
+//
+//            energy = c * c + d * d;
+//
+//            div1R = (a * c + b * d) / energy;
+//            div1I = (b * c - a * d) / energy;
+//
+//
+//            div2R = (g * c + h * d) / energy;
+//            div2I = (h * c - g * d) / energy;
+//
+//            div3R = (e * c + f * d) / energy;
+//            div3I = (f * c - e * d) / energy;
+//
+//            div3R2 = div3R * div1R - div3I * div1I;
+//            div3I2 = div3R * div1I + div3I * div1R;
+//
+//            phaseDoubleDerivative = (float)((div2R - div3R2) * 2. * Math.PI);
+//
+//            if(Math.abs(1 + phaseDoubleDerivative) <  0.4f){
+//                energyReasValues[currentFrameIndex][i] = energy;
+//                frequencyReasValues[currentFrameIndex][i] = index2freq(i, 0.5f * sampleRate / spectralFram.length) - div1I;
+//            } else{
+//                energyReasValues[currentFrameIndex][i] = 0;
+//                frequencyReasValues[currentFrameIndex][i] = 0;
+//            }
+//
+//        }
+
+
+
+
         for (int i = 0; i < spectralFram.length; i++) {
+
 
             ReassignedFrame frame = new ReassignedFrame();
             frame.setCurrentFrameIndex(currentFrameIndex);
@@ -189,7 +236,6 @@ public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
             }
 
             additionalCalculations(frame);
-
         }
     }
 
@@ -199,19 +245,21 @@ public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
     }
 
 
-    public void initialsizeMagSpectrum(int numberOfFreqBinsInTheOutputSpectrogram){
-        this.magSpec = new float[energyReasValues.length][numberOfFreqBinsInTheOutputSpectrogram];
+    public float[][] getMagSpectrumStandardArrayForm(int numberOfFreqBinsInTheOutputSpectrogram){
+        initialize();
+        float[][] outSpectrum = new float[energyReasValues.length][numberOfFreqBinsInTheOutputSpectrogram];
         for(int i = 0; i < energyReasValues.length; i++){
             for(int j = 0; j < energyReasValues[i].length; j++){
                 int newFrameIndex = getIndexForSample(timeReasValues[i][j]);
                 int newBinIndex = freq2index(frequencyReasValues[i][j], (0.5f * sampleRate) / numberOfFreqBinsInTheOutputSpectrogram);
 
                 //check that there is no out of bound error
-                if (newBinIndex >= 0 && newBinIndex < magSpec[0].length && newFrameIndex >= 0 && newFrameIndex < this.magSpec.length) {
-                    magSpec[newFrameIndex][newBinIndex] += energyReasValues[i][j];
+                if (newBinIndex >= 0 && newBinIndex < outSpectrum[0].length && newFrameIndex >= 0 && newFrameIndex < outSpectrum.length) {
+                    outSpectrum[newFrameIndex][newBinIndex] += energyReasValues[i][j];
                 }
             }
         }
+        return outSpectrum;
     }
 
 

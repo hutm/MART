@@ -48,7 +48,7 @@ public class ReassignedFromMatlabEllis extends ReassignedSpectrum {
 
     //TODO: needs testing
     @Override
-    public void initialsizeMagSpectrum(int numberOfFreqBinsInTheOutputSpectrogram) {
+    public float[][] getMagSpectrumStandardArrayForm(int numberOfFreqBinsInTheOutputSpectrogram) {
 
         this.sampleNumber = endSampleIndex - startSampleIndex + 1;
 
@@ -95,7 +95,7 @@ public class ReassignedFromMatlabEllis extends ReassignedSpectrum {
         this.sampleRateSpectrum = sampleRate / getFrameStep();
 
         this.windowLength = numberOfFreqBinsInTheOutputSpectrogram * 2;
-
+        return this.magSpec;
 
     }
 

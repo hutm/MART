@@ -309,6 +309,16 @@ public class HelperArrays {
         return max;
     }
 
+    public static int findMax(int[] array) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
+
     /**
      * Finds maximal abs element in array
      *
@@ -460,8 +470,8 @@ public class HelperArrays {
      * @return
      */
     public static float[] average(float[][] data, int startIndex, int endIndex) {
-        if(data.length == 0){
-            return  new float[]{};
+        if (data.length == 0) {
+            return new float[]{};
         }
         float[] out = new float[data[startIndex].length];
         for (int i = startIndex; i < endIndex; i++) {
@@ -1309,6 +1319,31 @@ public class HelperArrays {
     }
 
 
+    public static float[] convolution(float[] convolvee, float[] kernel) {
+        int length = convolvee.length;
+        int kernelLength = kernel.length;
+
+        float[] convolution = new float[length];
+        assert (kernelLength % 2 != 0); // no exception handling !!!
+
+        for (int i = kernelLength - 1; i < length; i++) {
+            float sum = 0;
+            for (int j = 0; j < kernelLength; j++) {
+                sum += convolvee[i - j] * kernel[j];
+            }
+            convolution[i - kernelLength / 2] = sum;
+        }
+
+        // fill upper and lower pads
+        for (int j = 0; j < kernelLength / 2; j++) {
+            convolution[j] = convolution[kernelLength / 2];
+        }
+        for (int j = length; j < length + kernelLength / 2; j++) {
+            convolution[j - kernelLength / 2] = convolution[length - kernelLength / 2 - 1];
+        }
+        return convolution;
+
+    }
 
 
 }

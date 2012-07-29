@@ -20,9 +20,11 @@ import org.apache.log4j.Logger;
 import org.mart.crs.core.spectrum.SpectrumImpl;
 import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrum;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.config.Configuration;
 import org.mart.crs.management.label.chord.Root;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperArrays;
+import org.mart.crs.utils.windowing.Hanning;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -120,8 +122,19 @@ public abstract class PCP {
         if (averagingFactor > 1) {
             performPCPDownsampling();
         }
+        if(numberOfBinsPerSemitone > 1){
+            normalizeHorizontally(7);
+        }
         calculatePCPWrapped();
     }
+
+    protected void initReassigned(){
+        if(numberOfBinsPerSemitone > 1){
+            normalizeHorizontally(7);
+        }
+        calculatePCPWrapped();
+    }
+
 
 
     public void initSpectrum(SpectrumImpl spectrum) {
@@ -155,7 +168,7 @@ public abstract class PCP {
                 }
             }
         }
-        calculatePCPWrapped();
+        initReassigned();
     }
 
 
@@ -191,6 +204,48 @@ public abstract class PCP {
         this.pcpUnwrapped = pcpUnwrappedDownsampled;
     }
 
+    /**
+     * Performs horizontal normalization of unwrapped PCP vector
+     *
+     * @param runningWindowLength number of semitones in running window
+     */
+    public void normalizeHorizontally(int runningWindowLength) {
+        int width = runningWindowLength * numberOfBinsPerSemitone;
+        float[] runningWindow = (new Hanning()).getWindowFunctionArrayNormalized(width);
+        for (float[] unwrapped : pcpUnwrapped) {
+            float[] runningMean = HelperArrays.convolution(unwrapped, runningWindow);
+            float[] runningSTD = new float[runningMean.length];
+            for (int i = 0; i < runningMean.length; i++) {
+                runningSTD[i] = (float) Math.pow(unwrapped[i] - runningMean[i], 2);
+            }
+            runningSTD = HelperArrays.convolution(runningSTD, runningWindow);
+
+            for (int i = 0; i < runningMean.length; i++) {
+                runningSTD[i] = (float) Math.sqrt(runningSTD[i]); // square root to finally have running std
+                if (runningSTD[i] > 0) {
+                    unwrapped[i] = (unwrapped[i] - runningMean[i]) > 0 ? (unwrapped[i] - runningMean[i]) / runningSTD[i] : 0;
+                }
+            }
+        }
+        calculatePCPWrapped();
+    }
+
+    /**
+     * Wraps all the bins belonging to a given semitone to a single semitone bin
+     */
+    protected void wraptoSemitone() {
+        for (int pcpIndex = 0; pcpIndex < pcp.length; pcpIndex++) {
+            float[] multiBin = pcp[pcpIndex];
+            float[] wrapped = new float[Configuration.NUMBER_OF_SEMITONES_IN_OCTAVE];
+            for (int i = 0; i < Configuration.NUMBER_OF_SEMITONES_IN_OCTAVE; i++) {
+                for (int j = 0; j < numberOfBinsPerSemitone; j++) {
+                    wrapped[i] += multiBin[i * numberOfBinsPerSemitone + j];
+                }
+            }
+            pcp[pcpIndex] = wrapped;
+        }
+
+    }
 
     /**
      * calculates chromagram
@@ -240,7 +295,7 @@ public abstract class PCP {
      * @return
      */
     protected int calcualteChromaBinIndex(float chromaNoteIndex) {
-        return Math.round(chromaNoteIndex * numberOfBinsPerSemitone);
+        return Math.round((chromaNoteIndex - 1 / (2.0f * numberOfBinsPerSemitone) + 0.5f) * numberOfBinsPerSemitone);
     }
 
 
@@ -270,6 +325,11 @@ public abstract class PCP {
         pcp = new float[pcpUnwrapped.length][getNumberOfBinsForWrappedChroma()];
         for (int i = 0; i < pcpUnwrapped.length; i++) {
             pcp[i] = calculatePCPWrapped(pcpUnwrapped[i]);
+        }
+
+        //Perform wrapping into single-bin semitone
+        if (numberOfBinsPerSemitone > 1) {
+            wraptoSemitone();
         }
     }
 

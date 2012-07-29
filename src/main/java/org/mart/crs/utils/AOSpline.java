@@ -38,7 +38,7 @@ package org.mart.crs.utils;
  * <p/>
  * <p/>
  * Class:			AOSpline
- * Autor:			olivier g�umann, neuch�tel (switzerland)
+ * Autor:			olivier gumann, neuchtel (switzerland)
  * JDK:				1.3
  * <p/>
  * Desctription:	cubic spline interpolation

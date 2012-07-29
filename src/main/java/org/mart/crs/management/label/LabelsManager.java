@@ -29,7 +29,7 @@ import static org.mart.crs.utils.helper.HelperFile.getPathForFileWithTheSameName
  */
 public class LabelsManager {
 
-    public static final int NUMBER_OF_LABEL_SOURCES = 3;
+    public static int NUMBER_OF_LABEL_SOURCES = 3;
     public static final String RECOGNIZE_NOW_DIR = "recognizeNow";
 
     protected LabelsSource[] labelsSources;

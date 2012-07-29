@@ -25,4 +25,26 @@ public class KaiserWindowTest {
     }
 
 
+    @Test
+    public void testHanningWindow() {
+
+        WindowFunction hanning = new Hanning();
+
+        int winLength = 1024;
+        float[] window = new float[winLength];
+        float[] timeWeighted = new float[winLength];
+        float[] freqWeighted = new float[winLength];
+        float[] timeFreqWeighted = new float[winLength];
+        for (int i = 0; i < winLength; i++) {
+            window[i] = hanning.getFunction(i, 0, winLength);
+            timeWeighted[i] = hanning.getFunctionTimeWeighted(i, 0, winLength, 4000);
+            freqWeighted[i] = hanning.getFunctionFrequencyWeighted(i, 0, winLength, 4000);
+            timeFreqWeighted[i] = hanning.getFunctionTimeFrequencyWeighted(i, 0, winLength, 4000);
+        }
+
+        System.out.println("done");
+
+    }
+
+
 }
