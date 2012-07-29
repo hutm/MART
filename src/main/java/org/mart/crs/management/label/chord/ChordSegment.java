@@ -405,6 +405,13 @@ public class ChordSegment extends NemaChord implements Serializable {
         if(cmp < 0){
             return -1;
         }
+        cmp = this.offset - o.getOffset();
+        if (cmp > 0){
+            return 1;
+        }
+        if(cmp < 0){
+            return -1;
+        }
         return 0;
     }
 

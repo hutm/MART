@@ -19,6 +19,8 @@ package org.mart.crs.management.label.chord;
 import org.apache.log4j.Logger;
 import org.mart.crs.config.Extensions;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.beat.BeatStructure;
+import org.mart.crs.management.label.LabelsSource;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperArrays;
 import org.mart.crs.utils.helper.HelperFile;
@@ -95,6 +97,14 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
     public void saveSegmentsInFile(String outDirectory) {
         this.saveSegmentsInFile(outDirectory, false);
+    }
+
+    public void exportToFileInOriginalChordFormat(String filePath){
+        List<String> lines = new ArrayList<String>();
+        for(ChordSegment cs:chordSegments){
+            lines.add(String.format("%5.5f\t%5.5f\t%s", cs.getOnset(), cs.getOffset(), cs.getChordNameOriginal()));
+        }
+        HelperFile.saveCollectionInFile(lines, filePath);
     }
 
 
@@ -301,6 +311,167 @@ public class ChordStructure implements Comparable<ChordStructure> {
         }
         out[out.length - 1] = chordSegments.get(chordSegments.size() - 1).getOffset();
         return out;
+    }
+
+
+    /**
+     * returns aray of n-best logliklihoods as a fuction of time
+     * @return
+     */
+    public float[][] getLogLikSampleArray(){
+
+        //First count number of Hypos
+        int counter = 1;
+        String currentChord = chordSegments.get(0).getChordName();
+        for(ChordSegment chordHypo:chordSegments.get(0).getHypotheses()){
+            if(!currentChord.equals(chordHypo.getChordName())){
+                counter++;
+            }
+            currentChord = chordHypo.getChordName();
+        }
+
+        List<List<Float>> outData = new ArrayList<List<Float>>();
+        for(int i = 0; i < counter; i++){
+            outData.add(new ArrayList<Float>());
+        }
+
+        for(ChordSegment chordSegment : chordSegments){
+            currentChord = "";//chordSegment.getChordName();
+            int currentIndex = -1;
+            for(ChordSegment chordHypo:chordSegment.getHypotheses()){
+                if(!currentChord.equals(chordHypo.getChordName())){
+                    currentIndex ++;
+                    currentChord = chordHypo.getChordName();
+                    continue;
+                }
+                outData.get(currentIndex).add((float)chordHypo.getLogLikelihood());
+            }
+        }
+        float[][] out = new float[counter][outData.get(0).size()];
+        for(int i = 0; i < counter; i++){
+            for(int j = 0; j < out[0].length; j++){
+                out[i][j] = outData.get(i).get(j);
+            }
+        }
+        return out;
+    }
+
+
+    protected double[] getBeatsForSong(String beatLabelsGroundTruthDir){
+        LabelsSource beatLabelSource = new LabelsSource(beatLabelsGroundTruthDir, true, "beatGT", Extensions.BEAT_EXTENSIONS);
+        BeatStructure beatStructure = BeatStructure.getBeatStructure(beatLabelSource.getFilePathForSong(getSongName()));
+        beatStructure.addTrailingBeats(getSongDuration());
+        return beatStructure.getBeats();
+    }
+
+
+    public void refineHypothesesUsingBeats(String beatLabelsGroundTruthDir){
+        refineHypothesesUsingBeats(getBeatsForSong(beatLabelsGroundTruthDir));
+    }
+
+
+    /**
+     * remove hierarchical structure and leave only one chord per frame
+     * @param beats beats
+     */
+    public void refineHypothesesUsingBeats(double beats[]){
+        List<ChordSegmentBeatSync> beatSyncChordSegments = getSegmentsBeatSync(getChordSegments(), beats);
+        List<ChordSegment> outChordSegments = new ArrayList<ChordSegment>();
+        for(int i = 0; i < beats.length - 1; i++){
+            List<String> intersections = new ArrayList<String>();
+            for(ChordSegmentBeatSync beatSyncChordSegment : beatSyncChordSegments){
+                if(beatSyncChordSegment.getOnsetBeat() <= i && beatSyncChordSegment.getOffsetBeat() >= i+1){
+                    intersections.add(beatSyncChordSegment.getChordName());
+                }
+            }
+            String newLabel = getMostFrequentString(intersections);
+            outChordSegments.add(new ChordSegment(beats[i], beats[i+1], newLabel));
+        }
+        this.chordSegments = outChordSegments;
+    }
+
+    public static String getMostFrequentString(List<String> arrayList){
+        Map<String, Integer> hm = new LinkedHashMap<String, Integer>();
+        int maxCount = 0;
+        String maxString = "";
+        for (String  item : arrayList) {
+            Integer count = hm.get(item);
+            int currentCount = count == null ? 1 : count + 1;
+            if(currentCount > maxCount){
+                maxCount = currentCount;
+                maxString = item;
+            }
+            hm.put(item , currentCount);
+        }
+        return maxString;
+    }
+
+
+    public void refineHypothesesLeavingOrder(int order, String beatLabelsGroundTruthDir){
+        refineHypothesesLeavingOrder(order, getBeatsForSong(beatLabelsGroundTruthDir));
+    }
+
+
+    /**
+     * Removes
+     * @param order
+     * @param beats
+     */
+    public void refineHypothesesLeavingOrder(int order, double[] beats){
+        List<ChordSegmentBeatSync> beatSyncsSegments = getSegmentsBeatSync(getChordSegments(), beats);
+
+        List<ChordSegment> outList = new ArrayList<ChordSegment>();
+        for(ChordSegmentBeatSync chordSegmentBeatSync:beatSyncsSegments){
+            if(chordSegmentBeatSync.getDurationInBeats() == order){
+                outList.add(chordSegmentBeatSync);
+            }
+        }
+        this.chordSegments = outList;
+    }
+
+
+    /**
+     * Removes
+     * @param order
+     * @param beats
+     */
+    public void refineHypothesesLeavingOrderWithoutIntersection(int order, double[] beats){
+        refineHypothesesLeavingOrder(order, beats);
+        List<ChordSegment> refinedList = new ArrayList<ChordSegment>();
+        //TODO add first and last beats
+        for(int i = 0; i < chordSegments.size(); i++){
+            for(int j = i+1; j < chordSegments.size(); j++){
+                if(chordSegments.get(i).intersects(chordSegments.get(j))){
+                    String chordSymbol = chordSegments.get(i).getLogLikelihood() > chordSegments.get(j).getLogLikelihood() ? chordSegments.get(i).getChordName() : chordSegments.get(j).getChordName();
+                    ChordSegmentBeatSync outSegment = ((ChordSegmentBeatSync) chordSegments.get(i)).getIntersectionInBeatsSegment((ChordSegmentBeatSync) chordSegments.get(j));
+                    refinedList.add(new ChordSegment(outSegment.getOnset(), outSegment.getOffset(), chordSymbol));
+                }
+            }
+        }
+        this.chordSegments = refinedList;
+    }
+
+
+    public static List<ChordSegmentBeatSync> getSegmentsBeatSync(List<ChordSegment> chordSegments, double[] beats){
+        List<ChordSegmentBeatSync> beatSyncsSegments = new ArrayList<ChordSegmentBeatSync>();
+        for(ChordSegment cs:chordSegments){
+            beatSyncsSegments.add(new ChordSegmentBeatSync(cs, beats));
+        }
+        return beatSyncsSegments;
+    }
+
+
+
+    public void shiftSegments(float shiftInsecs){
+        for(ChordSegment cs:chordSegments){
+            cs.setOnset(cs.getOnset() + shiftInsecs);
+            cs.setOffset(cs.getOffset() + shiftInsecs);
+        }
+    }
+
+    public void correctStartEndTimings(float duration){
+        chordSegments.get(0).setOnset(0);
+        chordSegments.get(chordSegments.size() - 1).setOffset(duration);
     }
 
 

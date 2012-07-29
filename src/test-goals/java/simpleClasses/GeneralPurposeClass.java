@@ -18,7 +18,7 @@ public class GeneralPurposeClass {
         float[] timeWeighted = new float[winLength];
         float[] timeFreqWeighted = new float[winLength];
         for (int i = 0; i < winLength; i++) {
-            frequencyweighted[i] = window.getFuctionFrequencyWeighted(i, 0, winLength, 11025);
+            frequencyweighted[i] = window.getFunctionFrequencyWeighted(i, 0, winLength, 11025);
             timeWeighted[i] = window.getFunctionTimeWeighted(i, 0, winLength, 11025);
             timeFreqWeighted[i] = window.getFunctionTimeFrequencyWeighted(i, 0, winLength, 11025);
         }

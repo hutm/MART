@@ -86,7 +86,7 @@ public abstract class WindowFunction {
         return out;
     }
 
-    public float getFuctionFrequencyWeighted(int i, int offset, int width, float samplingFreq) {
+    public float getFunctionFrequencyWeighted(int i, int offset, int width, float samplingFreq) {
 //        return getFunctionDerivative(i, offset, width) * (samplingFreq / (float)(2 * Math.PI));
         return getFunctionDerivativeViaFFT(i, offset, width) * (samplingFreq / (float) (2 * Math.PI));
 
@@ -97,7 +97,7 @@ public abstract class WindowFunction {
     }
 
     public float getFunctionTimeFrequencyWeighted(int i, int offset, int width, float samplingFreq) {
-        return getFuctionFrequencyWeighted(i, offset, width, samplingFreq) * (i - offset - width / 2) / samplingFreq;
+        return getFunctionFrequencyWeighted(i, offset, width, samplingFreq) * (i - offset - width / 2) / samplingFreq;
     }
 
 
@@ -129,7 +129,7 @@ public abstract class WindowFunction {
                         out[i] = getFunction(i, offset, width);
                         break;
                     case WINDOW_FREQUENCY_WEIGHTED:
-                        out[i] = getFuctionFrequencyWeighted(i, offset, width, samplingFrequency);
+                        out[i] = getFunctionFrequencyWeighted(i, offset, width, samplingFrequency);
                         break;
                     case WINDOW_TIME_WEIGHTED:
                         out[i] = getFunctionTimeWeighted(i, offset, width, samplingFrequency);
@@ -203,6 +203,20 @@ public abstract class WindowFunction {
 
     public static void apply(double[] data, WindowType windowType, WindowOption windowOption) {
         apply(HelperArrays.getDoubleAsFloat(data), 0, data.length, windowType, windowOption);
+    }
+
+
+    public float[] getWindowFunctionArrayNormalized(int width){
+        float sum = 0;
+        float[] out = new float[width];
+        for (int i = 0; i < width; ++i) {
+            out[i] = getFunction(i, 0, width);
+            sum += out[i];
+        }
+        for (int i = 0; i < width; ++i) {
+            out[i] = out[i] / sum;
+        }
+        return out;
     }
 
 }
