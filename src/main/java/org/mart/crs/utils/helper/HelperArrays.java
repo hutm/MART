@@ -109,25 +109,25 @@ public class HelperArrays {
         return output;
     }
 
-    /**
-     * Concatenates 2d arrays
-     *
-     * @return
-     */
-    public static float[][] concat(List<float[][]> inputs) {
-        int numberOfFrames = 0;
-        for (float[][] anInput : inputs) {
-            numberOfFrames += anInput.length;
-        }
-        float[][] output = new float[numberOfFrames][];
-        int pointer = 0;
-        for (float[][] anInput : inputs) {
-            for (float[] anAnInput : anInput) {
-                output[pointer++] = anAnInput;
-            }
-        }
-        return output;
-    }
+//    /**
+//     * Concatenates 2d arrays
+//     *
+//     * @return
+//     */
+//    public static float[][] concat(List<float[][]> inputs) {
+//        int numberOfFrames = 0;
+//        for (float[][] anInput : inputs) {
+//            numberOfFrames += anInput.length;
+//        }
+//        float[][] output = new float[numberOfFrames][];
+//        int pointer = 0;
+//        for (float[][] anInput : inputs) {
+//            for (float[] anAnInput : anInput) {
+//                output[pointer++] = anAnInput;
+//            }
+//        }
+//        return output;
+//    }
 
     /**
      * Concatenates 2d arrays
@@ -150,25 +150,6 @@ public class HelperArrays {
     }
 
 
-    /**
-     * Concatenates 2d arrays
-     *
-     * @return
-     */
-    public static short[] concat(List<short[]> inputs) {
-        int numberOfFrames = 0;
-        for (short[] anInput : inputs) {
-            numberOfFrames += anInput.length;
-        }
-        short[] output = new short[numberOfFrames];
-        int pointer = 0;
-        for (short[] anInput : inputs) {
-            for (short anAnInput : anInput) {
-                output[pointer++] = anAnInput;
-            }
-        }
-        return output;
-    }
 
 
     public static float[][] cut(float[][] inData, int startIndex, int endIndex) {

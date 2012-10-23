@@ -41,7 +41,6 @@ public class HelperFile {
         File tempDir = getFile(dirPath);
         if (!tempDir.exists()) {
             tempDir.mkdirs();
-            logger.debug("Creating directory " + dirPath);
         }
     }
 
