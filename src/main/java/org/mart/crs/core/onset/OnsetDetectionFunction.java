@@ -17,6 +17,7 @@
 package org.mart.crs.core.onset;
 
 import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrum;
 import org.mart.crs.management.config.Configuration;
 import org.mart.crs.utils.helper.HelperArrays;
 
@@ -30,21 +31,21 @@ import java.util.List;
 public class OnsetDetectionFunction extends AbstractOnsetDetectionFunction {
 
 
-    protected SpectrumImpl spectrum;
+    protected ReassignedSpectrum spectrum;
     protected float  startFreq;
     protected float endFreq;
 
     protected float[] detectionFunction;
 
 
-    public OnsetDetectionFunction(SpectrumImpl spectrum, float startFreq, float endFreq) {
+    public OnsetDetectionFunction(ReassignedSpectrum spectrum, float startFreq, float endFreq) {
         this.spectrum = spectrum;
         this.startFreq = startFreq;
         this.endFreq = endFreq;
     }
 
 
-    public OnsetDetectionFunction(SpectrumImpl spectrum) {
+    public OnsetDetectionFunction(ReassignedSpectrum spectrum) {
         this.spectrum = spectrum;
         this.startFreq = 0;
         this.endFreq = spectrum.getSampleRate() / 2 - 1;
@@ -56,34 +57,45 @@ public class OnsetDetectionFunction extends AbstractOnsetDetectionFunction {
 
 
     protected void computeOnsetDetection(){
-        if (Configuration.initializationByParts) {
-            int extractionWindowLength = Math.round(SpectrumImpl.SEGMENT_SIZE_FOR_MEMORY_OPTIMIZED_EXTRACTION * spectrum.getSampleRateSpectrum());
-
-            int counter = 0;
-            List<float[][]> onsetDataList = new ArrayList<float[][]>();
-            SpectrumImpl originalSpectrum = spectrum;
-            float[][] onsetDetectionFunctionPart = null;
-            while (counter < originalSpectrum.getNumberOfFrames()) {
-                int endIndex = Math.min(counter + extractionWindowLength, originalSpectrum.getNumberOfFrames());
-                SpectrumImpl partSpectrum = originalSpectrum.extractSpectrumPart(counter, endIndex);
-                onsetDetectionFunctionPart = calculateDetectionFunctionFromSpectrum(partSpectrum);
-                onsetDataList.add(onsetDetectionFunctionPart);
-                counter += extractionWindowLength;
-            }
-            this.detectionFunction = HelperArrays.concatColumnWise(onsetDataList)[0];
-        }
-        else{
+//        if (Configuration.initializationByParts) {
+//            int extractionWindowLength = Math.round(SpectrumImpl.SEGMENT_SIZE_FOR_MEMORY_OPTIMIZED_EXTRACTION * spectrum.getSampleRateSpectrum());
+//
+//            int counter = 0;
+//            List<float[][]> onsetDataList = new ArrayList<float[][]>();
+//            SpectrumImpl originalSpectrum = spectrum;
+//            float[][] onsetDetectionFunctionPart = null;
+//            while (counter < originalSpectrum.getNumberOfFrames()) {
+//                int endIndex = Math.min(counter + extractionWindowLength, originalSpectrum.getNumberOfFrames());
+//                ReassignedSpectrum partSpectrum = originalSpectrum.extractSpectrumPart(counter, endIndex);
+//                onsetDetectionFunctionPart = calculateDetectionFunctionFromSpectrum(partSpectrum);
+//                onsetDataList.add(onsetDetectionFunctionPart);
+//                counter += extractionWindowLength;
+//            }
+//            this.detectionFunction = HelperArrays.concatColumnWise(onsetDataList)[0];
+//        }
+//        else{
             this.detectionFunction = calculateDetectionFunctionFromSpectrum(this.spectrum)[0];
-        }
+//        }
 
         detectionFunction = HelperArrays.normalizeVector(detectionFunction);
     }
 
-    protected float[][] calculateDetectionFunctionFromSpectrum(SpectrumImpl spectrum){
-        float[][] magSpectrum = spectrum.getMagSpec();
-        float[][] detectionFunction = new float[1][magSpectrum.length];
-        for(int i = 0; i < magSpectrum.length; i++){
-            detectionFunction[0][i] = HelperArrays.sum(magSpectrum[i], spectrum.freq2index(this.startFreq), spectrum.freq2index(this.endFreq));
+    protected float[][] calculateDetectionFunctionFromSpectrum(ReassignedSpectrum spectrum){
+        float[][] energies = spectrum.getEnergyReasValues();
+        float[][] times = spectrum.getTimeReasValues();
+        float[][] freqs = spectrum.getFrequencyReasValues();
+
+
+        float[][] detectionFunction = new float[1][energies.length];
+        for(int i = 0; i < energies.length; i++){
+            for (int j = 0; j < energies[0].length; j++) {
+                int detectionFunctionBinIndex = Math.round(spectrum.getSampleRateSpectrum() * times[i][j] /spectrum.getSampleRate());
+                if (freqs[i][j] < this.endFreq && freqs[i][j] > this.startFreq && detectionFunctionBinIndex >= 0 && detectionFunctionBinIndex < detectionFunction[0].length) {
+                    detectionFunction[0][detectionFunctionBinIndex] += energies[i][j];
+                } else{
+//                    System.out.println("");
+                }
+            }
         }
         return detectionFunction;
     }

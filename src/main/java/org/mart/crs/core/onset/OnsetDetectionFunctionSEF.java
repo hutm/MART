@@ -17,6 +17,7 @@
 package org.mart.crs.core.onset;
 
 import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrum;
 import org.mart.crs.utils.helper.HelperArrays;
 
 /**
@@ -28,11 +29,11 @@ import org.mart.crs.utils.helper.HelperArrays;
 public class OnsetDetectionFunctionSEF extends OnsetDetectionFunction {
 
 
-    public OnsetDetectionFunctionSEF(SpectrumImpl spectrum, float startFreq, float endFreq) {
+    public OnsetDetectionFunctionSEF(ReassignedSpectrum spectrum, float startFreq, float endFreq) {
         super(spectrum, startFreq, endFreq);
     }
 
-    public OnsetDetectionFunctionSEF(SpectrumImpl spectrum) {
+    public OnsetDetectionFunctionSEF(ReassignedSpectrum spectrum) {
         super(spectrum);
     }
 
