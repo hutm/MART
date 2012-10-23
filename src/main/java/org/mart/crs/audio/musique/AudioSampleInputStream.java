@@ -20,7 +20,7 @@ import com.jssrc.resample.JSSRCResampler;
 import com.tulskiy.musique.audio.AudioFileReader;
 import com.tulskiy.musique.audio.Decoder;
 import com.tulskiy.musique.playlist.Track;
-import com.tulskiy.musique.system.Decoders;
+import com.tulskiy.musique.system.Codecs;
 import com.tulskiy.musique.system.TrackIO;
 import org.apache.log4j.Logger;
 import org.mart.crs.audio.musique.decoder.DecoderInputStream;
@@ -64,9 +64,9 @@ public class AudioSampleInputStream {
     public AudioSampleInputStream(String filePath, float desiredSampleRate) {
 
         reader = TrackIO.getAudioFileReader(filePath);
-        track = reader.readSingle(new File(filePath));
+        track = reader.read(new File(filePath));
         try {
-            decoder = Decoders.getDecoder(track).getClass().newInstance();
+            decoder = Codecs.getDecoder(track).getClass().newInstance();
         } catch (InstantiationException e) {
             logger.error(String.format("Could not instantiate decoder for audio reader"));
             logger.error(e.getStackTrace());
@@ -187,7 +187,7 @@ public class AudioSampleInputStream {
     }
 
     protected long getTotalSamples() {
-        return track.getTotalSamples();
+        return track.getTrackData().getTotalSamples();
     }
 
     public float getDuration(){
