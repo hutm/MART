@@ -16,7 +16,6 @@
 
 package org.mart.crs.management.beat;
 
-import at.ofai.music.beatroot.BeatRoot;
 import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSLogger;
 import org.mart.crs.utils.CRSThreadPoolExecutor;
@@ -116,7 +115,7 @@ public class BeatsManager {
         shortName = ((getFile(filePath)).getName());
         getNameWithoutExtension(filePath);
         outFile = beatsDir + File.separator + getNameWithoutExtension(shortName) + BEAT_EXT;
-        BeatRoot.main(new String[]{"-b", "-o", outFile, filePath});
+        //BeatRoot.main(new String[]{"-b", "-o", outFile, filePath});
     }
 
     public double[] getBeatsForWavFile(String filePath) {
