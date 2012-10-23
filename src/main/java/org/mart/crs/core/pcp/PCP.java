@@ -164,7 +164,11 @@ public abstract class PCP {
 
                 //Prevent from IndexOutOfBoundException
                 if (chromaBinIndex >= 0 && chromaBinIndex < pcpUnwrapped[0].length && pcpBinTime >= 0 && pcpBinTime < pcpUnwrapped.length) {
-                    pcpUnwrapped[pcpBinTime][chromaBinIndex] += energyValues[i][j];
+                    float energy = energyValues[i][j];
+                    if (chromaSpectrumRate != 1) {
+                        energy = (float) Math.pow(energyValues[i][j], chromaSpectrumRate);
+                    }
+                    pcpUnwrapped[pcpBinTime][chromaBinIndex] += energy;
                 }
             }
         }
