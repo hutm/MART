@@ -20,6 +20,7 @@ package org.mart.crs.logging;
 import org.apache.log4j.FileAppender;
 import org.apache.log4j.Layout;
 import org.apache.log4j.spi.ErrorCode;
+import org.mart.crs.utils.helper.HelperFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,7 +95,12 @@ public class NewFileLogger extends FileAppender {
                 // at the end.
                 newFileName = fileName + HIPHEN + dateStr;
             }
+
             String outFilePath = logFile.getParent() + File.separator + newFileName + String.format("%d", (int)(random.nextFloat()*100));
+            File parentfile = new File(outFilePath).getParentFile();
+            if(!parentfile.exists()){
+                parentfile.mkdirs();
+            }
             return outFilePath;
         }
         return null;
