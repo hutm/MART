@@ -1,17 +1,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <version>0.1-SNAPSHOT</version>
+        <groupId>org.mart</groupId>
+        <artifactId>mart</artifactId>
+    </parent>
+
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mart</groupId>
-    <artifactId>mart</artifactId>
+    <artifactId>mart-core</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>mart</name>
+    <name>mart-core</name>
     <url>http://mart.khadkevich.org</url>
 
     <properties>
         <myapp.jar.name>${name}-${version}.jar</myapp.jar.name>
-        <external.properties.file>../PHD/mart.properties</external.properties.file>
+        <external.properties.file>../mart.properties</external.properties.file>
     </properties>
 
 
@@ -21,6 +27,7 @@
             <url>http://www.khadkevich.org/repository</url>
         </repository>
     </repositories>
+
 
 
     <dependencies>
@@ -40,17 +47,44 @@
         </dependency>
 
         <dependency>
-            <groupId>at.ofai.music</groupId>
-            <artifactId>BeatRoot</artifactId>
-            <version>0.5.7</version>
+            <groupId>org.imirsel</groupId>
+            <artifactId>nema-analytics</artifactId>
+            <version>0.4.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>rasmus</groupId>
+            <artifactId>rasmusDSP</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.columbia.ee</groupId>
+            <artifactId>KaraokeMidiJava</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.epsgraphics</groupId>
+            <artifactId>epsGraphics</artifactId>
+            <version>1.0</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>com.tulskiy</groupId>
-            <artifactId>musique</artifactId>
-            <version>1.0</version>
+            <artifactId>musique-core</artifactId>
+            <version>0.3-SNAPSHOT</version>
             <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jssrc</groupId>
+            <artifactId>jssrc</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
@@ -74,19 +108,6 @@
             <version>1.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>edu.columbia.ee</groupId>
-            <artifactId>KaraokeMidiJava</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-        </dependency>
-
-        <dependency>
-            <groupId>rasmus</groupId>
-            <artifactId>rasmusDSP</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
-        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -94,27 +115,21 @@
             <version>2.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.jssrc</groupId>
-            <artifactId>jssrc</artifactId>
-            <version>1.0</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.imirsel</groupId>
-            <artifactId>nema-analytics</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
-        </dependency>
+
+
+
 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.3</version>
+            <version>6.8</version>
+            <scope>test</scope>
         </dependency>
 
+
+
     </dependencies>
-
-
 
 
     <build>
@@ -138,62 +153,61 @@
             </plugin>
 
 
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>properties-maven-plugin</artifactId>
-            <version>1.0-alpha-1</version>
-            <executions>
-                <execution>
-                    <phase>initialize</phase>
-                    <goals>
-                        <goal>read-project-properties</goal>
-                    </goals>
-                    <configuration>
-                        <files>
-                            <file>${external.properties.file}</file>
-                        </files>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-1</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${external.properties.file}</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
 
-        <plugin>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <configuration>
-                        <tasks>
-                             <copy todir="${build.dir}/cfg">
-                                <fileset dir="cfg"/>
-                            </copy>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy todir="${build.dir}/cfg">
+                                    <fileset dir="cfg"/>
+                                </copy>
 
-                            <copy file="${build.directory}/${name}-${version}.jar"
-                                  todir="${build.dir}/lib"/>
+                                <copy file="${build.directory}/${name}-${version}.jar"
+                                      todir="${build.dir}/lib"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-                        </tasks>
-                    </configuration>
-                    <goals>
-                        <goal>run</goal>
-                    </goals>
-                </execution>
-            </executions>
-        </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
 
 
         </plugins>
     </build>
-
-
-
-
-    <distributionManagement>
-        <repository>
-            <id>repo</id>
-            <name>khadkevich</name>
-            <url>file:///home/hut/prg/PROJECTS/WEBPAGES/repository/</url>
-        </repository>
-    </distributionManagement>
 
 </project>
