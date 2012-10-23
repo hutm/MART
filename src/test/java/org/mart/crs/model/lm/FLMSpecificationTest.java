@@ -34,7 +34,7 @@ public class FLMSpecificationTest {
     public Object[][] testData(){
         return new Object[][]{
             {
-                    String.format("%s/flmspecs",MartSuiteTest.workingDirectoryFilePath),
+                    String.format("%s/flmspecs",MartSuiteTest.getWorkingDirectoryFilePath()),
                     2,
                     2
             }

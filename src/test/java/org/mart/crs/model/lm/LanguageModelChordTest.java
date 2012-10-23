@@ -41,9 +41,9 @@ public class LanguageModelChordTest {
                         MartSuiteTest.CHORD_LIST_SHORT,
                         MartSuiteTest.CHORD_LABELS_DIR,
                         MartSuiteTest.BEAT_LABELS_DIR,
-                        String.format("%s/outText.txt", MartSuiteTest.workingDirectoryFilePath),
-                        "<s> N D#min G#min F#maj Bmaj",
-                        String.format("%s/outLM.lm", MartSuiteTest.workingDirectoryFilePath),
+                        String.format("%s/outText.txt", MartSuiteTest.getWorkingDirectoryFilePath()),
+                        " N D#min G#min F#maj Bmaj",
+                        String.format("%s/outLM.lm", MartSuiteTest.getWorkingDirectoryFilePath()),
                         12,
                         5000
                 }
@@ -59,12 +59,13 @@ public class LanguageModelChordTest {
     }
 
 
+
     protected void testLanguageModel(String outTextFilePath, String biginningOfTheFirstLine, String lmPath, int lmOrder, int minNumberOfLinesInOutLMFile){
         languageModelChord.process();
 
         List<String> lines = HelperFile.readLinesFromTextFile(outTextFilePath);
         Assert.assertEquals(lines.size(), 12);
-        Assert.assertTrue(lines.get(0).startsWith(biginningOfTheFirstLine));
+        Assert.assertTrue(lines.get(0).startsWith("<s>" + biginningOfTheFirstLine));
 
 
         languageModelChord.createLanguageModel(lmOrder, lmPath);
