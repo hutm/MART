@@ -38,9 +38,9 @@ public class LanguageModelChordFactoredTest extends LanguageModelChordTest{
                         MartSuiteTest.CHORD_LIST_SHORT,
                         MartSuiteTest.CHORD_LABELS_DIR,
                         MartSuiteTest.BEAT_LABELS_DIR,
-                        String.format("%s/outTextFLM.txt", MartSuiteTest.workingDirectoryFilePath),
-                        "<s> W-D#min:D-4 W-G#min:D-4 W-F#maj:D-",
-                        String.format("%s/outLM_flm.lm", MartSuiteTest.workingDirectoryFilePath),
+                        String.format("%s/outTextFLM.txt", MartSuiteTest.getWorkingDirectoryFilePath()),
+                        " W-N:D-1 W-D#min:D-4 W-G#min:D-4 W-F#maj:D-2",
+                        String.format("%s/outLM_flm.lm", MartSuiteTest.getWorkingDirectoryFilePath()),
                         12,
                         2000
                 }

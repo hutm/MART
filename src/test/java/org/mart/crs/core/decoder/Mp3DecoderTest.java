@@ -12,11 +12,12 @@ import java.io.IOException;
  */
 public class Mp3DecoderTest {
 
-    @Test(enabled = false)
+    @Test(groups = {"static"})
     public void testReadMp3() throws IOException {
         String filePath = this.getClass().getResource("/audio/1.mp3").getPath();
         AudioReader reader = new AudioReader(filePath);
         AudioHelper.play(reader);
     }
+
 
 }

@@ -18,23 +18,19 @@
 <suite name="XML Test suite" parallel="classes" thread-count="10">
 
 
-	<test name="Default tests">
-		<groups>
-			<run>
-				<exclude name="integration"/>
-			</run>
-		</groups>
+    <test name="Default tests">
+        <groups>
+            <run>
+                <exclude name="integration"/>
+                <exclude name="static"/>
+                <!--<include name="resample"/>-->
+            </run>
 
-		<packages>
-			<package name="org.mart.crs.*"/>
-		</packages>
-	</test>
+        </groups>
 
-	<!--<test name="Integration tests">-->
-		<!--<groups>-->
-			<!--<run>-->
-				<!--<include name="integration"/>-->
-			<!--</run>-->
-		<!--</groups>-->
-	<!--</test>-->
+        <packages>
+            <package name="org.mart.crs.*"/>
+        </packages>
+    </test>
+
 </suite>

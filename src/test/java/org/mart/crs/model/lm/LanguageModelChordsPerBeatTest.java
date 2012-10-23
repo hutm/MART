@@ -35,9 +35,9 @@ public class LanguageModelChordsPerBeatTest extends LanguageModelChordTest{
                         MartSuiteTest.CHORD_LIST_SHORT,
                         MartSuiteTest.CHORD_LABELS_DIR,
                         MartSuiteTest.BEAT_LABELS_DIR,
-                        String.format("%s/outTextPerBeat.txt", MartSuiteTest.workingDirectoryFilePath),
-                        "<s> D#min D#min D#min D#min G#min G#min G#min G#min F#maj",
-                        String.format("%s/outLMPerBeat.lm", MartSuiteTest.workingDirectoryFilePath),
+                        String.format("%s/outTextPerBeat.txt", MartSuiteTest.getWorkingDirectoryFilePath()),
+                        " N D#min D#min D#min D#min G#min G#min G#min G#min F#maj",
+                        String.format("%s/outLMPerBeat.lm", MartSuiteTest.getWorkingDirectoryFilePath()),
                         12,
                         11000
                 }
