@@ -139,51 +139,6 @@ public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
         float[] spectralFram = energyReasValues[currentFrameIndex];
 
 
-
-//        float energy, a, b, c, d, f, e, g, h, div1R, div1I, div2R, div2I, div3R, div3I, div3R2, div3I2,
-//                phaseDoubleDerivative, reassfreq;
-//        for (int i = 1; i < spectralFram.length; i++) {
-//
-//            a = complexSpectrumDerivative[i].getReal();
-//            b = complexSpectrumDerivative[i].getImag();
-//            c = complexSpectrum[i].getReal();
-//            d = complexSpectrum[i].getImag();
-//            e = complexSpectrumTimeWeighted[i].getReal();
-//            f = complexSpectrumTimeWeighted[i].getImag();
-//            g = complexSpectrumTimeWeightedDerivative[i].getReal();
-//            h = complexSpectrumTimeWeightedDerivative[i].getImag();
-//
-//
-//            energy = c * c + d * d;
-//
-//            div1R = (a * c + b * d) / energy;
-//            div1I = (b * c - a * d) / energy;
-//
-//
-//            div2R = (g * c + h * d) / energy;
-//            div2I = (h * c - g * d) / energy;
-//
-//            div3R = (e * c + f * d) / energy;
-//            div3I = (f * c - e * d) / energy;
-//
-//            div3R2 = div3R * div1R - div3I * div1I;
-//            div3I2 = div3R * div1I + div3I * div1R;
-//
-//            phaseDoubleDerivative = (float)((div2R - div3R2) * 2. * Math.PI);
-//
-//            if(Math.abs(1 + phaseDoubleDerivative) <  0.4f){
-//                energyReasValues[currentFrameIndex][i] = energy;
-//                frequencyReasValues[currentFrameIndex][i] = index2freq(i, 0.5f * sampleRate / spectralFram.length) - div1I;
-//            } else{
-//                energyReasValues[currentFrameIndex][i] = 0;
-//                frequencyReasValues[currentFrameIndex][i] = 0;
-//            }
-//
-//        }
-
-
-
-
         for (int i = 0; i < spectralFram.length; i++) {
 
 
@@ -268,26 +223,7 @@ public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
     }
 
 
-/*    public static void main(String[] args) {
-    //Test array version of Reassignment calculation
-    String fileName = "/home/hut/Beatles/data/wav/01_-_Drive_My_Car.wav";
-//        String fileName = "/home/hut/data/!audio/0001 - U2 - The Joshua Tree - With or without you.wav";
-    AudioReader reader = new AudioReader(fileName, 11025);
 
-
-    Settings.saveReassignmentStatistics = true;
-    Settings.saveMagSpectrum = false;
-
-
-    ReassignedSpectrum spectrum = null;//= new ReassignedSpectrum(reader.getSamples(), 0.4f);   //TODO: move to tests
-
-    spectrum.getMagSpec();
-
-    Histogram histogram = new Histogram(spectrum.frequencyReasStatistics, spectrum.energyReasStatistics, 0);
-    histogram.initialize();
-
-    logger.info("done");
-}*/
 
 
     class ReassignedFrame{
