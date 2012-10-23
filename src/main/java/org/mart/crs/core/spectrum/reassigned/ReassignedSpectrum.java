@@ -29,6 +29,7 @@ import org.mart.crs.utils.windowing.WindowType;
  */
 public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
 
+    public static final int NUMBER_OF_BINS_FOR_REASSIGNED_SPECTROGRAM = 4096;
 
     {
         this.saveComplexComponents = false;
@@ -63,35 +64,18 @@ public class ReassignedSpectrum extends SpectrumImplPhaseComponents {
     }
 
 
+    @Override
+    public float getFrequencyResolution() {
+        int spectrumLength = getMagSpectrumStandardArrayForm(NUMBER_OF_BINS_FOR_REASSIGNED_SPECTROGRAM)[0].length;
+        float spectralResolution = (float) (0.5 * sampleRate) / spectrumLength;
+        return spectralResolution;
+    }
+
     protected void initializeSpectrumDataArrays(int startFrame, int endFrame) {
         timeReasValues = new float[numberOfFrames][windowLength / 2];
         frequencyReasValues = new float[numberOfFrames][windowLength / 2];
         energyReasValues = new float[numberOfFrames][windowLength / 2];
     }
-
-/*    protected void initializeSpectrumDataArrays(int startIndex, int endIndex) {
-        super.initializeSpectrumDataArrays(startIndex, endIndex);
-        harmonicComponentsMatrix = new boolean[numberOfFrames][];
-        percussiveComponentsMatrix = new boolean[numberOfFrames][];
-        noiseComponentsMatrix = new boolean[numberOfFrames][];
-        for (int i = startIndex; i < endIndex; i++) {
-            if (Settings.saveComplexComponents) {
-                harmonicComponentsMatrix[i] = new boolean[windowLength / 2];
-                percussiveComponentsMatrix[i] = new boolean[windowLength / 2];
-                noiseComponentsMatrix[i] = new boolean[windowLength / 2];
-            }
-            if (Settings.saveReassignmentStatistics) {
-                timeReasStatistics[i] = new float[windowLength / 2];
-                frequencyReasStatistics[i] = new float[windowLength / 2];
-                energyReasStatistics[i] = new float[windowLength / 2];
-            }
-            if (Settings.saveNoResolutionRepresentation) {
-                timeReasValues[i] = new float[windowLength / 2];
-                frequencyReasValues[i] = new float[windowLength / 2];
-                energyReasValues[i] = new float[windowLength / 2];
-            }
-        }
-    }*/
 
 
     /**
