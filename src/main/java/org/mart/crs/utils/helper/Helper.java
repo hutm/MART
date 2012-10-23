@@ -103,7 +103,8 @@ public class Helper {
             Runtime rt = Runtime.getRuntime();
             logger.debug(command);
 
-            final Process pr = rt.exec(command, new String[]{String.format("PATH=%s:./bin/", System.getenv("PATH"))});
+//            final Process pr = rt.exec(command, new String[]{String.format("PATH=%s:./bin/", System.getenv("PATH"))});
+            final Process pr = rt.exec(command);
 
             Thread shutDownHook = new Thread() {
                 public void run() {
