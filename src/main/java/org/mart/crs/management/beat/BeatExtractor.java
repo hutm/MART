@@ -19,6 +19,7 @@ package org.mart.crs.management.beat;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.core.onset.OnsetDetectionFunction;
 import org.mart.crs.core.spectrum.SpectrumImpl;
+import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrum;
 import org.mart.crs.core.spectrum.reassigned.ReassignedSpectrumPercussivePart;
 import org.mart.crs.management.config.Configuration;
 
@@ -33,12 +34,12 @@ public class BeatExtractor {
 
     protected List<OnsetDetectionFunction> onsetDetecionFunctions;
 
-    protected SpectrumImpl spectrum;
+    protected ReassignedSpectrum spectrum;
 
     protected int numberOfIntervals = 8;
 
 
-    public BeatExtractor(SpectrumImpl spectrum) {
+    public BeatExtractor(ReassignedSpectrum spectrum) {
         this.spectrum = spectrum;
         buildOnsetDetectors();
     }
