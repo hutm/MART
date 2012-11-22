@@ -83,7 +83,9 @@ public class LanguageModelChordPerBeat extends LanguageModelChord{
                         intersectionchords.put(chordSegment.getIntersection(tempSegmentWithBeatDuration), chordSegment);
                     }
                 }
-                textBuilder.append(intersectionchords.lastEntry().getValue().getChordName()).append(" ");
+                if (!intersectionchords.isEmpty()) {
+                    textBuilder.append(intersectionchords.lastEntry().getValue().getChordName()).append(" ");
+                }
             }
             addShiftedVersions(textBuilder.toString(), outList, true);
         }

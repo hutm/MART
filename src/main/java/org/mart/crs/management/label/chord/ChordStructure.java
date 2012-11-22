@@ -360,7 +360,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
     protected double[] getBeatsForSong(String beatLabelsGroundTruthDir){
         LabelsSource beatLabelSource = new LabelsSource(beatLabelsGroundTruthDir, true, "beatGT", Extensions.BEAT_EXTENSIONS);
         BeatStructure beatStructure = BeatStructure.getBeatStructure(beatLabelSource.getFilePathForSong(getSongName()));
-        beatStructure.addTrailingBeats(getSongDuration());
+        beatStructure.fixBeatStructure(getSongDuration());
         return beatStructure.getBeats();
     }
 

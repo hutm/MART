@@ -43,7 +43,7 @@ public class BeatStructureText extends BeatStructure {
 
         for(String line:lines){
             String[] tokens = line.split("\\s+");
-            if(tokens[1].equalsIgnoreCase("New")){
+            if(tokens.length > 1 && tokens[1].equalsIgnoreCase("New")){
                 continue;
             }
             float startTime = 0;

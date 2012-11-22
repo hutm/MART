@@ -35,6 +35,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -302,9 +303,19 @@ public class BeatStructure implements Comparable<BeatStructure> {
     }
 
 
-    public void addTrailingBeats(double songDuration){
-        if (beatSegments.get(0).getTimeInstant() > 0.01) {
+    public void fixBeatStructure(double songDuration){
+        if (beatSegments.get(0).getTimeInstant() > 0.2) {
             this.beatSegments.add(new BeatSegment(0, 0));
+        }
+        BeatSegment previousBeat = null;
+        //Remove duplicate beats
+        for(Iterator<BeatSegment> iterator = beatSegments.iterator(); iterator.hasNext(); ){
+            BeatSegment currentBeat = iterator.next();
+            if(previousBeat != null && previousBeat.getTimeInstant() == currentBeat.getTimeInstant()){
+                iterator.remove();
+            }else{
+                previousBeat = currentBeat;
+            }
         }
         this.beatSegments.add(new BeatSegment(songDuration, 0));
         formMeasureStructure();
