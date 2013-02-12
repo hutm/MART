@@ -43,9 +43,17 @@ public class ChordStructure implements Comparable<ChordStructure> {
     protected String songName;
 
     public ChordStructure(String labelFilePath) {
+         this(labelFilePath, false);
+    }
+
+    public ChordStructure(String labelFilePath, boolean isCVS) {
         this.chordSegments = new ArrayList<ChordSegment>();
         this.songName = HelperFile.getNameWithoutExtension(labelFilePath);
-        parseChordLabels(labelFilePath);
+        if (!isCVS) {
+            parseChordLabels(labelFilePath);
+        } else{
+            parseChordLabelsCsv(labelFilePath);
+        }
     }
 
     public ChordStructure(List<ChordSegment> chordSegments, String songName) {
@@ -65,6 +73,32 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
             while ((line = reader.readLine()) != null && line.length() > 1) {
                 chordSegments.add(new ChordSegment(line));
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            logger.info("Could not find label file " + labelFilePath);
+        } catch (Exception e) {
+            logger.error("Unexpected Error occured ");
+            logger.error(Helper.getStackTrace(e));
+        }
+    }
+
+    public void parseChordLabelsCsv(String labelFilePath) {
+        File file;
+        try {
+
+            file = HelperFile.getFile(labelFilePath);
+
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            String[] previousLine=null;
+            while ((line = reader.readLine()) != null && line.length() > 1) {
+                String[] comps = line.trim().replaceAll("\"", "").split(",");
+                comps[1] = comps[1].indexOf("/") > 0 ? comps[1].substring(0, comps[1].indexOf("/")): comps[1];
+                if(previousLine != null){                                                                                                        //TODO chords from nnls-chroma may have the following format: C:maj/A which is not parsed correctly
+                    chordSegments.add(new ChordSegment(String.format("%s %s %s", previousLine[0], comps[0] ,previousLine[1])));
+                }
+                previousLine = comps;
             }
             reader.close();
         } catch (FileNotFoundException e) {
