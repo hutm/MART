@@ -16,6 +16,7 @@
 
 package org.mart.crs.management.label.chord;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -55,4 +56,10 @@ public class ChordStructureTest {
     }
 
 
+    @Test
+    public void testReadChordStructureFromCSV() {
+        String filePath = this.getClass().getResource("/chordLabels/01-chords.csv").getPath();
+        ChordStructure chordStructure = new ChordStructure(filePath, true);
+        Assert.assertEquals(chordStructure.getChordSegments().size(), 65);
+    }
 }
