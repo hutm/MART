@@ -521,6 +521,25 @@ public class HelperFile {
         return out;
     }
 
+    public static float[][] readFloatMatrixFromTextFile(String fileName, int numbersPerLine) {
+        List<String> strings = readLinesFromTextFile(fileName);
+
+        List<float[]> outList = new ArrayList<float[]>();
+
+        for (String string : strings) {
+            float[] temp = new float[numbersPerLine];
+
+            String[] tokens = string.trim().split("\\s+");
+            for(int i = 0; i < numbersPerLine; i++){
+                temp[i] = Float.parseFloat(tokens[i]);
+            }
+            outList.add(temp.clone());
+        }
+        float[][] out = new float[outList.size()][];
+        outList.toArray(out);
+        return out;
+    }
+
 
     /**
      * Reads Map structure from File
@@ -548,6 +567,21 @@ public class HelperFile {
             BufferedWriter writer = new BufferedWriter(new FileWriter(filePathToStore));
             for (int i = 0; i < data.length; i++) {
                 writer.write(String.format("%8.3f\r\n", data[i]));
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            logger.error("IO Error occured");
+            logger.error(Helper.getStackTrace(e));
+        }
+    }
+
+
+    public static void saveIntDataInTextFile(int[] data, String filePathToStore) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePathToStore));
+            for (int i = 0; i < data.length; i++) {
+                writer.write(String.format("%d\r\n",data[i]));
             }
             writer.close();
 
@@ -599,7 +633,7 @@ public class HelperFile {
      * @return
      */
     public static Map<String, String> readMapFromReader(Reader reader_) {
-        Map<String, String> outMap = new HashMap<String, String>();
+        Map<String, String> outMap = new LinkedHashMap<String, String>();
         try {
             BufferedReader reader = new BufferedReader(reader_);
             String line;

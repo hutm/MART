@@ -1026,14 +1026,42 @@ public class HelperArrays {
         return out;
     }
 
-
-    public static float[][] normalizeVectors(float[][] vectors) {
-        float[][] out = new float[vectors.length][];
-        for (int i = 0; i < vectors.length; i++) {
-            out[i] = normalizeVector(vectors[i]);
+    /**
+     * Normalizes vector so that all values are in the range [0, 1]
+     *
+     * @param samples
+     * @return
+     */
+    public static float[] normalizeVectorMaxMin(float[] samples) {
+        float[] out = new float[samples.length];
+        float maxValue = findMax(samples);
+        float minValue = findMin(samples);
+        if (maxValue > minValue) {
+            for (int i = 0; i < samples.length; i++) {
+                out[i] = (samples[i] - minValue) / (maxValue - minValue);
+            }
+        } else{
+            for (int i = 0; i < samples.length; i++) {
+                out[i] = 0;
+            }
         }
         return out;
     }
+
+
+    public static float[][] normalizeVectors(float[][] vectors, boolean maxMin) {
+        float[][] out = new float[vectors.length][];
+        for (int i = 0; i < vectors.length; i++) {
+            if (!maxMin) {
+                out[i] = normalizeVector(vectors[i]);
+            } else{
+                out[i] = normalizeVectorMaxMin(vectors[i]);
+            }
+        }
+        return out;
+    }
+
+
 
     public static float[] emphasizeVector(float[] samples, float factor) {
         float[] out = new float[samples.length];
