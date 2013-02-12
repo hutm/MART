@@ -30,8 +30,8 @@ public enum ChordType {
     //Chord Dictionary: maj, min, maj6=min7, 7, maj7, dim, aug             N maj min 7 maj6 min7 maj7 9 sus4 sus2 aug dim
     UNKNOWN_CHORD("UNK", new int[]{25}, null),
     NOT_A_CHORD("N",  new int[]{24}, UNKNOWN_CHORD),
-    MAJOR_CHORD("maj", new int[]{0, 4, 7}, NOT_A_CHORD),
-    MINOR_CHORD("min", new int[]{0, 3, 7}, NOT_A_CHORD),
+    MAJOR_CHORD("maj", new int[]{0, 4, 7}, UNKNOWN_CHORD),
+    MINOR_CHORD("min", new int[]{0, 3, 7}, UNKNOWN_CHORD),
     SEVEN_CHORD ("seventh", new int[]{0, 4, 7, 10}, MAJOR_CHORD),
     MAJOR_6_CHORD("maj6",  new int[]{0, 4, 7, 9}, MAJOR_CHORD),
     MINOR_7_CHORD("min7",  new int[]{0, 3, 7, 10}, MINOR_CHORD),  //Inversion of maj6
@@ -178,7 +178,7 @@ public enum ChordType {
     public static String[] BIAB_DIM = new String[]{"dim", "m7b5"};
 
 
-
-
-
+    public ChordType getAlternativeInterpretation() {
+        return alternativeInterpretation == null ? this : alternativeInterpretation;
+    }
 }
