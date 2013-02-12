@@ -60,6 +60,8 @@ public abstract class PCP {
     protected int averagingFactor;
     protected int numberOfBinsPerSemitone;
     protected boolean isToNormalize;
+    protected boolean isToUSEPCPLogTransform;
+    protected boolean isToUSESpectralLogTransform;
     protected int startNoteForPCPWrapped;
     protected int endNoteForPCPWrapped;
     protected float chromaSpectrumRate;
@@ -167,6 +169,9 @@ public abstract class PCP {
                     float energy = energyValues[i][j];
                     if (chromaSpectrumRate != 1) {
                         energy = (float) Math.pow(energyValues[i][j], chromaSpectrumRate);
+                    }
+                    if (isToUSESpectralLogTransform) {
+                        energy = (float) Math.log10(Math.max(energyValues[i][j], 10e-30));
                     }
                     pcpUnwrapped[pcpBinTime][chromaBinIndex] += energy;
                 }
@@ -326,6 +331,18 @@ public abstract class PCP {
         if (pcpUnwrapped == null) {
             return;
         }
+
+        if(isToUSEPCPLogTransform){
+            double cutOff=Math.pow(10, -10);
+            for (int i = 0; i < pcpUnwrapped.length; i++) {
+                for (int j = 0; j < pcpUnwrapped[0].length; j++) {
+                    pcpUnwrapped[i][j] = (float)Math.log10(Math.max(pcpUnwrapped[i][j], cutOff));
+                }
+            }
+
+        }
+
+
         pcp = new float[pcpUnwrapped.length][getNumberOfBinsForWrappedChroma()];
         for (int i = 0; i < pcpUnwrapped.length; i++) {
             pcp[i] = calculatePCPWrapped(pcpUnwrapped[i]);
@@ -584,5 +601,21 @@ public abstract class PCP {
 
     public int getNumerOfBinsInWrappedChromagram() {
         return numberOfBinsPerSemitone * NUMBER_OF_SEMITONES_IN_OCTAVE;
+    }
+
+    public boolean isToUSEPCPLogTransform() {
+        return isToUSEPCPLogTransform;
+    }
+
+    public void setToUSEPCPLogTransform(boolean toUSEPCPLogTransform) {
+        isToUSEPCPLogTransform = toUSEPCPLogTransform;
+    }
+
+    public boolean isToUSESpectralLogTransform() {
+        return isToUSESpectralLogTransform;
+    }
+
+    public void setToUSESpectralLogTransform(boolean toUSESpectralLogTransform) {
+        isToUSESpectralLogTransform = toUSESpectralLogTransform;
     }
 }
