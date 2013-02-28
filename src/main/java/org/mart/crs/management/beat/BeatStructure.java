@@ -90,6 +90,9 @@ public class BeatStructure implements Comparable<BeatStructure> {
         if (extension.equals(Extensions.ONSET_EXT)) {
             return new BeatStructureText(sourceFilePath);
         }
+        if(extension.equals(Extensions.CSV_EXT)) {
+            return new BeatStructureCSV(sourceFilePath);
+        }
         throw new IllegalArgumentException(String.format("Cannot extract beat structure from file %s with extension %s", sourceFilePath, extension));
     }
 

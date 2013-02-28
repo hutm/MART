@@ -16,6 +16,7 @@
 
 package org.mart.crs.management.label.chord;
 
+import org.mart.crs.management.beat.BeatStructure;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -61,5 +62,20 @@ public class ChordStructureTest {
         String filePath = this.getClass().getResource("/chordLabels/01-chords.csv").getPath();
         ChordStructure chordStructure = new ChordStructure(filePath, true);
         Assert.assertEquals(chordStructure.getChordSegments().size(), 65);
+    }
+
+    @Test
+    public void testSynchronizeChordsWithBeats(){
+        String filePath = this.getClass().getResource("/chordLabels/01-chords.csv").getPath();
+        ChordStructure chordStructure = new ChordStructure(filePath, true);
+
+        filePath = this.getClass().getResource("/chordLabels/01-beats.csv").getPath();
+        BeatStructure beatStructure =  BeatStructure.getBeatStructure(filePath);
+
+        ChordStructure syncedChords = chordStructure.getSegmentsPerBeat(beatStructure.getBeats());
+
+        Assert.assertEquals(syncedChords.getChordSegments().size(), 612);
+
+        String chordString = syncedChords.getStringRepresentation();
     }
 }

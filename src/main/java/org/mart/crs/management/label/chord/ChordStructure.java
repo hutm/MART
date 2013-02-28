@@ -43,7 +43,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
     protected String songName;
 
     public ChordStructure(String labelFilePath) {
-         this(labelFilePath, false);
+        this(labelFilePath, false);
     }
 
     public ChordStructure(String labelFilePath, boolean isCVS) {
@@ -51,7 +51,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
         this.songName = HelperFile.getNameWithoutExtension(labelFilePath);
         if (!isCVS) {
             parseChordLabels(labelFilePath);
-        } else{
+        } else {
             parseChordLabelsCsv(labelFilePath);
         }
     }
@@ -91,12 +91,12 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
-            String[] previousLine=null;
+            String[] previousLine = null;
             while ((line = reader.readLine()) != null && line.length() > 1) {
                 String[] comps = line.trim().replaceAll("\"", "").split(",");
-                comps[1] = comps[1].indexOf("/") > 0 ? comps[1].substring(0, comps[1].indexOf("/")): comps[1];
-                if(previousLine != null){                                                                                                        //TODO chords from nnls-chroma may have the following format: C:maj/A which is not parsed correctly
-                    chordSegments.add(new ChordSegment(String.format("%s %s %s", previousLine[0], comps[0] ,previousLine[1])));
+                comps[1] = comps[1].indexOf("/") > 0 ? comps[1].substring(0, comps[1].indexOf("/")) : comps[1];
+                if (previousLine != null) {                                                                                                        //TODO chords from nnls-chroma may have the following format: C:maj/A which is not parsed correctly
+                    chordSegments.add(new ChordSegment(String.format("%s %s %s", previousLine[0], comps[0], previousLine[1])));
                 }
                 previousLine = comps;
             }
@@ -117,8 +117,8 @@ public class ChordStructure implements Comparable<ChordStructure> {
             for (ChordSegment cs : chordSegments) {
                 if (!isChordNameOriginal) {
                     writer.write(cs + "\n");
-                }     else{
-                    writer.write(String.format("%7.5f\t%7.5f\t%s\n",cs.getOnset(), cs.getOffset(), cs.getChordNameOriginal()));
+                } else {
+                    writer.write(String.format("%7.5f\t%7.5f\t%s\n", cs.getOnset(), cs.getOffset(), cs.getChordNameOriginal()));
                 }
             }
             writer.close();
@@ -133,9 +133,9 @@ public class ChordStructure implements Comparable<ChordStructure> {
         this.saveSegmentsInFile(outDirectory, false);
     }
 
-    public void exportToFileInOriginalChordFormat(String filePath){
+    public void exportToFileInOriginalChordFormat(String filePath) {
         List<String> lines = new ArrayList<String>();
-        for(ChordSegment cs:chordSegments){
+        for (ChordSegment cs : chordSegments) {
             lines.add(String.format("%5.5f\t%5.5f\t%s", cs.getOnset(), cs.getOffset(), cs.getChordNameOriginal()));
         }
         HelperFile.saveCollectionInFile(lines, filePath);
@@ -207,9 +207,9 @@ public class ChordStructure implements Comparable<ChordStructure> {
             concatedNotes = ChordSegment.getNotesWithoutDuplicates(concatedNotes);
             ChordSegment newSegment = new ChordSegment(chordSegment.getOnset(), chordSegment.getOffset(), ChordType.NOT_A_CHORD.getName());
             newSegment.setRootAndType(concatedNotes);
-            if(newSegment.hasRoot()){
+            if (newSegment.hasRoot()) {
                 chordSegments.add(newSegment);
-            } else{
+            } else {
                 chordSegments.add(chordSegment);
             }
         }
@@ -317,30 +317,30 @@ public class ChordStructure implements Comparable<ChordStructure> {
     }
 
 
-    public ChordStructure transpose(int numberOfSemitones){
+    public ChordStructure transpose(int numberOfSemitones) {
         List<ChordSegment> outList = new ArrayList<ChordSegment>();
-        for(ChordSegment chordSegment:chordSegments){
+        for (ChordSegment chordSegment : chordSegments) {
             if (chordSegment.hasRoot()) {
                 int rootIndex = HelperArrays.transformIntValueToBaseRange(chordSegment.getRoot().ordinal() + numberOfSemitones, 12);
                 outList.add(new ChordSegment(chordSegment.getOnset(), chordSegment.getOffset(), Root.values()[rootIndex] + chordSegment.getChordType().getName()));
-            } else{
+            } else {
                 outList.add(chordSegment);
             }
         }
         return new ChordStructure(outList, getSongName());
     }
-    
-    public String getChordSequenceWithoutTimings(){
+
+    public String getChordSequenceWithoutTimings() {
         StringBuilder builder = new StringBuilder();
-        for(ChordSegment cs:chordSegments){
+        for (ChordSegment cs : chordSegments) {
             builder.append(cs.getChordName()).append(" ");
         }
         return builder.toString();
     }
 
-    public double[] getTimeGrid(){
+    public double[] getTimeGrid() {
         double[] out = new double[chordSegments.size() + 1];
-        for(int i = 0; i < chordSegments.size(); i++){
+        for (int i = 0; i < chordSegments.size(); i++) {
             out[i] = chordSegments.get(i).getOnset();
         }
         out[out.length - 1] = chordSegments.get(chordSegments.size() - 1).getOffset();
@@ -350,40 +350,41 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
     /**
      * returns aray of n-best logliklihoods as a fuction of time
+     *
      * @return
      */
-    public float[][] getLogLikSampleArray(){
+    public float[][] getLogLikSampleArray() {
 
         //First count number of Hypos
         int counter = 1;
         String currentChord = chordSegments.get(0).getChordName();
-        for(ChordSegment chordHypo:chordSegments.get(0).getHypotheses()){
-            if(!currentChord.equals(chordHypo.getChordName())){
+        for (ChordSegment chordHypo : chordSegments.get(0).getHypotheses()) {
+            if (!currentChord.equals(chordHypo.getChordName())) {
                 counter++;
             }
             currentChord = chordHypo.getChordName();
         }
 
         List<List<Float>> outData = new ArrayList<List<Float>>();
-        for(int i = 0; i < counter; i++){
+        for (int i = 0; i < counter; i++) {
             outData.add(new ArrayList<Float>());
         }
 
-        for(ChordSegment chordSegment : chordSegments){
+        for (ChordSegment chordSegment : chordSegments) {
             currentChord = "";//chordSegment.getChordName();
             int currentIndex = -1;
-            for(ChordSegment chordHypo:chordSegment.getHypotheses()){
-                if(!currentChord.equals(chordHypo.getChordName())){
-                    currentIndex ++;
+            for (ChordSegment chordHypo : chordSegment.getHypotheses()) {
+                if (!currentChord.equals(chordHypo.getChordName())) {
+                    currentIndex++;
                     currentChord = chordHypo.getChordName();
                     continue;
                 }
-                outData.get(currentIndex).add((float)chordHypo.getLogLikelihood());
+                outData.get(currentIndex).add((float) chordHypo.getLogLikelihood());
             }
         }
         float[][] out = new float[counter][outData.get(0).size()];
-        for(int i = 0; i < counter; i++){
-            for(int j = 0; j < out[0].length; j++){
+        for (int i = 0; i < counter; i++) {
+            for (int j = 0; j < out[0].length; j++) {
                 out[i][j] = outData.get(i).get(j);
             }
         }
@@ -391,7 +392,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
     }
 
 
-    protected double[] getBeatsForSong(String beatLabelsGroundTruthDir){
+    protected double[] getBeatsForSong(String beatLabelsGroundTruthDir) {
         LabelsSource beatLabelSource = new LabelsSource(beatLabelsGroundTruthDir, true, "beatGT", Extensions.BEAT_EXTENSIONS);
         BeatStructure beatStructure = BeatStructure.getBeatStructure(beatLabelSource.getFilePathForSong(getSongName()));
         beatStructure.fixBeatStructure(getSongDuration());
@@ -399,64 +400,66 @@ public class ChordStructure implements Comparable<ChordStructure> {
     }
 
 
-    public void refineHypothesesUsingBeats(String beatLabelsGroundTruthDir){
+    public void refineHypothesesUsingBeats(String beatLabelsGroundTruthDir) {
         refineHypothesesUsingBeats(getBeatsForSong(beatLabelsGroundTruthDir));
     }
 
 
     /**
      * remove hierarchical structure and leave only one chord per frame
+     *
      * @param beats beats
      */
-    public void refineHypothesesUsingBeats(double beats[]){
+    public void refineHypothesesUsingBeats(double beats[]) {
         List<ChordSegmentBeatSync> beatSyncChordSegments = getSegmentsBeatSync(getChordSegments(), beats);
         List<ChordSegment> outChordSegments = new ArrayList<ChordSegment>();
-        for(int i = 0; i < beats.length - 1; i++){
+        for (int i = 0; i < beats.length - 1; i++) {
             List<String> intersections = new ArrayList<String>();
-            for(ChordSegmentBeatSync beatSyncChordSegment : beatSyncChordSegments){
-                if(beatSyncChordSegment.getOnsetBeat() <= i && beatSyncChordSegment.getOffsetBeat() >= i+1){
+            for (ChordSegmentBeatSync beatSyncChordSegment : beatSyncChordSegments) {
+                if (beatSyncChordSegment.getOnsetBeat() <= i && beatSyncChordSegment.getOffsetBeat() >= i + 1) {
                     intersections.add(beatSyncChordSegment.getChordName());
                 }
             }
             String newLabel = getMostFrequentString(intersections);
-            outChordSegments.add(new ChordSegment(beats[i], beats[i+1], newLabel));
+            outChordSegments.add(new ChordSegment(beats[i], beats[i + 1], newLabel));
         }
         this.chordSegments = outChordSegments;
     }
 
-    public static String getMostFrequentString(List<String> arrayList){
+    public static String getMostFrequentString(List<String> arrayList) {
         Map<String, Integer> hm = new LinkedHashMap<String, Integer>();
         int maxCount = 0;
         String maxString = "";
-        for (String  item : arrayList) {
+        for (String item : arrayList) {
             Integer count = hm.get(item);
             int currentCount = count == null ? 1 : count + 1;
-            if(currentCount > maxCount){
+            if (currentCount > maxCount) {
                 maxCount = currentCount;
                 maxString = item;
             }
-            hm.put(item , currentCount);
+            hm.put(item, currentCount);
         }
         return maxString;
     }
 
 
-    public void refineHypothesesLeavingOrder(int order, String beatLabelsGroundTruthDir){
+    public void refineHypothesesLeavingOrder(int order, String beatLabelsGroundTruthDir) {
         refineHypothesesLeavingOrder(order, getBeatsForSong(beatLabelsGroundTruthDir));
     }
 
 
     /**
      * Removes
+     *
      * @param order
      * @param beats
      */
-    public void refineHypothesesLeavingOrder(int order, double[] beats){
+    public void refineHypothesesLeavingOrder(int order, double[] beats) {
         List<ChordSegmentBeatSync> beatSyncsSegments = getSegmentsBeatSync(getChordSegments(), beats);
 
         List<ChordSegment> outList = new ArrayList<ChordSegment>();
-        for(ChordSegmentBeatSync chordSegmentBeatSync:beatSyncsSegments){
-            if(chordSegmentBeatSync.getDurationInBeats() == order){
+        for (ChordSegmentBeatSync chordSegmentBeatSync : beatSyncsSegments) {
+            if (chordSegmentBeatSync.getDurationInBeats() == order) {
                 outList.add(chordSegmentBeatSync);
             }
         }
@@ -466,16 +469,17 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
     /**
      * Removes
+     *
      * @param order
      * @param beats
      */
-    public void refineHypothesesLeavingOrderWithoutIntersection(int order, double[] beats){
+    public void refineHypothesesLeavingOrderWithoutIntersection(int order, double[] beats) {
         refineHypothesesLeavingOrder(order, beats);
         List<ChordSegment> refinedList = new ArrayList<ChordSegment>();
         //TODO add first and last beats
-        for(int i = 0; i < chordSegments.size(); i++){
-            for(int j = i+1; j < chordSegments.size(); j++){
-                if(chordSegments.get(i).intersects(chordSegments.get(j))){
+        for (int i = 0; i < chordSegments.size(); i++) {
+            for (int j = i + 1; j < chordSegments.size(); j++) {
+                if (chordSegments.get(i).intersects(chordSegments.get(j))) {
                     String chordSymbol = chordSegments.get(i).getLogLikelihood() > chordSegments.get(j).getLogLikelihood() ? chordSegments.get(i).getChordName() : chordSegments.get(j).getChordName();
                     ChordSegmentBeatSync outSegment = ((ChordSegmentBeatSync) chordSegments.get(i)).getIntersectionInBeatsSegment((ChordSegmentBeatSync) chordSegments.get(j));
                     refinedList.add(new ChordSegment(outSegment.getOnset(), outSegment.getOffset(), chordSymbol));
@@ -486,24 +490,99 @@ public class ChordStructure implements Comparable<ChordStructure> {
     }
 
 
-    public static List<ChordSegmentBeatSync> getSegmentsBeatSync(List<ChordSegment> chordSegments, double[] beats){
+    public static List<ChordSegmentBeatSync> getSegmentsBeatSync(List<ChordSegment> chordSegments, double[] beats) {
         List<ChordSegmentBeatSync> beatSyncsSegments = new ArrayList<ChordSegmentBeatSync>();
-        for(ChordSegment cs:chordSegments){
+        for (ChordSegment cs : chordSegments) {
             beatSyncsSegments.add(new ChordSegmentBeatSync(cs, beats));
         }
         return beatSyncsSegments;
     }
 
+    /**
+     * Split chords into beat segments, so that each beat is one chord segment
+     * @param beats beats to sync chords with
+     * @return new ChordStructure
+     */
+    public ChordStructure getSegmentsPerBeat(double[] beats) {
+        List<ChordSegment> beatSyncsSegments = new ArrayList<ChordSegment>();
+        int currentChordSegmentIndex = 0;
+        ChordSegment currentChordSegment = chordSegments.get(currentChordSegmentIndex);
+        ChordSegment currentBeatSegment;
+        for (int i = 0; i < beats.length - 1; i++) {
+            double currentBeat = beats[i];
+            double nextBeat = beats[i + 1];
+            currentBeatSegment = new ChordSegment(currentBeat, nextBeat, "N");
+
+            while (nextBeat > currentChordSegment.getOnset() && !currentChordSegment.intersects(currentBeatSegment) && currentChordSegmentIndex < chordSegments.size() - 1) {
+                currentChordSegment = chordSegments.get(++currentChordSegmentIndex);
+            }
+            //here we found first segment that intersects with our beat segment
+            Map<ChordSegment, Float> intersectionMap = new HashMap<ChordSegment, Float>();
+            do {
+                intersectionMap.put(currentChordSegment, currentChordSegment.getIntersection(currentBeatSegment));
+                if (currentChordSegmentIndex < chordSegments.size() - 1) {
+                    currentChordSegment = chordSegments.get(++currentChordSegmentIndex);
+                } else{
+                    break;
+                }
+            } while (currentChordSegment.intersects(currentBeatSegment));
+            currentChordSegment = chordSegments.get(--currentChordSegmentIndex);
+            //Now we have all intersections in a map. Let's find the longest
+            ChordSegment longestIntersection = null;
+            float longestValue = -1;
+            for (ChordSegment cs : intersectionMap.keySet()) {
+                if (intersectionMap.get(cs) > longestValue) {
+                    longestIntersection = cs;
+                    longestValue = intersectionMap.get(cs);
+                }
+            }
+
+            String label = longestIntersection != null ? longestIntersection.getLabel() : ChordType.NOT_A_CHORD.getName();
+            beatSyncsSegments.add(new ChordSegment(currentBeat, nextBeat, label));
+        }
+        return new ChordStructure(beatSyncsSegments, getSongName());
+    }
 
 
-    public void shiftSegments(float shiftInsecs){
+    public String getStringRepresentation(){
+        StringBuilder builder = new StringBuilder();
         for(ChordSegment cs:chordSegments){
+            char letter = (char) (97 + cs.getNumberForSimplpeChord());
+            builder.append(letter);
+        }
+        return builder.toString();
+    }
+
+
+    public void shiftSegmentsInTime(float shiftInsecs) {
+        for (ChordSegment cs : chordSegments) {
             cs.setOnset(cs.getOnset() + shiftInsecs);
             cs.setOffset(cs.getOffset() + shiftInsecs);
         }
     }
 
-    public void correctStartEndTimings(float duration){
+    public void shiftKey(int semitones) {
+        for (ChordSegment cs : chordSegments) {
+            cs.shiftRoot(semitones);
+        }
+    }
+
+    /**
+     * Returns a copy of ChordStructure with shifted chords.
+     * @param semitones Shift (in semitones)
+     * @return Shifted ChordStructure
+     */
+    public ChordStructure getShiftedChordStructure(int semitones) {
+        List<ChordSegment> newSegments = new ArrayList<ChordSegment>(chordSegments.size());
+        for (ChordSegment cs : chordSegments) {
+            newSegments.add(new ChordSegment(cs.getOnset(), cs.getOffset(), cs.getChordNameOriginal()));
+        }
+        ChordStructure outChordStructure= new ChordStructure(newSegments, songName);
+        outChordStructure.shiftKey(semitones);
+        return outChordStructure;
+    }
+
+    public void correctStartEndTimings(float duration) {
         chordSegments.get(0).setOnset(0);
         chordSegments.get(chordSegments.size() - 1).setOffset(duration);
     }
@@ -513,7 +592,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
         return chordSegments;
     }
 
-    public double getSongDuration(){
+    public double getSongDuration() {
         Collections.sort(chordSegments);
         return chordSegments.get(chordSegments.size() - 1).getOffset();
     }

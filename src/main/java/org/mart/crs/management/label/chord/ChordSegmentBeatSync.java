@@ -29,8 +29,6 @@ public class ChordSegmentBeatSync extends ChordSegment {
         super(chordString);
     }
 
-
-
     public ChordSegmentBeatSync(ChordSegment chordSegment, double[] beats) {
         super(chordSegment.getOnset(), chordSegment.getOffset(), chordSegment.getChordName(), chordSegment.getLogLikelihood());
         initializeBeats(beats);
