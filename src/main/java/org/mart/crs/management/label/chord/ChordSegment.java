@@ -88,9 +88,9 @@ public class ChordSegment extends NemaChord implements Serializable {
         }
 
         //Now parse n-best hypotheses
-        if(comps.length > 5 && comps[4].equals("|")){
-            for(int i = 5; i <comps.length; i += 2){
-                hypotheses.add(new ChordSegment(this.onset, this.offset, preprocessChordLabel(comps[i]), Helper.parseDouble(comps[i+1])));
+        if (comps.length > 5 && comps[4].equals("|")) {
+            for (int i = 5; i < comps.length; i += 2) {
+                hypotheses.add(new ChordSegment(this.onset, this.offset, preprocessChordLabel(comps[i]), Helper.parseDouble(comps[i + 1])));
             }
         }
     }
@@ -331,6 +331,9 @@ public class ChordSegment extends NemaChord implements Serializable {
 
 
     public static Root shiftRoot(Root root, int shift) {
+        if(root == null){
+            return root;
+        }
         int newIndex = root.ordinal() + shift;
         newIndex = HelperArrays.transformIntValueToBaseRange(newIndex, NUMBER_OF_SEMITONES_IN_OCTAVE);
         return Root.values()[newIndex];
@@ -392,6 +395,21 @@ public class ChordSegment extends NemaChord implements Serializable {
         return root;
     }
 
+    /**
+     * This format was used in MIREX 2008 chord detection task
+     *
+     * @return corresponding chord number
+     */
+    public int getNumberForSimplpeChord() {
+        if (chordType.equals(ChordType.MAJOR_CHORD)) {
+            return this.root.ordinal();
+        } else if (chordType.equals(ChordType.MINOR_CHORD)) {
+            return this.root.ordinal() + 12;
+        } else {
+            return 24; //Not a chord for the rest
+        }
+    }
+
     public String getChordNameOriginal() {
         return chordNameOriginal;
     }
@@ -399,22 +417,21 @@ public class ChordSegment extends NemaChord implements Serializable {
 
     public int compareTo(NemaSegment o) {
         double cmp = this.onset - o.getOnset();
-        if (cmp > 0){
+        if (cmp > 0) {
             return 1;
         }
-        if(cmp < 0){
+        if (cmp < 0) {
             return -1;
         }
         cmp = this.offset - o.getOffset();
-        if (cmp > 0){
+        if (cmp > 0) {
             return 1;
         }
-        if(cmp < 0){
+        if (cmp < 0) {
             return -1;
         }
         return 0;
     }
-
 
 
 }

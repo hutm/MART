@@ -36,6 +36,7 @@ public class Extensions {
     public static final String CFG_EXT = ".cfg";
     public static final String ONSET_EXT = ".txt";
     public static final String BEAT_TXT_EXT = ".beattxt";
+    public static final String CSV_EXT = ".csv";
     public static final String BEAT_MAZURKA_EXT = ".tap";
     public static final String[] BEAT_EXTENSIONS = new String[]{BEAT_EXT, BEAT_MAZURKA_EXT, BEAT_TXT_EXT, ONSET_EXT};
 }
