@@ -1,17 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <parent>
-        <version>0.1-SNAPSHOT</version>
-        <groupId>org.mart</groupId>
-        <artifactId>mart</artifactId>
-    </parent>
 
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mart</groupId>
     <artifactId>mart-core</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>0.1-SNAPSHOT</version>
     <name>mart-core</name>
     <url>http://mart.khadkevich.org</url>
 
