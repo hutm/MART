@@ -60,7 +60,7 @@
         <dependency>
             <groupId>org.mart</groupId>
             <artifactId>martDSP</artifactId>
-            <version>1.0</version>
+            <version>0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
 
@@ -91,6 +91,14 @@
             <version>1.0</version>
             <type>jar</type>
         </dependency>
+
+        <dependency>
+            <groupId>kylm</groupId>
+            <artifactId>kylm</artifactId>
+            <version>0.7</version>
+            <type>jar</type>
+        </dependency>
+
 
         <dependency>
             <groupId>com.tulskiy</groupId>
@@ -226,6 +234,14 @@
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <preparationGoals>clean install deploy</preparationGoals>
+                </configuration>
+                <version>2.2.2</version>
             </plugin>
 
 
