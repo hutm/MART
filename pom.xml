@@ -37,9 +37,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git://github.com/hutm/mart-core.git</connection>
-        <developerConnection>scm:git:git@github.com:hutm/mart-core.git</developerConnection>
-        <url>http://github.com/hutm/mart-core.git</url>
+        <connection>scm:git:git://github.com/hutm/MART.git</connection>
+        <developerConnection>scm:git:git@github.com:hutm/MART.git</developerConnection>
+        <url>http://github.com/hutm/MART.git</url>
     </scm>
 
     <properties>
