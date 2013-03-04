@@ -36,6 +36,12 @@
         </repository>
     </distributionManagement>
 
+    <scm>
+        <connection>scm:git:git://github.com/hutm/mart-core.git</connection>
+        <developerConnection>scm:git:git@github.com:hutm/mart-core.git</developerConnection>
+        <url>http://github.com/hutm/mart-core.git</url>
+    </scm>
+
     <properties>
         <myapp.jar.name>${name}-${version}.jar</myapp.jar.name>
         <external.properties.file>../mart.properties</external.properties.file>
@@ -59,7 +65,7 @@
 
         <dependency>
             <groupId>org.mart</groupId>
-            <artifactId>martDSP</artifactId>
+            <artifactId>mart-dsp</artifactId>
             <version>0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
@@ -67,7 +73,7 @@
         <dependency>
             <groupId>org.imirsel</groupId>
             <artifactId>nema-analytics</artifactId>
-            <version>0.4.0-SNAPSHOT</version>
+            <version>0.4.0</version>
             <type>jar</type>
         </dependency>
 
@@ -103,7 +109,7 @@
         <dependency>
             <groupId>com.tulskiy</groupId>
             <artifactId>musique-core</artifactId>
-            <version>0.3-SNAPSHOT</version>
+            <version>0.3</version>
             <type>jar</type>
         </dependency>
 
