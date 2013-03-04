@@ -16,9 +16,10 @@
 
 package org.mart.crs.management.midi;
 
-import edu.columbia.ee.csmit.MidiKaraoke.PianoRoll;
-import edu.columbia.ee.csmit.MidiKaraoke.PianoRollViewParser;
-import edu.columbia.ee.csmit.MidiKaraoke.TimedNote;
+import edu.columbia.ee.csmit.MidiKaraoke.read.NotesInMidi;
+import edu.columbia.ee.csmit.MidiKaraoke.read.PianoRoll;
+import edu.columbia.ee.csmit.MidiKaraoke.read.PianoRollViewParser;
+import edu.columbia.ee.csmit.MidiKaraoke.read.TimedNote;
 import org.mart.crs.utils.helper.Helper;
 
 import javax.sound.midi.MidiSystem;
@@ -44,7 +45,7 @@ public class MidiManager {
 
             //Now parse note-based information
             PianoRoll pianoRoll = PianoRollViewParser.parse(mySeq);
-            edu.columbia.ee.csmit.MidiKaraoke.TimedNote notes[] = pianoRoll.getNotes();
+            NotesInMidi notes[] = pianoRoll.getNotes();
 
             saveGroundTruth(notes, fileNameOut);
 
@@ -60,7 +61,7 @@ public class MidiManager {
     }
 
 
-    public static void saveGroundTruth(TimedNote[] notes, String fileName) {
+    public static void saveGroundTruth(NotesInMidi[] notes, String fileName) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
 
