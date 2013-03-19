@@ -500,6 +500,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
     /**
      * Split chords into beat segments, so that each beat is one chord segment
+     *
      * @param beats beats to sync chords with
      * @return new ChordStructure
      */
@@ -522,7 +523,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
                 intersectionMap.put(currentChordSegment, currentChordSegment.getIntersection(currentBeatSegment));
                 if (currentChordSegmentIndex < chordSegments.size() - 1) {
                     currentChordSegment = chordSegments.get(++currentChordSegmentIndex);
-                } else{
+                } else {
                     break;
                 }
             } while (currentChordSegment.intersects(currentBeatSegment));
@@ -544,14 +545,16 @@ public class ChordStructure implements Comparable<ChordStructure> {
     }
 
 
-    public String getStringRepresentation(){
+    public String getStringRepresentation() {
         StringBuilder builder = new StringBuilder();
-        for(ChordSegment cs:chordSegments){
+        for (ChordSegment cs : chordSegments) {
             char letter = (char) (97 + cs.getNumberForSimplpeChord());
             builder.append(letter);
         }
         return builder.toString();
     }
+
+
 
 
     public void shiftSegmentsInTime(float shiftInsecs) {
@@ -569,6 +572,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
 
     /**
      * Returns a copy of ChordStructure with shifted chords.
+     *
      * @param semitones Shift (in semitones)
      * @return Shifted ChordStructure
      */
@@ -577,7 +581,7 @@ public class ChordStructure implements Comparable<ChordStructure> {
         for (ChordSegment cs : chordSegments) {
             newSegments.add(new ChordSegment(cs.getOnset(), cs.getOffset(), cs.getChordNameOriginal()));
         }
-        ChordStructure outChordStructure= new ChordStructure(newSegments, songName);
+        ChordStructure outChordStructure = new ChordStructure(newSegments, songName);
         outChordStructure.shiftKey(semitones);
         return outChordStructure;
     }

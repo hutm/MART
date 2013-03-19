@@ -395,6 +395,35 @@ public class ChordSegment extends NemaChord implements Serializable {
         return root;
     }
 
+
+    public static ChordSegment getSimpleChordForANumber(int number){
+        if(number >=0 && number < 12){
+            return new ChordSegment(0, 0, Root.values()[number].toString());
+        } if(number >=12 && number < 24){
+            return new ChordSegment(0, 0, Root.values()[number - 12].toString() + ":" + ChordType.MINOR_CHORD.getName());
+        }
+        return new ChordSegment(0, 0, NOT_A_CHORD.getName());
+    }
+
+    /**
+     * Get number corresponding to a chord. Usually numbers [0-11] represent major chords. [12-23] are minor chords
+     *
+     * @return
+     */
+    public int getChordNumber() {
+        if (this.chordType.equals(ChordType.NOT_A_CHORD)) {
+            return -1;
+        }
+
+        if (this.chordType == ChordType.MAJOR_CHORD) {
+            return root.ordinal();
+        }
+        if (this.chordType == ChordType.MINOR_CHORD) {
+            return 12 + root.ordinal();
+        }
+        return -1; //TODO extend for more complex chord types in the future.
+    }
+
     /**
      * This format was used in MIREX 2008 chord detection task
      *
