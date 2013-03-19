@@ -125,14 +125,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.blinkenlights</groupId>
-            <artifactId>jid3</artifactId>
-            <version>1.0</version>
+            <groupId>org.blinkenlights.jid3</groupId>
+            <artifactId>JID3</artifactId>
+            <version>0.46</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
-            <groupId>com.jmatio</groupId>
+            <groupId>net.sourceforge.jmatio</groupId>
             <artifactId>jmatio</artifactId>
             <type>jar</type>
             <version>1.0</version>
