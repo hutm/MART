@@ -16,7 +16,7 @@
             <url>http://www.khadkevich.org/repository</url>
         </repository>
         <repository>
-            <id>khadkevich</id>
+            <id>khadkevich-snapshots</id>
             <name>Khadkevich Maven Snapshot Repository</name>
             <url>http://www.khadkevich.org/snapshots</url>
         </repository>
