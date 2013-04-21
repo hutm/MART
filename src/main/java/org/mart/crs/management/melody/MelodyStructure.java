@@ -20,8 +20,11 @@ package org.mart.crs.management.melody;
 import org.apache.log4j.Logger;
 import org.mart.crs.config.Extensions;
 import org.mart.crs.logging.CRSLogger;
+import org.mart.crs.management.beat.BeatStructure;
 import org.mart.crs.management.beat.BeatStructureCSV;
+import org.mart.crs.management.beat.segment.BeatSegment;
 import org.mart.crs.management.label.chord.ChordSegment;
+import org.mart.crs.management.label.chord.ChordType;
 import org.mart.crs.utils.helper.Helper;
 import org.mart.crs.utils.helper.HelperFile;
 
@@ -30,7 +33,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @version 1.0 2/21/13 11:25 AM
@@ -43,8 +48,12 @@ public class MelodyStructure {
 
     protected List<MelodySegment> melodySegments;
 
+    private MelodyStructure(){
+        this.melodySegments = new ArrayList<MelodySegment>();
+    }
+
     private MelodyStructure(String csvPath) {
-        melodySegments = new ArrayList<MelodySegment>();
+        this();
         File file;
         try {
 
@@ -90,11 +99,57 @@ public class MelodyStructure {
         if (extension.equals(Extensions.CSV_EXT)) {
             return new MelodyStructure(filePath);
         }
-        throw new IllegalArgumentException(String.format("Cannot extract beat structure from file %s with extension %s", filePath, extension));
+        throw new IllegalArgumentException(String.format("Cannot extract melody structure from file %s with extension %s", filePath, extension));
+    }
+
+    public static MelodyStructure getBeatSynchronousMelodyStructure(MelodyStructure structure, String beatLabelsPath){
+        BeatStructure beatStructure = BeatStructure.getBeatStructure(beatLabelsPath);
+        List<BeatSegment> beatSegments = beatStructure.getBeatSegments();
+        List<MelodySegment> segments = structure.getMelodySegments();
+        MelodyStructure outMelodyStructure = new MelodyStructure();
+        int currentMelodyFrame = 0;
+        for(int i = 0; i < beatSegments.size() - 1; i++){
+            BeatSegment currentBeatSegment = beatSegments.get(i);
+            BeatSegment nextBeatSegment = beatSegments.get(i+1);
+            while(currentMelodyFrame < segments.size() && segments.get(currentMelodyFrame).getStartTime() < currentBeatSegment.getTimeInstant()){
+                currentMelodyFrame++;
+            }
+            currentMelodyFrame -- ;
+            Map<Integer, Float> intersectionMap = new HashMap<Integer, Float>();
+
+            while(currentMelodyFrame < segments.size() && segments.get(currentMelodyFrame).getStartTime() < nextBeatSegment.getTimeInstant()){
+                float intersection = (float)(Math.min(segments.get(currentMelodyFrame).getEndTime(), nextBeatSegment.getTimeInstant()) - Math.max(segments.get(currentMelodyFrame).getStartTime(), currentBeatSegment.getTimeInstant()));
+                if(intersection <=0 ){
+                    currentMelodyFrame++;
+                    continue;
+                }
+                int midiNote = segments.get(currentMelodyFrame).getMidiNote();
+                Float savedValue = intersectionMap.get(midiNote);
+                float putValue = savedValue == null ? intersection : savedValue + intersection;
+                intersectionMap.put(midiNote, putValue);
+                currentMelodyFrame++;
+            }
+            currentMelodyFrame -- ;
+
+            int longestNote = 0;
+            float longestDuration = 0;
+            for (Integer midiNote : intersectionMap.keySet()) {
+                if (intersectionMap.get(midiNote) > longestDuration) {
+                    longestNote = midiNote;
+                    longestDuration = intersectionMap.get(midiNote);
+                }
+            }
+            outMelodyStructure.addSegment(new MelodySegment((float)currentBeatSegment.getTimeInstant(), (float)nextBeatSegment.getTimeInstant(), Helper.getFreqForMIDINote(longestNote)));
+        }
+        return outMelodyStructure;
     }
 
 
     public List<MelodySegment> getMelodySegments() {
         return melodySegments;
+    }
+
+    protected void addSegment(MelodySegment segment){
+        melodySegments.add(segment);
     }
 }

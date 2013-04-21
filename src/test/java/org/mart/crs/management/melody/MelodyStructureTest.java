@@ -32,4 +32,14 @@ public class MelodyStructureTest {
         Assert.assertEquals(melodyStructure.getMelodySegments().size(), 22955);
 
     }
+
+
+    @Test
+    public void testGetMelodyStructureBeatSynchronous() throws Exception {
+        String baseFilePath = this.getClass().getResource("/label/1_vamp_mtg-melodia_melodia_melody.csv").getPath();
+        MelodyStructure melodyStructure = MelodyStructure.getMelodyStructure(baseFilePath);
+        String beatsFilePath = this.getClass().getResource("/label/1_vamp_qm-vamp-plugins_qm-barbeattracker_beats.csv").getPath();
+        MelodyStructure beatSynched = MelodyStructure.getBeatSynchronousMelodyStructure(melodyStructure, beatsFilePath);
+        Assert.assertEquals(beatSynched.getMelodySegments().size(), 612);
+    }
 }

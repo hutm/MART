@@ -17,6 +17,8 @@
 
 package org.mart.crs.management.melody;
 
+import org.mart.crs.utils.helper.Helper;
+
 /**
  * Time segment of a melody
  * @version 1.0 2/21/13 11:25 AM
@@ -27,12 +29,14 @@ public class MelodySegment {
     protected float startTime;
     protected float endTime;
     protected float pitch;
+    protected int midiNote;
     protected boolean voiced;
 
     public MelodySegment(float startTime, float endTime, float pitch) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.pitch = Math.abs(pitch);
+        this.midiNote = Math.round(Helper.getMidiNoteForFreq(this.pitch));
         this.voiced = pitch > 0;
     }
 
@@ -67,5 +71,9 @@ public class MelodySegment {
 
     public void setVoiced(boolean voiced) {
         this.voiced = voiced;
+    }
+
+    public int getMidiNote() {
+        return Math.max(0, midiNote);
     }
 }
