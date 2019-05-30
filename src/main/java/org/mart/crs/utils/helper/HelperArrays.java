@@ -17,7 +17,7 @@
 
 package org.mart.crs.utils.helper;
 
-import de.dfki.maths.Complex;
+import org.mart.crs.core.spectrum.Complex;
 import org.apache.log4j.Logger;
 import org.mart.crs.logging.CRSException;
 import org.mart.crs.logging.CRSLogger;

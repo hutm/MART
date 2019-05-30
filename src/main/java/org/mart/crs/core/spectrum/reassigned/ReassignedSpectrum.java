@@ -17,7 +17,7 @@
 
 package org.mart.crs.core.spectrum.reassigned;
 
-import de.dfki.maths.Complex;
+import org.mart.crs.core.spectrum.Complex;
 import org.mart.crs.core.AudioReader;
 import org.mart.crs.core.spectrum.SpectrumImplPhaseComponents;
 import org.mart.crs.utils.windowing.WindowFunction;

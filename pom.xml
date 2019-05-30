@@ -13,12 +13,12 @@
         <repository>
             <id>khadkevich</id>
             <name>Khadkevich Maven Release Repository</name>
-            <url>http://www.khadkevich.org/repository</url>
+            <url>http://hutm.github.io/repository</url>
         </repository>
         <repository>
             <id>khadkevich-snapshots</id>
             <name>Khadkevich Maven Snapshot Repository</name>
-            <url>http://www.khadkevich.org/snapshots</url>
+            <url>http://hutm.github.io/snapshots</url>
         </repository>
     </repositories>
 
